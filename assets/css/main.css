@@ -1,1 +1,28 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .method-badge {
+    @apply px-2 py-1 rounded text-sm text-white font-mono;
+  }
+  
+  .endpoint-card {
+    @apply mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden transition-all duration-300;
+  }
+  
+  .endpoint-card:hover {
+    @apply shadow-md;
+  }
+  
+  .code-block {
+    @apply bg-gray-200 dark:bg-gray-700 p-3 rounded overflow-x-auto;
+  }
+  
+  .collapse-button {
+    @apply flex justify-between items-center cursor-pointer py-2 px-3 bg-gray-100 dark:bg-gray-800 rounded;
+  }
+}
