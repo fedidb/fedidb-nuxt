@@ -25,4 +25,9 @@ html {
   .collapse-button {
     @apply flex justify-between items-center cursor-pointer py-2 px-3 bg-gray-100 dark:bg-gray-800 rounded;
   }
+
+}
+
+.router-link-active {
+  @apply text-blue-600 dark:text-blue-400;
 }
