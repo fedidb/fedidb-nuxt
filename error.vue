@@ -1,7 +1,7 @@
 <template>
     <div>
         <AppHeader />
-        <div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-500 to-blue-600 dark:bg-gray-950 dark:to-indigo-900 px-4 py-16">
+        <div class="min-h-screen flex flex-col items-center justify-center bg:white dark:bg-gradient-to-br dark:bg-gray-950 dark:to-indigo-900 px-4 py-16">
             <div class="container max-w-6xl text-center">
 
                 <h1 class="text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-7xl">
