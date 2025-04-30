@@ -172,7 +172,7 @@ export function useSoftwareBySlug(slug) {
                 throw new Error('Software slug is required');
             }
             const res = await fetch(
-                `https://api.fedidb.org/v1.1/software/${id.value}`
+                `https://api.fedidb.org/v1/software/${id.value}`
             );
             if (!res.ok) {
                 throw new Error(`API request failed with status ${res.status}`);
