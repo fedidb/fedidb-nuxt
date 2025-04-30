@@ -31,7 +31,7 @@
             </div>
 
             <div class="flex flex-col md:items-end mt-4 md:mt-0 md:ml-6 lg:ml-12">
-                <div class="flex mt-5 flex-col md:flex-row space-x-6 md:space-x-8">
+                <div class="flex mt-5 flex-col md:flex-row space-x-6 md:space-x-12">
                     <div class="text-center">
                         <div class="text-3xl font-bold text-gray-900 dark:text-white">{{ software.instance_count.toLocaleString() }}</div>
                         <div class="text-sm text-gray-500 dark:text-gray-400">Servers</div>
@@ -46,12 +46,12 @@
                     </div>
                 </div>
 
-                <div class="mt-5 flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 md:items-end">
+                <div class="mt-5 flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-9 md:items-end">
                     <a v-if="software.website" :href="software.website" class="inline-flex items-center px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 dark:bg-gray-700 dark:hover:bg-blue-600 transition-colors text-sm" target="_blank">
-                        Project Website
+                        Website
                     </a>
                     <a v-if="software.api_docs_url" :href="software.api_docs_url" class="inline-flex items-center px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 dark:bg-gray-700 dark:hover:bg-blue-600 transition-colors text-sm" target="_blank">
-                        API Docs
+                        Docs
                     </a>
                     <a v-if="software.donate_url" :href="software.donate_url" class="inline-flex items-center px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 dark:bg-gray-700 dark:hover:bg-blue-600 transition-colors text-sm" target="_blank">
                         Donate
