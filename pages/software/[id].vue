@@ -182,13 +182,15 @@
 </template>
 
 <script setup>
-    import { ref, computed, onMounted, watchEffect } from 'vue';
+    import { ref, computed, watch } from 'vue'
+    import { useRoute, useRouter } from 'vue-router'
     import {
-        useSoftwareBySlug,
-        useSoftwareServers,
-    } from '~/composables/useQueries';
-    const route = useRoute();
+      useSoftwareBySlug,
+      useSoftwareServers,
+    } from '~/composables/useQueries'
 
+    const route = useRoute()
+    const router = useRouter()
     const slug = computed(() => route.params.id);
 
     const {
@@ -200,18 +202,22 @@
     const software = computed(() => rawMeta.value ?? {});
 
     const searchQuery = ref('');
-    const regionFilter = ref('all');
-    const sortOption = ref('users-desc');
-    const versionFilter = ref('');
-    const uptimeFilter = ref('');
-    const registrationFilter = ref('');
-    const matureFilter = ref(false);
-    const smallFilter = ref(false);
-    const showDetailedStats = ref(false);
-    const page = ref(1);
+    const regionFilter = ref(route.query.region ?? 'all')
+    const sortOption = ref(route.query.sort ?? 'users-desc')
+    const versionFilter = ref(route.query.version ?? '')
+    const uptimeFilter = ref(route.query.uptime ?? '')
+    const registrationFilter = ref(route.query.registration ?? '')
+    const matureFilter = ref(
+      route.query.mature === '1' || route.query.mature === 'true'
+    )
+    const smallFilter = ref(
+      route.query.small === '1' || route.query.small === 'true'
+    )
+    const showDetailedStats = ref(route.query.stats === '1')
+    const page = ref(parseInt(route.query.page) || 1)
     const pageSize = 12;
-    const searchInputValue = ref('');
-    const debouncedSearchQuery = ref('');
+    const searchInputValue = ref(route.query.search ?? '')
+    const debouncedSearchQuery = ref(route.query.search ?? '')
     const filterChangeTimeout = ref(null);
     const isSearching = ref(false);
 
@@ -232,52 +238,37 @@
     const getSortParams = () => {
         switch (sortOption.value) {
         case 'users-desc':
-            return { sort_by: 'user_count', sort_direction: 'desc' };
+            return { sort_by: 'user_count', sort_direction: 'desc' }
         case 'users-asc':
-            return { sort_by: 'user_count', sort_direction: 'asc' };
+            return { sort_by: 'user_count', sort_direction: 'asc' }
         case 'version-desc':
-            return { sort_by: 'version', sort_direction: 'desc' };
+            return { sort_by: 'version', sort_direction: 'desc' }
         case 'created-desc':
-            return { sort_by: 'first_seen_at', sort_direction: 'desc' };
+            return { sort_by: 'first_seen_at', sort_direction: 'desc' }
         case 'created-asc':
-            return { sort_by: 'first_seen_at', sort_direction: 'asc' };
+            return { sort_by: 'first_seen_at', sort_direction: 'asc' }
         default:
-            return { sort_by: 'user_count', sort_direction: 'desc' };
+            return { sort_by: 'user_count', sort_direction: 'desc' }
         }
     };
 
     const apiFilters = computed(() => {
-        const filters = {
-            limit: pageSize,
+        const f = {
+            limit: 12,
             ...getSortParams(),
-        };
-
-        if (debouncedSearchQuery.value) {
-            filters.search = debouncedSearchQuery.value;
         }
-
-        if (regionFilter.value !== 'all') {
-            filters.region = regionFilter.value;
-        }
-
+        if (debouncedSearchQuery.value) f.search = debouncedSearchQuery.value
+        if (regionFilter.value !== 'all') f.region = regionFilter.value
         if (versionFilter.value) {
-            filters.version = versionFilter.value === 'latest' ? 'latest' : 'all';
+            f.version = versionFilter.value === 'latest' ? 'latest' : 'all'
         }
-
-        if (registrationFilter.value === 'open') {
-            filters.registration = 'open';
-        }
-
-        if (matureFilter.value == true) {
-            filters.mature = 1;
-        }
-
-        if (smallFilter.value == true) {
-            filters.small = 1;
-        }
-
-        return filters;
-    });
+        if (uptimeFilter.value) f.uptime = uptimeFilter.value
+        if (registrationFilter.value === 'open') f.registration = 'open'
+        if (matureFilter.value) f.mature = 1
+        if (smallFilter.value) f.small = 1
+        f.page = page.value
+        return f
+    })
 
     const {
         data: rawPages,
@@ -290,32 +281,51 @@
         refetch,
     } = useSoftwareServers(slug, apiFilters);
 
-    watchEffect(() => {
-        const filtersSignature = JSON.stringify(apiFilters.value);
+    watch(
+      [
+        debouncedSearchQuery,
+        regionFilter,
+        sortOption,
+        versionFilter,
+        uptimeFilter,
+        registrationFilter,
+        matureFilter,
+        smallFilter,
+        page,
+        showDetailedStats,
+      ],
+      () => {
+        const q = {}
+        if (debouncedSearchQuery.value) q.search = debouncedSearchQuery.value
+        if (regionFilter.value !== 'all') q.region = regionFilter.value
+        if (sortOption.value !== 'users-desc') q.sort = sortOption.value
+        if (versionFilter.value) q.version = versionFilter.value
+        if (uptimeFilter.value) q.uptime = uptimeFilter.value
+        if (registrationFilter.value) q.registration = registrationFilter.value
+        if (matureFilter.value) q.mature = '1'
+        if (smallFilter.value) q.small = '1'
+        if (page.value !== 1) q.page = String(page.value)
+        if (showDetailedStats.value) q.stats = '1'
+        router.replace({ query: q })
+      }
+    )
 
-        if (page.value !== 1) {
-            page.value = 1;
-        }
-
-        const timer = setTimeout(() => {
-            refetch();
-        }, 10);
-
-        return () => clearTimeout(timer);
-    });
+    watch(apiFilters, () => {
+      refetch()
+    })
 
     const servers = computed(() =>
         rawPages.value ? rawPages.value.pages.flatMap((page) => page.data) : []
-        );
+    );
 
     const isLoading = computed(() => metaLoading || srvLoading);
     const errorMessage = computed(() =>
         metaError ? metaErrorObj.message : srvError ? srvErrorObj.message : null
-        );
+    );
 
     const pageCount = computed(() =>
         Math.ceil(software.value.instance_count / pageSize)
-        );
+    );
 
     const pagedServers = computed(() => {
         const start = (page.value - 1) * pageSize;
@@ -324,11 +334,11 @@
 
     const startIndex = computed(() =>
         servers.value.length === 0 ? 0 : (page.value - 1) * pageSize + 1
-        );
+    );
 
     const endIndex = computed(() =>
         Math.min(page.value * pageSize, servers.value.length)
-        );
+    );
 
     const isFirstPageLoaded = computed(() => {
         return servers.value.length > 0 && !isLoading;
@@ -367,15 +377,12 @@
             return true;
         }
 
-        if (
-            page.value >= Math.ceil(servers.value.length / pageSize) &&
-            !hasNextPage.value
-            ) {
+        if (page.value >= Math.ceil(servers.value.length / pageSize) && !hasNextPage.value) {
             return true;
-    }
+        }
 
-    return false;
-});
+        return false;
+    });
 
     const toggleVersionFilter = (value) => {
         versionFilter.value = versionFilter.value === value ? '' : value;
@@ -411,29 +418,4 @@
     const isFilteringOrSearching = computed(() => {
         return srvLoading && !metaLoading && servers.value.length > 0;
     });
-
-    const getUptimeColor = (percentage) => {
-        if (percentage >= 99.9) {
-            return 'text-green-600 dark:text-green-400';
-        } else if (percentage >= 99.5) {
-            return 'text-blue-600 dark:text-blue-400';
-        } else if (percentage >= 99.0) {
-            return 'text-yellow-600 dark:text-yellow-400';
-        } else {
-            return 'text-red-600 dark:text-red-400';
-        }
-    };
-
-    const getBgColor = (name) => {
-        const bgColors = {
-            Mastodon: 'bg-blue-600',
-            Pleroma: 'bg-green-600',
-            Pixelfed: 'bg-pink-600',
-            PeerTube: 'bg-orange-600',
-            Misskey: 'bg-blue-600',
-            WriteFreely: 'bg-indigo-600',
-        };
-
-        return bgColors[name] || 'bg-gray-600';
-    };
 </script>
