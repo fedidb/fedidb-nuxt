@@ -29,7 +29,7 @@
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <NuxtLink to="/servers" class="px-5 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors duration-200 flex items-center justify-center">
+                <NuxtLink to="/servers" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200 flex items-center justify-center">
                     <Icon name="feather:list" class="mr-2" size="16" />
                     Back to Server List
                 </NuxtLink>
