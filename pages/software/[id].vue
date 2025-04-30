@@ -144,7 +144,7 @@
                             </div>
                         </NuxtLink>
                     </div>
-                    <div v-if="!pagedServers.length" class="flex flex-col gap-3 justify-center items-center p-4 md:px-6 md:py-20">
+                    <div v-if="!pagedServers.length && isFilteringOrSearching" class="flex flex-col gap-3 justify-center items-center p-4 md:px-6 md:py-20">
                         <Spinner />
                         <p>Loading...</p>
                     </div>
