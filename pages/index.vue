@@ -27,15 +27,15 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <ServerCard
-                    v-for="server in topServers.slice(0,6)"
-                    :key="server.id"
-                    :name="server.description"
-                    :domain="server.domain"
-                    :users="server.stats.user_count.toLocaleString()"
-                    :software="server.software?.name || 'Unknown software'"
-                    :uptime="server.uptime"
-                    :thumbnail="server.thumbnail"
-                    :description="server.description || 'No server description available'"
+                        v-for="server in topServers.slice(0,6)"
+                        :key="server.id"
+                        :name="server.description"
+                        :domain="server.domain"
+                        :users="server.stats.user_count.toLocaleString()"
+                        :software="server.software?.name || 'Unknown software'"
+                        :uptime="server.uptime"
+                        :thumbnail="server.thumbnail"
+                        :description="server.description || 'No server description available'"
                     />
                 </div>
             </section>

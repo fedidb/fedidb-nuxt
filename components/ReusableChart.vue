@@ -116,7 +116,7 @@ const props = defineProps({
 
 const colorMode = useColorMode();
 
-const isDark = ref(colorMode.preference === 'dark');
+const isDark = ref(colorMode.value === 'dark');
 
 const themeColors = computed(() => {
     if (isDark.value) {

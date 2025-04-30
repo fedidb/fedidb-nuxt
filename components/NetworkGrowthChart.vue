@@ -84,7 +84,7 @@ const props = defineProps({
 });
 
 const colorMode = useColorMode();
-const isDark = ref(colorMode.preference === 'dark');
+const isDark = ref(colorMode.value === 'dark');
 
 const toggleTheme = () => {
     isDark.value = !isDark.value;
