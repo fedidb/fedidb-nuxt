@@ -38,7 +38,7 @@
                     </div>
                     <div class="text-center">
                         <div class="text-3xl font-bold text-gray-900 dark:text-white">{{ formatNumber(software.user_count) }}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Users</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">Accounts</div>
                     </div>
                     <div class="text-center">
                         <div class="text-3xl font-bold text-gray-900 dark:text-white">{{ formatNumber(software.status_count) }}</div>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="text-center">
                         <div class="text-3xl font-bold text-gray-900 dark:text-white">{{ parseFloat(software.monthly_actives / software.user_count * 100).toFixed(1) }}%</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Active users</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">Active accounts</div>
                     </div>
                 </div>
 

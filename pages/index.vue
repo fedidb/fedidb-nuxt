@@ -6,7 +6,7 @@
                 <p class="text-lg text-gray-600 dark:text-gray-500 mb-8">Tracking the growth and activity of the ActivityPub fediverse.</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                    <StatCard title="Active Users" :value="stats?.monthly_active_users?.toLocaleString()" icon="active" trend="+2" />
+                    <StatCard title="Active Accounts" :value="stats?.monthly_active_users?.toLocaleString()" icon="active" trend="+2" />
                     <StatCard title="Active Servers" :value="stats?.total_instances?.toLocaleString()" icon="server" trend="+12%" />
                     <StatCard title="Total Accounts" :value="formatNumber(stats?.total_users)" icon="users" trend="+3.2%" />
                     <StatCard title="Total Posts" :value="formatNumber(stats?.total_statuses)" icon="posts" trend="+8.7%" />

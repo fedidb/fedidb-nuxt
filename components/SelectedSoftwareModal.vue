@@ -52,7 +52,7 @@
                                 <p class="dark:text-gray-200 font-medium">{{ selectedSoftware?.instance_count?.toLocaleString() || 0 }}</p>
                             </div>
                             <div>
-                                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Users</h4>
+                                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Accounts</h4>
                                 <p class="dark:text-gray-200 font-medium">{{ selectedSoftware?.user_count?.toLocaleString() || 0 }}</p>
                             </div>
                             <div>
