@@ -398,6 +398,9 @@
     };
 
     const isLatestVersion = (version) => {
+        if(!software.value?.versions) {
+            return false;
+        }
         return version === software.value?.versions[0].version;
     };
 
