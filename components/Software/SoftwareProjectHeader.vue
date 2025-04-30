@@ -44,10 +44,6 @@
                         <div class="text-3xl font-bold text-gray-900 dark:text-white">{{ formatNumber(software.status_count) }}</div>
                         <div class="text-sm text-gray-500 dark:text-gray-400">Statuses</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-gray-900 dark:text-white">{{ parseFloat(software.monthly_actives / software.user_count * 100).toFixed(1) }}%</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">Active accounts</div>
-                    </div>
                 </div>
 
                 <div class="mt-5 flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 md:items-end">
