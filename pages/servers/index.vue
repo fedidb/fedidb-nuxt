@@ -38,6 +38,14 @@
                                 <option value="created-asc">Oldest First</option>
                             </select>
                         </div>
+                        <div>
+                            <select v-model="itemsPerPage" @change="handleFilterChange" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
+                                <option value="8">8 per page</option>
+                                <option value="15">15 per page</option>
+                                <option value="20">20 per page</option>
+                                <option value="50">50 per page</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,7 +166,7 @@
     const regionFilter = ref('all');
 
     const currentPage = ref(1);
-    const itemsPerPage = 8;
+    const itemsPerPage = ref(8);
     const pagesHistory = ref([]);
     const debounceTimeout = ref(null);
 
@@ -232,7 +240,7 @@
     });
 
     const paginationInfo = computed(() => {
-        const startCount = (currentPage.value - 1) * itemsPerPage + 1;
+        const startCount = (currentPage.value - 1) * itemsPerPage.value + 1;
         const endCount = startCount + currentServers.value.length - 1;
 
         return {
