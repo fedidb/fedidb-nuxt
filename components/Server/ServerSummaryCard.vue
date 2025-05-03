@@ -27,7 +27,7 @@
                 <p class="text-2xl font-bold text-gray-800 dark:text-white mt-2">{{ formatNumber(server.stats.user_count) }}</p>
             </div>
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Posts</h3>
+                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Statuses</h3>
                 <p class="text-2xl font-bold text-gray-800 dark:text-white mt-2">{{ formatNumber(server.stats.status_count) }}</p>
             </div>
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">

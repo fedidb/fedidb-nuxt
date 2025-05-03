@@ -63,7 +63,7 @@
                                 <option value="users">Total Users</option>
                                 <option value="active">Monthly Active Users</option>
                                 <option value="servers">Server Count</option>
-                                <option value="posts">Post Count</option>
+                                <option value="posts">Status Count</option>
                             </select>
                             <button @click="toggleSortDirection()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
                                 <svg v-if="sortDirection === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -188,7 +188,7 @@
                                             <div class="font-semibold text-gray-900 dark:text-white">{{ formatNumber(software?.monthly_actives) }}</div>
                                         </div>
                                         <div class="flex flex-col items-center">
-                                            <div class="text-xs text-gray-500 dark:text-gray-400">Posts</div>
+                                            <div class="text-xs text-gray-500 dark:text-gray-400">Statuses</div>
                                             <div class="font-semibold text-gray-900 dark:text-white">{{ formatNumber(software?.status_count) }}</div>
                                         </div>
                                     </div>

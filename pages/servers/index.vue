@@ -32,8 +32,8 @@
                             <select v-model="sortOption" @change="handleFilterChange" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
                                 <option value="users-desc">Users (High to Low)</option>
                                 <option value="users-asc">Users (Low to High)</option>
-                                <option value="posts-desc">Posts (High to Low)</option>
-                                <option value="posts-asc">Posts (Low to High)</option>
+                                <option value="posts-desc">Statuses (High to Low)</option>
+                                <option value="posts-asc">Statuses (Low to High)</option>
                                 <option value="created-desc">Newest First</option>
                                 <option value="created-asc">Oldest First</option>
                             </select>

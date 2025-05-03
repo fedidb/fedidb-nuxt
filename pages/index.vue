@@ -9,7 +9,7 @@
                     <StatCard title="Active Accounts" :value="stats?.monthly_active_users?.toLocaleString()" icon="active" trend="+2" />
                     <StatCard title="Active Servers" :value="stats?.total_instances?.toLocaleString()" icon="server" trend="+12%" />
                     <StatCard title="Total Accounts" :value="formatNumber(stats?.total_users)" icon="users" trend="+3.2%" />
-                    <StatCard title="Total Posts" :value="formatNumber(stats?.total_statuses)" icon="posts" trend="+8.7%" />
+                    <StatCard title="Total Statuses" :value="formatNumber(stats?.total_statuses)" icon="posts" trend="+8.7%" />
                 </div>
 
                 <div class="grid grid-cols-1 gap-8 mb-10">
