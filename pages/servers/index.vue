@@ -80,57 +80,7 @@
                         v-for="server in currentServers" 
                         :key="server.id" 
                         class="p-4 md:px-6 md:py-4 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors cursor-pointer" >
-                        <NuxtLink :href="`/servers/${server.domain}`">
-                            <div class="md:hidden">
-                                <div class="flex items-center mb-2">
-                                    <div class="h-8 w-8 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-2 flex items-center justify-center overflow-hidden">
-                                        <img v-if="server.logo" :src="server.logo" alt="" class="h-full w-full object-cover">
-                                        <span v-else class="text-xl font-bold text-blue-600 dark:text-blue-400">{{ server.domain.charAt(0).toUpperCase() }}</span>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-semibold dark:text-white">{{ server.name || server.domain }}</h3>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ server.domain }}</p>
-                                    </div>
-                                </div>
-                                <div class="flex flex-wrap gap-y-1">
-                                    <div class="w-1/3">
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">Software</div>
-                                        <div class="text-sm font-medium dark:text-gray-200">{{ server.software?.name }}</div>
-                                    </div>
-
-                                    <div class="w-1/3">
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">Accounts</div>
-                                        <div class="text-sm font-medium dark:text-gray-200">{{ server.stats?.user_count?.toLocaleString() }}</div>
-                                    </div>
-
-                                    <div class="w-1/3">
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">MAU</div>
-                                        <div class="text-sm font-medium dark:text-gray-200">{{ formatNumber(server.stats?.monthly_active_users || 0) }}</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="hidden md:grid md:grid-cols-6 md:gap-4 md:items-center">
-                                <div class="col-span-2">
-                                    <div class="font-medium dark:text-white truncate">{{ server.domain }}</div>
-                                </div>
-                                <div class="flex items-center">
-                                    <span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium" :class="getSoftwareClass(server.software?.name)">
-                                        {{ server.software?.name || 'Unknown' }}
-                                        <span class="ml-1.5 opacity-70 font-normal" :class="{'dark:opacity-60 opacity-70': $colorMode.value === 'dark', 'opacity-70': $colorMode.value === 'light'}">
-                                        {{ truncateText(server.software?.version, 8) }}
-                                        </span>
-                                    </span>
-                                </div>
-                                <div class="dark:text-gray-200 flex text-sm gap-2">
-                                    <span class="text-gray-500 dark:text-gray-500">{{ formatNumber(server.stats?.user_count) }}</span>
-                                    <span class="text-gray-300 dark:text-gray-700">/</span>
-                                    <span class="font-bold dark:text-gray-200">{{ formatNumber(server.stats?.monthly_active_users) }}</span>
-                                </div>
-                                <div class="dark:text-gray-200 text-sm">{{ formatNumber(server.stats?.status_count) }}</div>
-                                <div class="dark:text-gray-200 text-sm">{{ server.location?.country || 'Unknown' }}</div>
-                            </div>
-                        </NuxtLink>
+                        <ServerListItem :server="server" />
                     </div>
                 </div>
 
@@ -144,8 +94,41 @@
                         </template>
                     </div>
                     <div class="flex space-x-2">
-                        <button @click="prevPage" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="!hasPreviousPages">Previous</button>
-                        <button @click="nextPage" :disabled="!hasNextPage || isFetchingNextPage || isLoading" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 disabled:opacitdisabled:cursor-not-allowed"><span v-if="isFetchingNextPage">Loading...</span><span v-else>Next</span></button>
+                        <button
+                            @click="prevPage"
+                            :disabled="!hasPreviousPages || isFetchingPrevPage"
+                            class="w-32 flex items-center justify-center text-sm px-4 py-2 rounded-lg 
+                                cursor-pointer border border-gray-300 dark:border-gray-600
+                                text-gray-700 dark:text-gray-200
+                                bg-gradient-to-r from-gray-100 to-gray-200
+                                dark:from-slate-700 dark:to-gray-600
+                                hover:from-gray-200 hover:to-gray-300
+                                dark:hover:from-gray-600 dark:hover:to-gray-500
+                                disabled:opacity-50 disabled:cursor-not-allowed
+                                transition-all duration-200"
+                        >
+                            <template v-if="isFetchingPrevPage">
+                                <Spinner :size="20" :thickness="2" />
+                            </template>
+                            <template v-else>Previous</template>
+                        </button>
+                        <button
+                            @click="nextPage"
+                            :disabled="!hasNextPage || isFetchingNextPage || isLoading"
+                            class="w-32 flex items-center justify-center px-4 text-sm py-2 rounded-lg
+                                text-white cursor-pointer
+                                bg-gradient-to-r from-sky-500 to-blue-600
+                                dark:from-sky-500 dark:to-blue-700
+                                hover:from-sky-600 hover:to-blue-700
+                                dark:hover:from-sky-700 dark:hover:to-blue-800
+                                disabled:opacity-50 disabled:cursor-not-allowed
+                                transition-all duration-200"
+                        >
+                            <template v-if="isFetchingNextPage">
+                                <Spinner :size="20" :thickness="2" />
+                            </template>
+                            <template v-else>Next</template>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -154,7 +137,7 @@
 </template>
 
 <script setup>
-    import { ref, computed, watch, onMounted } from 'vue';
+    import { ref, computed, onMounted } from 'vue';
     import {
         useSoftwareSlugs,
         useFilteredServers,
@@ -172,10 +155,8 @@
 
     const currentPage = ref(1);
     const itemsPerPage = ref(10);
-    const pagesHistory = ref([]);
+    const isFetchingPrevPage = ref(false);
     const debounceTimeout = ref(null);
-
-    const selectedServer = ref(null);
 
     const combinedFilters = computed(() => {
         return {
@@ -228,21 +209,11 @@
     } = useFilteredServers(combinedFilters.value);
 
     const currentServers = computed(() => {
-        if (!data.value?.pages || data.value.pages.length === 0) {
-            return [];
-        }
-
-        if (currentPage.value === 1) {
-            return data.value.pages[0]?.data || [];
-        } else {
-            const lastPageIndex = data.value.pages.length - 1;
-            return data.value.pages[lastPageIndex]?.data || [];
-        }
+        const pages = data.value?.pages || [];
+        return pages[currentPage.value - 1]?.data || [];
     });
 
-    const hasPreviousPages = computed(() => {
-        return currentPage.value > 1 && pagesHistory.value.length > 0;
-    });
+    const hasPreviousPages = computed(() => currentPage.value > 1);
 
     const paginationInfo = computed(() => {
         const startCount = (currentPage.value - 1) * itemsPerPage.value + 1;
@@ -256,48 +227,18 @@
 
     const nextPage = async () => {
         if (hasNextPage.value && !isFetchingNextPage.value) {
-            if (data.value?.pages?.[data.value.pages.length - 1]?.meta?.next_cursor) {
-                pagesHistory.value.push({
-                    page: currentPage.value,
-                    data: currentServers.value,
-                });
-            }
             currentPage.value++;
             await fetchNextPage();
         }
     };
 
-    const prevPage = () => {
-        if (hasPreviousPages.value) {
-            const prevPageData = pagesHistory.value.pop();
+    const prevPage = async () => {
+        if (!hasPreviousPages.value) return;
+        isFetchingPrevPage.value = true;
 
-            currentPage.value = prevPageData.page;
-
-            if (currentPage.value === 1) {
-                setFilters(combinedFilters.value);
-                refetch();
-            }
-        }
-    };
-
-    const getSoftwareClass = (software) => {
-        const softwareClasses = {
-            Mastodon:
-            'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200',
-            Pleroma:
-            'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200',
-            Pixelfed:
-            'bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200',
-            PeerTube:
-            'bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200',
-            Misskey:
-            'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200',
-        };
-
-        return (
-            softwareClasses[software] ||
-            'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
-            );
+        await new Promise(r => setTimeout(r, 200));
+        currentPage.value--;
+        isFetchingPrevPage.value = false;
     };
 
     onMounted(() => {
