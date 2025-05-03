@@ -30,17 +30,18 @@
                         </div>
                         <div>
                             <select v-model="sortOption" @change="handleFilterChange" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
-                                <option value="users-desc">Users (High to Low)</option>
-                                <option value="users-asc">Users (Low to High)</option>
+                                <option value="users-desc">Accounts (High to Low)</option>
+                                <option value="users-asc">Accounts (Low to High)</option>
+                                <option value="mau-desc">MAU (High to Low)</option>
+                                <option value="mau-asc">MAU (Low to High)</option>
                                 <option value="posts-desc">Statuses (High to Low)</option>
                                 <option value="posts-asc">Statuses (Low to High)</option>
                                 <option value="created-desc">Newest First</option>
-                                <option value="created-asc">Oldest First</option>
                             </select>
                         </div>
                         <div>
                             <select v-model="itemsPerPage" @change="handleFilterChange" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
-                                <option value="8">8 per page</option>
+                                <option value="10">10 per page</option>
                                 <option value="15">15 per page</option>
                                 <option value="20">20 per page</option>
                                 <option value="50">50 per page</option>
@@ -54,7 +55,7 @@
                 <div class="hidden md:grid md:grid-cols-6 gap-4 px-6 py-3 bg-gray-100 dark:bg-gray-700 rounded-t-xl font-medium text-gray-500 dark:text-gray-400 text-sm">
                     <div class="col-span-2">Server</div>
                     <div>Software</div>
-                    <div>Accounts</div>
+                    <div>Accounts / MAU</div>
                     <div>Statuses</div>
                     <div>Region</div>
                 </div>
@@ -78,7 +79,7 @@
                         v-else 
                         v-for="server in currentServers" 
                         :key="server.id" 
-                        class="p-4 md:px-6 md:py-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer" >
+                        class="p-4 md:px-6 md:py-4 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors cursor-pointer" >
                         <NuxtLink :href="`/servers/${server.domain}`">
                             <div class="md:hidden">
                                 <div class="flex items-center mb-2">
@@ -92,38 +93,42 @@
                                     </div>
                                 </div>
                                 <div class="flex flex-wrap gap-y-1">
-                                    <div class="w-1/2">
+                                    <div class="w-1/3">
                                         <div class="text-xs text-gray-500 dark:text-gray-400">Software</div>
                                         <div class="text-sm font-medium dark:text-gray-200">{{ server.software?.name }}</div>
                                     </div>
 
-                                    <div class="w-1/2">
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">Users</div>
+                                    <div class="w-1/3">
+                                        <div class="text-xs text-gray-500 dark:text-gray-400">Accounts</div>
                                         <div class="text-sm font-medium dark:text-gray-200">{{ server.stats?.user_count?.toLocaleString() }}</div>
+                                    </div>
+
+                                    <div class="w-1/3">
+                                        <div class="text-xs text-gray-500 dark:text-gray-400">MAU</div>
+                                        <div class="text-sm font-medium dark:text-gray-200">{{ formatNumber(server.stats?.monthly_active_users || 0) }}</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="hidden md:grid md:grid-cols-6 md:gap-4 md:items-center">
                                 <div class="col-span-2">
-                                    <div class="flex items-center">
-                                        <div class="h-8 w-8 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-3 flex items-center justify-center overflow-hidden">
-                                            <img v-if="server.logo" :src="server.logo" alt="" class="h-full w-full object-cover">
-                                            <span v-else class="text-xl font-bold text-blue-600 dark:text-blue-400">{{ server.domain.charAt(0).toUpperCase() }}</span>
-                                        </div>
-                                        <div>
-                                            <div class="font-medium dark:text-white">{{ server.domain }}</div>
-                                        </div>
-                                    </div>
+                                    <div class="font-medium dark:text-white truncate">{{ server.domain }}</div>
                                 </div>
-                                <div>
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" :class="getSoftwareClass(server.software?.name)">
-                                        {{ server.software?.name }}
+                                <div class="flex items-center">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium" :class="getSoftwareClass(server.software?.name)">
+                                        {{ server.software?.name || 'Unknown' }}
+                                        <span class="ml-1.5 opacity-70 font-normal" :class="{'dark:opacity-60 opacity-70': $colorMode.value === 'dark', 'opacity-70': $colorMode.value === 'light'}">
+                                        {{ truncateText(server.software?.version, 8) }}
+                                        </span>
                                     </span>
                                 </div>
-                                <div class="dark:text-gray-200">{{ server.stats?.user_count?.toLocaleString() }}</div>
-                                <div class="dark:text-gray-200">{{ formatNumber(server.stats?.status_count) }}</div>
-                                <div class="dark:text-gray-200">{{ server.location?.country }}</div>
+                                <div class="dark:text-gray-200 flex text-sm gap-2">
+                                    <span class="text-gray-500 dark:text-gray-500">{{ formatNumber(server.stats?.user_count) }}</span>
+                                    <span class="text-gray-300 dark:text-gray-700">/</span>
+                                    <span class="font-bold dark:text-gray-200">{{ formatNumber(server.stats?.monthly_active_users) }}</span>
+                                </div>
+                                <div class="dark:text-gray-200 text-sm">{{ formatNumber(server.stats?.status_count) }}</div>
+                                <div class="dark:text-gray-200 text-sm">{{ server.location?.country || 'Unknown' }}</div>
                             </div>
                         </NuxtLink>
                     </div>
@@ -166,7 +171,7 @@
     const regionFilter = ref('all');
 
     const currentPage = ref(1);
-    const itemsPerPage = ref(8);
+    const itemsPerPage = ref(10);
     const pagesHistory = ref([]);
     const debounceTimeout = ref(null);
 
