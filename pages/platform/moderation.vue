@@ -2,8 +2,8 @@
     <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
         <div class="container mx-auto px-4 py-12 max-w-4xl">
             <ModerationHeroSection />
-            <!-- <ModerationTypesSection />
-            <ModerationProcessSection />
+            <ModerationTypesSection />
+            <!--<ModerationProcessSection />
             <ModerationInstanceListSection />
             <ModerationReportInstanceSection /> -->
         </div>
