@@ -5,9 +5,7 @@
             <p class="text-xl md:text-2xl text-blue-100 mb-8">
                 Your go-to source for comprehensive fediverse data & analytics
             </p>
-            <a href="#contact" class="px-8 py-3 bg-white text-indigo-700 font-semibold rounded-lg shadow hover:bg-indigo-50 transition">
-                Get in Touch
-            </a>
+            <a href="#contact" class="inline-block px-8 py-3 bg-white text-indigo-700 font-semibold rounded-lg shadow hover:bg-indigo-50 transition">Get in Touch</a>
         </div>
         <div class="absolute bottom-0 w-full">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 220" class="fill-white dark:fill-gray-900">
