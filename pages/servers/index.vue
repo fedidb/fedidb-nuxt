@@ -143,35 +143,12 @@
 <script setup>
     import { ref, computed, watch, onMounted } from 'vue';
     import {
+        useSoftwareSlugs,
         useFilteredServers,
-        extractAllServers,
+        useNetworkStats,
     } from '~/composables/useQueries';
-    import { useNetworkStats } from '~/composables/useQueries';
 
-    const filterableSoftware = ref([
-        'mastodon',
-        'misskey',
-        'pixelfed',
-        'peertube',
-        'lemmy',
-        'microdotblog',
-        'bridgy-fed',
-        'mobilizon',
-        'writefreely',
-        'pleroma',
-        'bookwyrm',
-        'fedibird',
-        'wordpress',
-        'loops',
-        'sharkey',
-        'plume',
-        'neodb',
-        'hometown',
-        'friendica',
-        'akkoma',
-        'foundkey',
-        'funkwhale',
-    ]);
+    const { data: filterableSoftware } = useSoftwareSlugs();
 
     const { data: stats } = useNetworkStats();
 

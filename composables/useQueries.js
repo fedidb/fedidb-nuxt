@@ -6,6 +6,30 @@ import {
 } from '@tanstack/vue-query';
 import { unref, computed } from 'vue';
 
+
+/**
+ * Hook to fetch software slugs
+ * @returns {Object} Query object with data, status, and functions
+ */
+export function useSoftwareSlugs() {
+    return useQuery({
+        queryKey: ['softwareSlugs'],
+        queryFn: async () => {
+            try {
+                const response = await fetch('https://api.fedidb.org/v1.1/software-slugs');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            } catch (error) {
+                console.error('Error fetching software:', error);
+                throw error;
+            }
+        },
+        staleTime: 1000 * 60 * 60 * 24 * 14,
+    });
+}
+
 /**
  * Hook to fetch network stats
  * @returns {Object} Query object with data, status, and functions
