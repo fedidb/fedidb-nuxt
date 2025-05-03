@@ -163,7 +163,7 @@
                                                 <span v-else class="text-xl font-bold text-white">{{ software.name.charAt(0) }}</span>
                                             </div>
                                         </div>
-                                        <div class="min-w-0 flex-1 px-4">
+                                        <div class="min-w-0 flex-1 px-4 md:max-w-[60%] lg:max-w-[80%]">
                                             <div class="flex items-center justify-between">
                                                 <p class="truncate text-sm font-medium text-gray-900 dark:text-white">{{ software.name }}</p>
                                             </div>
@@ -173,22 +173,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="hidden md:grid md:grid-cols-4 md:gap-4 text-center">
-                                        <div>
+                                    <!-- Stats section - improved alignment -->
+                                    <div class="hidden md:grid md:grid-cols-4 md:gap-4">
+                                        <div class="flex flex-col items-center">
                                             <div class="text-xs text-gray-500 dark:text-gray-400">Servers</div>
-                                            <div class="font-semibold text-gray-900 dark:text-white">{{ software?.instance_count?.toLocaleString() }}</div>
+                                            <div class="font-semibold text-gray-900 dark:text-white">{{ formatNumber(software?.instance_count) }}</div>
                                         </div>
-                                        <div>
+                                        <div class="flex flex-col items-center">
                                             <div class="text-xs text-gray-500 dark:text-gray-400">Users</div>
-                                            <div class="font-semibold text-gray-900 dark:text-white">{{ software.user_count?.toLocaleString() }}</div>
+                                            <div class="font-semibold text-gray-900 dark:text-white">{{ formatNumber(software.user_count) }}</div>
                                         </div>
-                                        <div>
+                                        <div class="flex flex-col items-center">
                                             <div class="text-xs text-gray-500 dark:text-gray-400">MAU</div>
-                                            <div class="font-semibold text-gray-900 dark:text-white">{{ software?.monthly_actives?.toLocaleString() }}</div>
+                                            <div class="font-semibold text-gray-900 dark:text-white">{{ formatNumber(software?.monthly_actives) }}</div>
                                         </div>
-                                        <div>
+                                        <div class="flex flex-col items-center">
                                             <div class="text-xs text-gray-500 dark:text-gray-400">Posts</div>
-                                            <div class="font-semibold text-gray-900 dark:text-white">{{ software?.status_count?.toLocaleString() }}</div>
+                                            <div class="font-semibold text-gray-900 dark:text-white">{{ formatNumber(software?.status_count) }}</div>
                                         </div>
                                     </div>
                                     <div class="ml-5 flex-shrink-0">
