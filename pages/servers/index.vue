@@ -38,27 +38,6 @@
                                 <option value="created-asc">Oldest First</option>
                             </select>
                         </div>
-
-                        <div class="hidden md:flex md:ml-5 flex items-center">
-                            <span class="text-sm text-gray-700 dark:text-gray-300 mr-2">Quick View</span>
-                                <button @click=" showInModal = ! showInModal" type="button" :class=" showInModal ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'"class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                                    <span :class=" showInModal ? 'translate-x-5' : 'translate-x-0'" class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
-                                        >
-                                        <span :class=" showInModal ? 'opacity-0 duration-100 ease-out' : 'opacity-100 duration-200 ease-in'" class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
-                                        >
-                                            <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
-                                                <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                        <span :class=" showInModal ? 'opacity-100 duration-200 ease-in' : 'opacity-0 duration-100 ease-out'" class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
-                                        >
-                                        <svg class="h-3 w-3 text-blue-600" fill="currentColor" viewBox="0 0 12 12">
-                                            <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -87,52 +66,58 @@
                         </button>
                     </div>
 
-                    <div v-else v-for="server in currentServers" :key="server.id" class="p-4 md:px-6 md:py-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer" @click="selectServer(server)">
-                        <div class="md:hidden">
-                            <div class="flex items-center mb-2">
-                                <div class="h-8 w-8 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-2 flex items-center justify-center overflow-hidden">
-                                    <img v-if="server.logo" :src="server.logo" alt="" class="h-full w-full object-cover">
-                                    <span v-else class="text-xl font-bold text-blue-600 dark:text-blue-400">{{ server.domain.charAt(0).toUpperCase() }}</span>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold dark:text-white">{{ server.name || server.domain }}</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ server.domain }}</p>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap gap-y-1">
-                                <div class="w-1/2">
-                                    <div class="text-xs text-gray-500 dark:text-gray-400">Software</div>
-                                    <div class="text-sm font-medium dark:text-gray-200">{{ server.software?.name }}</div>
-                                </div>
-
-                                <div class="w-1/2">
-                                    <div class="text-xs text-gray-500 dark:text-gray-400">Users</div>
-                                    <div class="text-sm font-medium dark:text-gray-200">{{ server.stats?.user_count?.toLocaleString() }}</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="hidden md:grid md:grid-cols-6 md:gap-4 md:items-center">
-                            <div class="col-span-2">
-                                <div class="flex items-center">
-                                    <div class="h-8 w-8 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-3 flex items-center justify-center overflow-hidden">
+                    <div 
+                        v-else 
+                        v-for="server in currentServers" 
+                        :key="server.id" 
+                        class="p-4 md:px-6 md:py-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer" >
+                        <NuxtLink :href="`/servers/${server.domain}`">
+                            <div class="md:hidden">
+                                <div class="flex items-center mb-2">
+                                    <div class="h-8 w-8 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-2 flex items-center justify-center overflow-hidden">
                                         <img v-if="server.logo" :src="server.logo" alt="" class="h-full w-full object-cover">
                                         <span v-else class="text-xl font-bold text-blue-600 dark:text-blue-400">{{ server.domain.charAt(0).toUpperCase() }}</span>
                                     </div>
                                     <div>
-                                        <div class="font-medium dark:text-white">{{ server.domain }}</div>
+                                        <h3 class="font-semibold dark:text-white">{{ server.name || server.domain }}</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ server.domain }}</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap gap-y-1">
+                                    <div class="w-1/2">
+                                        <div class="text-xs text-gray-500 dark:text-gray-400">Software</div>
+                                        <div class="text-sm font-medium dark:text-gray-200">{{ server.software?.name }}</div>
+                                    </div>
+
+                                    <div class="w-1/2">
+                                        <div class="text-xs text-gray-500 dark:text-gray-400">Users</div>
+                                        <div class="text-sm font-medium dark:text-gray-200">{{ server.stats?.user_count?.toLocaleString() }}</div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" :class="getSoftwareClass(server.software?.name)">
-                                    {{ server.software?.name }}
-                                </span>
+
+                            <div class="hidden md:grid md:grid-cols-6 md:gap-4 md:items-center">
+                                <div class="col-span-2">
+                                    <div class="flex items-center">
+                                        <div class="h-8 w-8 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-3 flex items-center justify-center overflow-hidden">
+                                            <img v-if="server.logo" :src="server.logo" alt="" class="h-full w-full object-cover">
+                                            <span v-else class="text-xl font-bold text-blue-600 dark:text-blue-400">{{ server.domain.charAt(0).toUpperCase() }}</span>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium dark:text-white">{{ server.domain }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" :class="getSoftwareClass(server.software?.name)">
+                                        {{ server.software?.name }}
+                                    </span>
+                                </div>
+                                <div class="dark:text-gray-200">{{ server.stats?.user_count?.toLocaleString() }}</div>
+                                <div class="dark:text-gray-200">{{ formatNumber(server.stats?.status_count) }}</div>
+                                <div class="dark:text-gray-200">{{ server.location?.country }}</div>
                             </div>
-                            <div class="dark:text-gray-200">{{ server.stats?.user_count?.toLocaleString() }}</div>
-                            <div class="dark:text-gray-200">{{ formatNumber(server.stats?.status_count) }}</div>
-                            <div class="dark:text-gray-200">{{ server.location?.country }}</div>
-                        </div>
+                        </NuxtLink>
                     </div>
                 </div>
 
@@ -148,83 +133,6 @@
                     <div class="flex space-x-2">
                         <button @click="prevPage" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="!hasPreviousPages">Previous</button>
                         <button @click="nextPage" :disabled="!hasNextPage || isFetchingNextPage || isLoading" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 disabled:opacitdisabled:cursor-not-allowed"><span v-if="isFetchingNextPage">Loading...</span><span v-else>Next</span></button>
-                    </div>
-                </div>
-            </div>
-
-            <div v-if="selectedServer" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                    <div class="fixed inset-0 bg-gray-500/50 bg-opacity-75 dark:bg-gray-900/50 dark:bg-opacity-75 transition-opacity" aria-hidden="true" @click="selectedServer = null"></div>
-
-                    <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
-                        <div class="flex justify-between items-start p-6 border-b border-gray-200 dark:border-gray-700">
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white" id="modal-title">
-                                Server Details
-                            </h3>
-                            <button @click="selectedServer = null" class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300">
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="p-6">
-                            <div class="flex justify-center items-center">
-                                <div class="mb-6 md:mb-0">
-                                    <div class="flex items-center mb-4">
-                                        <div class="h-12 w-12 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-3 flex items-center justify-center overflow-hidden">
-                                            <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">{{ selectedServer.domain.charAt(0).toUpperCase() }}</span>
-                                        </div>
-                                        <div>
-                                            <h2 class="text-xl font-bold dark:text-white">{{ selectedServer.name }}</h2>
-                                            <p class="text-gray-500 dark:text-gray-400">{{ selectedServer.domain }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div v-if="selectedServer.description" class="mb-6">
-                                        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Description</h4>
-                                        <p class="dark:text-gray-200 line-clamp-2">{{ selectedServer.description }}</p>
-                                    </div>
-
-                                    <div class="grid grid-cols-2 gap-4 mb-6">
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Software</h4>
-                                            <p class="dark:text-gray-200 font-medium truncate"><NuxtLink :href="'/software/' + selectedServer?.software?.url?.split('/')[4]" class="text-blue-600">{{ selectedServer.software.name }}</NuxtLink> v{{ selectedServer.software.version }}</p>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Users</h4>
-                                            <p class="dark:text-gray-200 font-medium">{{ selectedServer.stats.user_count.toLocaleString() }}</p>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Monthly Active Users</h4>
-                                            <p class="dark:text-gray-200 font-medium">{{ selectedServer.stats.monthly_active_users.toLocaleString() }}</p>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Posts</h4>
-                                            <p class="dark:text-gray-200 font-medium">{{ formatNumber(selectedServer.stats.status_count) }}</p>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">First Seen</h4>
-                                            <p class="dark:text-gray-200 font-medium">{{ formatDate(selectedServer.first_seen_at) }}</p>
-                                        </div>
-                                        <div v-if="selectedServer.location.country">
-                                            <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Location</h4>
-                                            <p class="dark:text-gray-200 font-medium">{{ selectedServer.location.country }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                            <NuxtLink :href="`/servers/${selectedServer.domain}`" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
-                                View more info →
-                            </NuxtLink>
-                            <button @click="selectedServer = null" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg transition-colors">
-                                Close
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -267,12 +175,6 @@
 
     const { data: stats } = useNetworkStats();
 
-    const showInModal = ref(false);
-
-    const isMenuOpen = ref(false);
-
-    const viewMode = ref('list');
-
     const serverSearch = ref('');
     const softwareFilter = ref('');
     const sortOption = ref('users-desc');
@@ -284,13 +186,6 @@
     const debounceTimeout = ref(null);
 
     const selectedServer = ref(null);
-    const selectServer = async (server) => {
-        if (showInModal.value) {
-            selectedServer.value = server;
-        } else {
-            await navigateTo(`/servers/${server.domain}`);
-        }
-    };
 
     const combinedFilters = computed(() => {
         return {
