@@ -121,7 +121,7 @@
                                 <div class="space-y-3">
                                     <div v-for="(version, index) in selectedSoftware.versions.slice(0, 5)" :key="index" class="pt-3 border-t border-gray-200 dark:border-gray-700 first:border-0">
                                         <div class="flex justify-between items-center gap-3">
-                                            <div class="font-medium dark:text-white">v{{ version.version }}</div>
+                                            <div class="text-xs md:text-sm font-medium dark:text-white">v{{ truncateText(version.version, 12) }}</div>
                                             <div class="text-xs text-gray-500 dark:text-gray-400">{{ version.count?.toLocaleString() }} servers ({{ Math.round(version.count / selectedSoftware.instance_count * 100) }}%)</div>
                                         </div>
                                     </div>
