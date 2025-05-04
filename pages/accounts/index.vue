@@ -175,7 +175,7 @@
                               <div class="font-semibold dark:text-white">{{ formatNumber(account.following_count) }}</div>
                           </div>
                           <div>
-                              <div class="text-xs text-gray-500 dark:text-gray-400">Posts</div>
+                              <div class="text-xs text-gray-500 dark:text-gray-400">Statuses</div>
                               <div class="font-semibold dark:text-white">{{ formatNumber(account.status_count) }}</div>
                           </div>
                       </div>
