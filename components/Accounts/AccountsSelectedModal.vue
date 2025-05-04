@@ -102,7 +102,7 @@
               About
             </h4>
             <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-6">
-              <p class="text-sm text-gray-500 dark:text-gray-200 break-word whitespace-pre-line" v-html="selectedAccount.bio"></p>
+              <p class="text-sm text-gray-500 dark:text-gray-200 break-all whitespace-pre-line" v-html="selectedAccount.bio"></p>
             </div>
           </div>
           
