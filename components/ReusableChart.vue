@@ -235,7 +235,10 @@ const chartOption = computed(() => {
             axisTick: { show: false },
         },
         yAxis: {
-            type: 'value',
+            min: 'dataMin',
+            max: 'dataMax',
+            type: 'log',
+            logBase: 2,
             axisLine: { lineStyle: { color: colors.axisLineColor } },
             axisLabel: {
                 color: colors.textColorSecondary,
