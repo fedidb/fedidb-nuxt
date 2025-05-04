@@ -320,7 +320,7 @@
     const viewMode = ref('grid');
     const currentPage = ref(1);
     const itemsPerPage = ref(12);
-    const searchQuery = ref('');
+    const searchQuery = ref();
     const categoryFilter = ref('all');
     const serverFilter = ref('all');
     const sortOption = ref('followers-desc');

@@ -22,7 +22,30 @@ export function useSoftwareSlugs() {
                 }
                 return response.json();
             } catch (error) {
-                console.error('Error fetching software:', error);
+                console.error('Error fetching software slugs:', error);
+                throw error;
+            }
+        },
+        staleTime: 1000 * 60 * 60 * 24 * 14,
+    });
+}
+
+/**
+ * Hook to fetch apps
+ * @returns {Object} Query object with data, status, and functions
+ */
+export function useApps() {
+    return useQuery({
+        queryKey: ['apps'],
+        queryFn: async () => {
+            try {
+                const response = await fetch('https://api.fedidb.org/v1.1/apps');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            } catch (error) {
+                console.error('Error fetching apps:', error);
                 throw error;
             }
         },
