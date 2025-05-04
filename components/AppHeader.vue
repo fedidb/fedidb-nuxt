@@ -15,6 +15,7 @@
                     <NuxtLink to="/" class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">Home</NuxtLink>
                     <NuxtLink to="/servers" class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">Servers</NuxtLink>
                     <NuxtLink to="/software" class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">Software</NuxtLink>
+                    <NuxtLink to="/accounts" class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">Accounts</NuxtLink>
                 </nav>
 
                 <div class="flex items-center space-x-4">
@@ -41,6 +42,7 @@
                     <NuxtLink to="/" @click="closeMenu" class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">Home</NuxtLink>
                     <NuxtLink to="/servers" @click="closeMenu" class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">Servers</NuxtLink>
                     <NuxtLink to="/software" @click="closeMenu" class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">Software</NuxtLink>
+                    <NuxtLink to="/accounts" @click="closeMenu" class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">Accounts</NuxtLink>
                 </div>
             </div>
         </div>

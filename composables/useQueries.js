@@ -88,13 +88,13 @@ export function useFetchPopularAccounts() {
         queryFn: async () => {
             try {
                 const response = await fetch(
-                    'https://api.fedidb.org/v1/popular-accounts'
+                    'https://api.fedidb.org/v1.1/popular-accounts'
                 );
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const result = await response.json();
-                return result.data || [];
+                return result || [];
             } catch (error) {
                 console.error('Error fetching software:', error);
                 throw error;
