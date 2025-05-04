@@ -17,7 +17,8 @@
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                                     <Icon name="feather:search" class="text-gray-400" />
                                 </div>
-                                <input v-model="searchQuery" type="text" placeholder="Search apps..." class="w-full py-2 pr-3 pl-10 font-light rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                <input v-model="searchQuery" type="text" placeholder="Search apps..."
+                                    class="w-full py-2 pr-3 pl-10 font-light rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             </div>
                         </div>
 
@@ -64,7 +65,9 @@
                             </div>
                         </div>
 
-                        <button @click="clearFilters" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Clear Filters</button>
+                        <button @click="clearFilters"
+                            class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Clear
+                            Filters</button>
                     </div>
                 </aside>
 
@@ -140,10 +143,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useApps } from '~/composables/useQueries';
+import { useRoute, useRouter } from 'vue-router';
 
-// SEO setup
 useHead({
     title: 'Fediverse Apps - FediDB',
     meta: [
@@ -151,8 +154,10 @@ useHead({
     ]
 });
 
-const { data: apps, isLoading } = useApps();
+const route = useRoute();
+const router = useRouter();
 
+const { data: apps, isLoading } = useApps();
 
 const projects = computed(() => {
     if (!apps.value?.length) return []
@@ -189,6 +194,63 @@ const searchQuery = ref('');
 const selectedProjects = ref([]);
 const selectedCategories = ref([]);
 const selectedOS = ref([]);
+
+const parseQueryParams = () => {
+    if (route.query.q) {
+        searchQuery.value = route.query.q;
+    }
+
+    if (route.query.projects) {
+        const projectParams = Array.isArray(route.query.projects)
+            ? route.query.projects
+            : [route.query.projects];
+        selectedProjects.value = projectParams;
+    }
+
+    if (route.query.categories) {
+        const categoryParams = Array.isArray(route.query.categories)
+            ? route.query.categories
+            : [route.query.categories];
+        selectedCategories.value = categoryParams;
+    }
+
+    if (route.query.os) {
+        const osParams = Array.isArray(route.query.os)
+            ? route.query.os
+            : [route.query.os];
+        selectedOS.value = osParams;
+    }
+};
+
+const updateQueryParams = () => {
+    const query = {};
+
+    if (searchQuery.value) {
+        query.q = searchQuery.value;
+    }
+
+    if (selectedProjects.value.length > 0) {
+        query.projects = selectedProjects.value;
+    }
+
+    if (selectedCategories.value.length > 0) {
+        query.categories = selectedCategories.value;
+    }
+
+    if (selectedOS.value.length > 0) {
+        query.os = selectedOS.value;
+    }
+
+    router.replace({ query });
+};
+
+watch([searchQuery, selectedProjects, selectedCategories, selectedOS], () => {
+    updateQueryParams();
+}, { deep: true });
+
+onMounted(() => {
+    parseQueryParams();
+});
 
 const filteredApps = computed(() => {
     return apps.value.filter(app => {
@@ -239,5 +301,6 @@ function clearFilters() {
     selectedProjects.value = [];
     selectedCategories.value = [];
     selectedOS.value = [];
+    updateQueryParams();
 }
 </script>
