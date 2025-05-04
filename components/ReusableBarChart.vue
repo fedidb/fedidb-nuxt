@@ -6,7 +6,7 @@
       
       <div 
         ref="chartContainer" 
-        class="w-full bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+        class="w-full bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden"
         :style="{ height: height + 'px' }"
       ></div>
     </div>
