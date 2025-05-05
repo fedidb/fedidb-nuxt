@@ -379,7 +379,7 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
             const data = await res.json();
             return data;
         },
-
+        getPreviousPageParam: first => first.meta.prev_cursor,
         getNextPageParam: (lastPage) => {
             if (lastPage.meta?.next_cursor) {
                 return lastPage.meta.next_cursor;
@@ -395,8 +395,8 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
 
             return undefined;
         },
-
         enabled: computed(() => Boolean(id.value)),
+        keepPreviousData: true,
         staleTime: 1000 * 60 * 15,
         ...options,
     });
