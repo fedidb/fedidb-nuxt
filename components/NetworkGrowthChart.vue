@@ -12,7 +12,7 @@
             </button>
         </div>
 
-        <div :class="isDark ? 'bg-gray-800' : 'bg-gray-100'" class="flex flex-col items-center justify-center h-full p-3 transition-colors duration-300">
+        <div :class="isDark ? 'bg-gray-800' : 'bg-white'" class="flex flex-col items-center justify-center h-full p-3 transition-colors duration-300">
             <div v-if="isLoading" class="flex justify-center items-center h-64">
                 <div class="animate-pulse flex space-x-4">
                     <div :class="isDark ? 'bg-gray-300' : 'bg-gray-700'" class="rounded-full h-10 w-10"></div>
