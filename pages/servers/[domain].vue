@@ -90,24 +90,63 @@
                         </div>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Historical Statistics</h2>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                        <h2 class="text-xl font-bold text-gray-800 dark:text-white p-4 bg-gray-200 dark:bg-gray-700">Historical Statistics</h2>
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                 <thead class="bg-gray-50 dark:bg-gray-800">
                                     <tr>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Date</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Users</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Active Users</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Accounts</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Active Accounts</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Statuses</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                    <tr v-for="(stat, index) in historicalStats" :key="index">
+                                    <tr v-for="(stat, index) in historicalStats.reverse()" :key="index">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ formatGraphDate(stat.date) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ formatNumber(stat.users) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ formatNumber(stat.activeUsers) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ formatNumber(stat.posts) }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                            {{ formatNumber(stat.users, 2) }}
+                                            <span
+                                                v-if="stat.deltaUsers != 0"
+                                                class="ml-2 text-xs font-medium"
+                                                :class="stat.deltaUsers >= 0
+                                                    ? 'text-green-600 dark:text-green-400'
+                                                    : 'text-red-600 dark:text-red-400'"
+                                                >
+                                                {{ stat.deltaUsers >= 0
+                                                    ? '+' + formatNumber(stat.deltaUsers)
+                                                    : formatNumber(stat.deltaUsers) }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                            {{ formatNumber(stat.activeUsers, 2) }}
+                                            <span
+                                                v-if="stat.deltaActiveUsers != 0"
+                                                class="ml-2 text-xs font-medium"
+                                                :class="stat.deltaActiveUsers >= 0
+                                                    ? 'text-green-600 dark:text-green-400'
+                                                    : 'text-red-600 dark:text-red-400'"
+                                                >
+                                                {{ stat.deltaActiveUsers >= 0
+                                                    ? '+' + formatNumber(stat.deltaActiveUsers)
+                                                    : formatNumber(stat.deltaActiveUsers) }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                            {{ formatNumber(stat.posts, 2) }}
+                                            <span
+                                                v-if="stat.deltaPosts != 0"
+                                                class="ml-2 text-xs font-medium"
+                                                :class="stat.deltaPosts >= 0
+                                                    ? 'text-green-600 dark:text-green-400'
+                                                    : 'text-red-600 dark:text-red-400'"
+                                                >
+                                                {{ stat.deltaPosts >= 0
+                                                    ? '+' + formatNumber(stat.deltaPosts)
+                                                    : formatNumber(stat.deltaPosts) }}
+                                            </span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -137,19 +176,25 @@
     const isFavorite = ref(false);
 
     const historicalStats = computed(() => {
-        if (!server.value || !server.value.monthly_stats) return [];
+        if (!server.value?.monthly_stats) return [];
 
-        return server.value.monthly_stats.map((growth, index) => {
-            const postsRatio =
-            server.value.totalPosts /
-            (server.value.totalUsers || server.value.users);
-            const posts = Math.round(growth.users * postsRatio);
+        const base = server.value.monthly_stats.map(g => ({
+            date: g.date,
+            users: g.user_count,
+            activeUsers: g.active_monthly,
+            posts: g.status_count,
+        }));
 
+        return base.map((stat, i) => {
+            if (i === 0) {
+                return { ...stat, deltaUsers: 0, deltaActiveUsers: 0, deltaPosts: 0 };
+            }
+            const prev = base[i - 1];
             return {
-                date: growth.date,
-                users: growth.user_count,
-                activeUsers: growth.active_monthly,
-                posts: growth.status_count,
+                ...stat,
+                deltaUsers: stat.users - prev.users,
+                deltaActiveUsers: stat.activeUsers - prev.activeUsers,
+                deltaPosts: stat.posts - prev.posts,
             };
         });
     });
