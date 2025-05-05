@@ -12,7 +12,7 @@
             </button>
         </div>
 
-        <div :class="isDark ? 'bg-gray-800' : 'bg-gray-100'" class="flex flex-col items-center justify-center h-full p-3 transition-colors duration-300">
+        <div :class="isDark ? 'bg-gray-800' : 'bg-white'" class="flex flex-col items-center justify-center h-full p-3 transition-colors duration-300">
             <div v-if="isLoading" class="flex justify-center items-center h-64">
                 <Spinner />
             </div>
@@ -140,7 +140,7 @@ const themeColors = computed(() => {
             textColor: '#1F2937',
             textColorSecondary: 'rgba(31,41,55,0.7)',
             axisLineColor: 'rgba(31,41,55,0.1)',
-            backgroundColor: 'rgba(249,250,251,0.9)',
+            backgroundColor: '#ffffff',
             colorPalette: [
                 'rgb(109,40,217)', // Dark Purple
                 'rgb(234,88,12)', // Dark Orange
