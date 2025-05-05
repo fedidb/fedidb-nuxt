@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="flex justify-between items-center p-3" :class="isDark ? 'bg-gray-900' : 'bg-gray-50'">
+        <div class="flex justify-between items-center p-3" :class="isDark ? 'bg-gray-700' : 'bg-gray-200'">
             <h2 :class="isDark ? 'text-white' : 'text-gray-800'" class="text-lg font-semibold">{{ title }}</h2>
             <button v-if="showThemeToggle" @click="toggleTheme" class="p-2 rounded-full hover:bg-opacity-20" :class="isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-300'">
                 <svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
