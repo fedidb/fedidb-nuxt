@@ -80,7 +80,7 @@
           </div>
         </div>
         
-        <div class="grid grid-cols-3 gap-4 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center">
             <p class="text-2xl font-bold text-gray-800 dark:text-white">{{ formatNumber(selectedAccount.followers_count) }}</p>
             <p class="text-sm text-gray-500 dark:text-gray-400">Followers</p>
