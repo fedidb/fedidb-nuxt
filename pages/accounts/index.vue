@@ -73,12 +73,6 @@
                 Verified
               </div>
             </button>
-            <!-- <button @click="toggleActiveFilter" :class="activeFilter ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'" class="cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors">
-              <div class="flex items-center text-xs">
-                <Icon name="feather:clock" class="mr-2" />
-                Active Last Week
-              </div>
-            </button> -->
             <button @click="toggleBotFilter" :class="botFilter ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'" class="cursor-pointer px-3 py-1 rounded-full text-sm font-medium transition-colors">
               <div class="flex items-center text-xs gap-2">
                 <Icon name="feather:zap" />
@@ -265,33 +259,10 @@
             Showing <span class="font-medium">{{ startItem }}-{{ endItem }}</span> of <span class="font-medium">{{ filteredAccounts.length }}</span> accounts
           </div>
           <div class="flex space-x-2">
-            <button 
-              @click="goToPrevPage" 
-              class="w-32 flex items-center justify-center text-sm px-4 py-2 rounded-lg 
-                              cursor-pointer border border-gray-300 dark:border-gray-600
-                              text-gray-700 dark:text-gray-200
-                              bg-gradient-to-r from-gray-100 to-gray-200
-                              dark:from-slate-700 dark:to-gray-600
-                              hover:from-gray-200 hover:to-gray-300
-                              dark:hover:from-gray-600 dark:hover:to-gray-500
-                              disabled:opacity-50 disabled:cursor-not-allowed
-                              transition-all duration-200"
-              :disabled="currentPage === 1"
-            >
+            <button @click="goToPrevPage" class="w-32 flex items-center justify-center text-sm px-4 py-2 rounded-lg cursor-pointer border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-slate-700 dark:to-gray-600 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200" :disabled="currentPage === 1">
               Previous
             </button>
-            <button 
-              @click="goToNextPage" 
-              class="w-32 flex items-center justify-center px-4 text-sm py-2 rounded-lg
-                              text-white cursor-pointer
-                              bg-gradient-to-r from-sky-500 to-blue-600
-                              dark:from-sky-500 dark:to-blue-700
-                              hover:from-sky-600 hover:to-blue-700
-                              dark:hover:from-sky-700 dark:hover:to-blue-800
-                              disabled:opacity-50 disabled:cursor-not-allowed
-                              transition-all duration-200"
-              :disabled="currentPage === totalPages"
-            >
+            <button @click="goToNextPage" class="w-32 flex items-center justify-center px-4 text-sm py-2 rounded-lg text-white cursor-pointer bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-500 dark:to-blue-700 hover:from-sky-600 hover:to-blue-700 dark:hover:from-sky-700 dark:hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200" :disabled="currentPage === totalPages">
               Next
             </button>
           </div>
@@ -471,7 +442,7 @@
     });
 
     const topCategories = computed(() => {
-    if (accounts && accounts.value.length) {
+    if (accounts.value && accounts.value?.length) {
         const categoryMap = new Map();
         
         accounts.value.forEach(account => {
