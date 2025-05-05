@@ -3,9 +3,8 @@ import {
     useMutation,
     useInfiniteQuery,
     useQueryClient,
-} from '@tanstack/vue-query';
-import { unref, computed } from 'vue';
-
+} from "@tanstack/vue-query";
+import { unref, computed } from "vue";
 
 /**
  * Hook to fetch software slugs
@@ -13,16 +12,18 @@ import { unref, computed } from 'vue';
  */
 export function useSoftwareSlugs() {
     return useQuery({
-        queryKey: ['softwareSlugs'],
+        queryKey: ["softwareSlugs"],
         queryFn: async () => {
             try {
-                const response = await fetch('https://api.fedidb.org/v1.1/software-slugs');
+                const response = await fetch(
+                    "https://api.fedidb.org/v1.1/software-slugs"
+                );
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error("Network response was not ok");
                 }
                 return response.json();
             } catch (error) {
-                console.error('Error fetching software slugs:', error);
+                console.error("Error fetching software slugs:", error);
                 throw error;
             }
         },
@@ -36,20 +37,97 @@ export function useSoftwareSlugs() {
  */
 export function useApps() {
     return useQuery({
-        queryKey: ['apps'],
+        queryKey: ["appsAndClients"],
         queryFn: async () => {
             try {
-                const response = await fetch('https://api.fedidb.org/v1.1/apps');
+                const response = await fetch(
+                    "https://api.fedidb.org/v1.1/apps"
+                );
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error("Network response was not ok");
                 }
                 return response.json();
             } catch (error) {
-                console.error('Error fetching apps:', error);
+                console.error("Error fetching apps:", error);
                 throw error;
             }
         },
-        staleTime: 1000 * 60 * 60 * 24 * 14,
+        staleTime: 1000 * 60 * 60 * 4,
+    });
+}
+
+/**
+ * Hook to fetch historical
+ * @returns {Object} Query object with data, status, and functions
+ */
+export function useHistoricalStats() {
+    return useQuery({
+        queryKey: ["historicalStats"],
+        queryFn: async () => {
+            try {
+                const response = await fetch(
+                    "https://api.fedidb.org/v1.1/stats/historical"
+                );
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            } catch (error) {
+                console.error("Error fetching apps:", error);
+                throw error;
+            }
+        },
+        staleTime: 1000 * 60 * 60 * 4,
+    });
+}
+
+/**
+ * Hook to fetch distribution stats
+ * @returns {Object} Query object with data, status, and functions
+ */
+export function useDistributionStats() {
+    return useQuery({
+        queryKey: ["distributionStats"],
+        queryFn: async () => {
+            try {
+                const response = await fetch(
+                    "https://api.fedidb.org/v1.1/stats/distribution"
+                );
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            } catch (error) {
+                console.error("Error fetching apps:", error);
+                throw error;
+            }
+        },
+        staleTime: 1000 * 60 * 60 * 4,
+    });
+}
+
+/**
+ * Hook to fetch asn stats
+ * @returns {Object} Query object with data, status, and functions
+ */
+export function useASNStats() {
+    return useQuery({
+        queryKey: ["asnStats"],
+        queryFn: async () => {
+            try {
+                const response = await fetch(
+                    "https://api.fedidb.org/v1.1/stats/asn"
+                );
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            } catch (error) {
+                console.error("Error fetching apps:", error);
+                throw error;
+            }
+        },
+        staleTime: 1000 * 60 * 60 * 4,
     });
 }
 
@@ -59,16 +137,16 @@ export function useApps() {
  */
 export function useNetworkStats() {
     return useQuery({
-        queryKey: ['networkStats'],
+        queryKey: ["networkStats"],
         queryFn: async () => {
             try {
-                const response = await fetch('https://api.fedidb.org/v1/stats');
+                const response = await fetch("https://api.fedidb.org/v1/stats");
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error("Network response was not ok");
                 }
                 return response.json();
             } catch (error) {
-                console.error('Error fetching software:', error);
+                console.error("Error fetching software:", error);
                 throw error;
             }
         },
@@ -82,18 +160,18 @@ export function useNetworkStats() {
  */
 export function useFetchSoftware() {
     return useQuery({
-        queryKey: ['software'],
+        queryKey: ["software"],
         queryFn: async () => {
             try {
                 const response = await fetch(
-                    'https://api.fedidb.org/v1.1/software'
+                    "https://api.fedidb.org/v1.1/software"
                 );
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error("Network response was not ok");
                 }
                 return response.json();
             } catch (error) {
-                console.error('Error fetching software:', error);
+                console.error("Error fetching software:", error);
                 throw error;
             }
         },
@@ -107,19 +185,19 @@ export function useFetchSoftware() {
  */
 export function useFetchPopularAccounts() {
     return useQuery({
-        queryKey: ['popularAccounts'],
+        queryKey: ["popularAccounts"],
         queryFn: async () => {
             try {
                 const response = await fetch(
-                    'https://api.fedidb.org/v1.1/popular-accounts'
+                    "https://api.fedidb.org/v1.1/popular-accounts"
                 );
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error("Network response was not ok");
                 }
                 const result = await response.json();
                 return result || [];
             } catch (error) {
-                console.error('Error fetching software:', error);
+                console.error("Error fetching software:", error);
                 throw error;
             }
         },
@@ -136,10 +214,10 @@ export function useServers(options = {}) {
     const queryClient = useQueryClient();
 
     return useInfiniteQuery({
-        queryKey: ['servers'],
+        queryKey: ["servers"],
         queryFn: async ({ pageParam = null }) => {
             try {
-                let url = 'https://api.fedidb.org/v1.1/servers';
+                let url = "https://api.fedidb.org/v1.1/servers";
                 if (pageParam) {
                     url = `${url}?cursor=${pageParam}`;
                 }
@@ -154,9 +232,9 @@ export function useServers(options = {}) {
 
                 return await response.json();
             } catch (error) {
-                console.error('Failed to fetch servers:', error);
+                console.error("Failed to fetch servers:", error);
                 throw new Error(
-                    'Failed to load servers data. Please try again later.'
+                    "Failed to load servers data. Please try again later."
                 );
             }
         },
@@ -174,10 +252,10 @@ export function useServers(options = {}) {
  */
 export function useServerByDomain(domain) {
     return useQuery({
-        queryKey: ['serverByDomainV1', domain],
+        queryKey: ["serverByDomainV1", domain],
         queryFn: async () => {
             if (!domain) {
-                throw new Error('Server domain is required');
+                throw new Error("Server domain is required");
             }
 
             try {
@@ -213,10 +291,10 @@ export function useSoftwareBySlug(slug) {
     const id = computed(() => unref(slug));
 
     return useQuery({
-        queryKey: computed(() => ['softwareBySlug', id.value]),
+        queryKey: computed(() => ["softwareBySlug", id.value]),
         queryFn: async () => {
             if (!id.value) {
-                throw new Error('Software slug is required');
+                throw new Error("Software slug is required");
             }
             const res = await fetch(
                 `https://api.fedidb.org/v1/software/${id.value}`
@@ -246,7 +324,7 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
 
     return useInfiniteQuery({
         queryKey: computed(() => [
-            'softwareServers',
+            "softwareServers",
             id.value,
             currentFilters.value,
         ]),
@@ -277,18 +355,20 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
             if (sort_direction) params.push(`sort_direction=${sort_direction}`);
 
             if (search) params.push(`q=${encodeURIComponent(search)}`);
-            if (region && region !== 'all')
+            if (region && region !== "all")
                 params.push(`region=${encodeURIComponent(region)}`);
             if (version) params.push(`version=${encodeURIComponent(version)}`);
             if (registration)
                 params.push(
-                    `registration=${registration === 'open' ? 'open' : 'closed'}`
+                    `registration=${
+                        registration === "open" ? "open" : "closed"
+                    }`
                 );
             if (mature) params.push(`mature=${mature ? 1 : null}`);
             if (small) params.push(`small=${small ? 1 : null}`);
 
             if (params.length > 0) {
-                url += `?${params.join('&')}`;
+                url += `?${params.join("&")}`;
             }
 
             const res = await fetch(url);
@@ -306,7 +386,7 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
             }
             if (lastPage.links?.next) {
                 const url = new URL(lastPage.links.next);
-                return url.searchParams.get('cursor');
+                return url.searchParams.get("cursor");
             }
             const limit = currentFilters.value.limit || 10;
             if (lastPage.data && lastPage.data.length < limit) {
@@ -331,26 +411,26 @@ export function useFilteredServers(initialFilters = {}) {
     const activeFilters = ref(initialFilters);
 
     const query = useInfiniteQuery({
-        queryKey: ['servers', 'filtered', activeFilters],
+        queryKey: ["servers", "filtered", activeFilters],
         queryFn: async ({ pageParam = null }) => {
             try {
-                let url = new URL('https://api.fedidb.org/v1.1/servers');
+                let url = new URL("https://api.fedidb.org/v1.1/servers");
 
                 if (pageParam) {
-                    url.searchParams.append('cursor', pageParam);
+                    url.searchParams.append("cursor", pageParam);
                 }
 
                 Object.entries(activeFilters.value).forEach(([key, value]) => {
-                    if (value !== null && value !== undefined && value !== '') {
+                    if (value !== null && value !== undefined && value !== "") {
                         url.searchParams.append(key, value);
                     }
                 });
 
                 if (
-                    !url.searchParams.has('limit') &&
+                    !url.searchParams.has("limit") &&
                     !activeFilters.value.limit
                 ) {
-                    url.searchParams.append('limit', 10);
+                    url.searchParams.append("limit", 10);
                 }
 
                 const response = await fetch(url.toString());
@@ -363,7 +443,7 @@ export function useFilteredServers(initialFilters = {}) {
 
                 return await response.json();
             } catch (error) {
-                console.error('Failed to fetch filtered servers:', error);
+                console.error("Failed to fetch filtered servers:", error);
                 throw error;
             }
         },
