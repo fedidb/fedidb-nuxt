@@ -396,7 +396,6 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
             return undefined;
         },
         enabled: computed(() => Boolean(id.value)),
-        keepPreviousData: true,
         staleTime: 1000 * 60 * 15,
         ...options,
     });
