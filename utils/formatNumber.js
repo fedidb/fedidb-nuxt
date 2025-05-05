@@ -1,4 +1,4 @@
-export function formatNumber(num) {
+export function formatNumber(num, precision = 1) {
     num = Number(num);
     
     if (isNaN(num)) {
@@ -13,11 +13,11 @@ export function formatNumber(num) {
     
     let formattedNum;
     if (absNum >= 1000000000) {
-        formattedNum = (absNum / 1000000000).toFixed(1) + 'B';
+        formattedNum = (absNum / 1000000000).toFixed(precision) + 'B';
     } else if (absNum >= 1000000) {
-        formattedNum = (absNum / 1000000).toFixed(1) + 'M';
+        formattedNum = (absNum / 1000000).toFixed(precision) + 'M';
     } else if (absNum >= 1000) {
-        formattedNum = (absNum / 1000).toFixed(1) + 'K';
+        formattedNum = (absNum / 1000).toFixed(precision) + 'K';
     } else {
         formattedNum = absNum.toString();
     }
