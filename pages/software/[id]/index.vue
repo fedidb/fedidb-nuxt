@@ -166,13 +166,13 @@
                     <span v-if="isLoading && servers.length === 0">Loading servers...</span>
                     <span v-else>
                         Showing
-                        <span class="font-medium">{{ startIndex }}–{{ endIndex }}</span>
+                        <span class="font-medium">{{ currentPageIndex * pageSize }}–{{ currentPageIndex * pageSize + pageSize }}</span>
                         of <span class="font-medium">{{ software.instance_count }}</span>
                         servers
                     </span>
                 </div>
                 <div class="flex space-x-2">
-                    <button @click="prevPage" :disabled="page === 1 || srvLoading" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+                    <button @click="prevPage" :disabled="currentPageIndex < 1" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
 
                     <button @click="nextPage" :disabled="isNextButtonDisabled" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"><span>{{ isFetchingNextPage ? 'Loading...' : 'Next' }}</span><svg v-if="isFetchingNextPage" class="animate-spin ml-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></button>
                 </div>
@@ -192,6 +192,7 @@
     const route = useRoute()
     const router = useRouter()
     const slug = computed(() => route.params.id);
+    const currentPageIndex = ref(0)
 
     const {
         data: rawMeta,
@@ -290,7 +291,6 @@
         registrationFilter,
         matureFilter,
         smallFilter,
-        page,
         showDetailedStats,
       ],
       () => {
@@ -303,8 +303,9 @@
         if (registrationFilter.value) q.registration = registrationFilter.value
         if (matureFilter.value) q.mature = '1'
         if (smallFilter.value) q.small = '1'
-        if (page.value !== 1) q.page = String(page.value)
         if (showDetailedStats.value) q.stats = '1'
+        currentPageIndex.value = 0
+
         router.replace({ query: q })
       }
     )
@@ -327,42 +328,23 @@
     );
 
     const pagedServers = computed(() => {
-        const start = (page.value - 1) * pageSize;
-        return servers.value.slice(start, start + pageSize);
-    });
+        const start = currentPageIndex.value * pageSize
+        return servers.value.slice(start, start + pageSize)
+    })
 
-    const startIndex = computed(() =>
-        servers.value.length === 0 ? 0 : (page.value - 1) * pageSize + 1
-    );
-
-    const endIndex = computed(() =>
-        Math.min(page.value * pageSize, servers.value.length)
-    );
-
-    const isFirstPageLoaded = computed(() => {
-        return servers.value.length > 0 && !isLoading;
-    });
-
-    const canGoToNextPage = computed(() => {
-        return page.value < pageCount.value || hasNextPage.value;
-    });
-
-    function nextPage() {
-        if (page.value < Math.ceil(servers.value.length / pageSize)) {
-            page.value++;
-            return;
+    const nextPage = async () => {
+        if ((currentPageIndex.value + 1) * pageSize >= servers.value.length && hasNextPage.value) {
+            await fetchNextPage()
         }
-
-        if (hasNextPage.value && !isFetchingNextPage.value) {
-            fetchNextPage();
-            if (!srvError) {
-                page.value++;
-            }
+        if (currentPageIndex.value < pageCount.value - 1) {
+            currentPageIndex.value++
+            page.value++;
         }
     }
 
     function prevPage() {
-        if (page.value > 1) {
+        if (currentPageIndex.value >= 1) {
+            currentPageIndex.value--;
             page.value--;
         }
     }
@@ -409,10 +391,6 @@
         }
         return version === software.value?.versions[0].version;
     };
-
-    const isInitialLoading = computed(() => {
-        return metaLoading || (srvLoading && servers.value.length === 0);
-    });
 
     const isFilteringOrSearching = computed(() => {
         return srvLoading && !metaLoading && servers.value.length > 0;
