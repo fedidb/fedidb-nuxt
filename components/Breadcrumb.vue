@@ -24,7 +24,9 @@
                     <NuxtLink :href="thirdLevelPath">
                         <div class="flex items-center">
                             <Icon name="feather:chevron-right" class="mx-1 text-gray-400" size="20" />
-                            <span class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-blue-400">
+                            <span 
+                                class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-blue-400"
+                                :class="{ capitalize: thirdLevelCapitalize }">
                                 {{ thirdLevelTitle }}
                             </span>
                         </div>
@@ -33,7 +35,9 @@
                 <template v-else>
                     <div class="flex items-center">
                         <Icon name="feather:chevron-right" class="mx-1 text-gray-400" size="20" />
-                        <span class="ml-1 text-sm font-medium text-blue-600 md:ml-2 dark:text-blue-400">
+                        <span 
+                            class="ml-1 text-sm font-medium text-blue-600 md:ml-2 dark:text-blue-400"
+                            :class="{ capitalize: thirdLevelCapitalize }">
                             {{ thirdLevelTitle }}
                         </span>
                     </div>
@@ -69,6 +73,10 @@
         thirdLevelPath: {
             type: String,
             default: null,
+        },
+        thirdLevelCapitalize: {
+            type: Boolean,
+            default: false
         },
         fourthLevelTitle: {
             type: String,
