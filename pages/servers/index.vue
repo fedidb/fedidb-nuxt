@@ -170,7 +170,6 @@
 
     const handleFilterChange = () => {
         currentPage.value = 1;
-        pagesHistory.value = [];
 
         if (debounceTimeout.value) {
             clearTimeout(debounceTimeout.value);
