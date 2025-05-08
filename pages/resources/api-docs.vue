@@ -229,7 +229,7 @@
             </div>
           </div>
         </div>
-
+        
         <div class="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
           <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800">
             <div class="flex-grow">
