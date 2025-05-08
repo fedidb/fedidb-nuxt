@@ -9,14 +9,14 @@
       </header>
 
       <section class="mb-12">
-        <h2 class="text-2xl font-bold mb-4 dark:text-slate-300">API Overview</h2>
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-slate-300">API Overview</h2>
         <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <p class="mb-0 text-gray-600 dark:text-gray-400">The v1 API endpoint is <code class="bg-gray-200 dark:bg-gray-700 dark:text-slate-200 px-2 py-1 rounded">https://api.fedidb.org/v1/</code>. All requests should be made to this endpoint.</p>
+          <p class="mb-0 text-gray-600 dark:text-gray-400">The v1 API endpoint is <code class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 px-2 py-1 rounded">https://api.fedidb.org/v1/</code>. All requests should be made to this endpoint.</p>
         </div>
       </section>
 
       <section>
-        <h2 class="text-2xl font-bold mb-6 dark:text-slate-300">Endpoints</h2>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-slate-300">Endpoints</h2>
         
         <div 
           v-for="(endpoint, index) in endpoints" 
@@ -28,7 +28,7 @@
               {{ endpoint.method }}
             </div>
             <div class="flex-grow">
-              <h3 class="text-xl dark:text-white font-bold font-mono">{{ endpoint.path }}</h3>
+              <h3 class="text-xl text-gray-500 dark:text-white font-bold font-mono">{{ endpoint.path }}</h3>
               <p class="mt-1 text-gray-600 dark:text-gray-400">{{ endpoint.description }}</p>
             </div>
           </div>
@@ -58,7 +58,7 @@
 
             <div class="mb-6">
               <h4 class="text-lg dark:text-white font-semibold mb-2">Example Request</h4>
-              <pre class="bg-gray-200 dark:bg-gray-700 dark:text-slate-200 p-3 rounded overflow-x-auto">{{ endpoint.exampleRequest }}</pre>
+              <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto">{{ endpoint.exampleRequest }}</pre>
             </div>
 
             <div>
@@ -77,7 +77,7 @@
                 v-show="openResponses[index]" 
                 class="mt-2 transition-all duration-300 ease-in-out overflow-hidden"
               >
-                <pre class="bg-gray-200 dark:bg-gray-700 dark:text-slate-200 p-3 rounded overflow-x-auto whitespace-pre-wrap">{{ endpoint.exampleResponse }}</pre>
+                <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto whitespace-pre-wrap">{{ endpoint.exampleResponse }}</pre>
               </div>
             </div>
           </div>
@@ -85,12 +85,12 @@
       </section>
       
       <section class="mb-10">
-        <h2 class="text-2xl dark:text-slate-300 font-bold mb-6">Entity Definitions</h2>
+        <h2 class="text-2xl text-gray-800 dark:text-slate-300 font-bold mb-6">Entity Definitions</h2>
         
         <div class="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
           <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800">
             <div class="flex-grow">
-              <h3 class="text-xl dark:text-white font-bold">ServerEntity</h3>
+              <h3 class="text-xl text-gray-500 dark:text-white font-bold">ServerEntity</h3>
               <p class="mt-1 text-gray-600 dark:text-gray-400">ServerEntity represents an individual Server and returns the following attributes.</p>
             </div>
             <div 
@@ -136,7 +136,7 @@
 
             <div>
               <h4 class="text-lg dark:text-white font-semibold mb-2">Example Response</h4>
-              <pre class="bg-gray-200 dark:bg-gray-700 dark:text-slate-200 p-3 rounded overflow-x-auto">{
+              <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto">{
     "id": 18006,
     "domain": "pixelfed.social",
     "open_registration": true,
@@ -167,7 +167,7 @@
         <div class="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
           <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800">
             <div class="flex-grow">
-              <h3 class="text-xl dark:text-white font-bold">SoftwareEntity</h3>
+              <h3 class="text-xl text-gray-500 dark:text-white font-bold">SoftwareEntity</h3>
               <p class="mt-1 text-gray-600 dark:text-gray-400">SoftwareEntity represents an individual Software project and returns the following attributes.</p>
             </div>
             <div 
@@ -213,7 +213,7 @@
 
             <div>
               <h4 class="text-lg dark:text-white font-semibold mb-2">Example Response</h4>
-              <pre class="bg-gray-200 dark:bg-gray-700 dark:text-slate-200 p-3 rounded overflow-x-auto">{
+              <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto">{
     "id": 1,
     "name": "Pixelfed",
     "url": "https://fedidb.org/software/pixelfed",
@@ -233,7 +233,7 @@
         <div class="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
           <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800">
             <div class="flex-grow">
-              <h3 class="text-xl dark:text-white font-bold">PopularAccountEntity</h3>
+              <h3 class="text-xl text-gray-500 dark:text-white font-bold">PopularAccountEntity</h3>
               <p class="mt-1 text-gray-600 dark:text-gray-400">PopularAccountEntity represents an individual account and returns the following attributes.</p>
             </div>
             <div 
@@ -279,7 +279,7 @@
 
             <div>
               <h4 class="text-lg dark:text-white font-semibold mb-2">Example Response</h4>
-              <pre class="bg-gray-200 dark:bg-gray-700 dark:text-slate-200 p-3 rounded overflow-x-auto">{
+              <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto">{
     "id": 1,
     "rank": 5,
     "username": "Mastodon",
