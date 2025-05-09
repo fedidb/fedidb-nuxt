@@ -2,21 +2,21 @@
   <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
     <div class="container mx-auto px-4 py-12 max-w-4xl">
       <header class="mb-12">
-        <h1 class="text-4xl font-bold mb-2">API Documentation</h1>
+        <h1 class="text-4xl font-bold mb-2 dark:text-slate-200">API Documentation</h1>
         <p class="text-lg text-gray-600 dark:text-gray-400">
           Explore the open FediDB API endpoints.
         </p>
       </header>
 
       <section class="mb-12">
-        <h2 class="text-2xl font-bold mb-4">API Overview</h2>
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-slate-300">API Overview</h2>
         <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <p class="mb-0">The v1 API endpoint is <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">https://api.fedidb.org/v1/</code>. All requests should be made to this endpoint.</p>
+          <p class="mb-0 text-gray-600 dark:text-gray-400">The v1 API endpoint is <code class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 px-2 py-1 rounded">https://api.fedidb.org/v1/</code>. All requests should be made to this endpoint.</p>
         </div>
       </section>
 
       <section>
-        <h2 class="text-2xl font-bold mb-6">Endpoints</h2>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-slate-300">Endpoints</h2>
         
         <div 
           v-for="(endpoint, index) in endpoints" 
@@ -28,37 +28,37 @@
               {{ endpoint.method }}
             </div>
             <div class="flex-grow">
-              <h3 class="text-xl font-bold font-mono">{{ endpoint.path }}</h3>
+              <h3 class="text-xl text-gray-500 dark:text-white font-bold font-mono">{{ endpoint.path }}</h3>
               <p class="mt-1 text-gray-600 dark:text-gray-400">{{ endpoint.description }}</p>
             </div>
           </div>
           
           <div class="p-4 border-t border-gray-200 dark:border-gray-700">
             <div v-if="endpoint.parameters && endpoint.parameters.length > 0" class="mb-6">
-              <h4 class="text-lg font-semibold mb-2">Parameters</h4>
+              <h4 class="text-lg dark:text-white font-semibold mb-2">Parameters</h4>
               <table class="w-full text-left border-collapse">
                 <thead>
                   <tr class="bg-gray-100 dark:bg-gray-800">
-                    <th class="p-2 border border-gray-200 dark:border-gray-700">Name</th>
-                    <th class="p-2 border border-gray-200 dark:border-gray-700">Type</th>
-                    <th class="p-2 border border-gray-200 dark:border-gray-700">Required</th>
-                    <th class="p-2 border border-gray-200 dark:border-gray-700">Description</th>
+                    <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Name</th>
+                    <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Type</th>
+                    <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Required</th>
+                    <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(param, paramIndex) in endpoint.parameters" :key="paramIndex" class="border-b border-gray-200 dark:border-gray-700">
-                    <td class="p-2 border border-gray-200 dark:border-gray-700 font-mono">{{ param.name }}</td>
-                    <td class="p-2 border border-gray-200 dark:border-gray-700">{{ param.type }}</td>
-                    <td class="p-2 border border-gray-200 dark:border-gray-700">{{ param.required ? 'Yes' : 'No' }}</td>
-                    <td class="p-2 border border-gray-200 dark:border-gray-700">{{ param.description }}</td>
+                    <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-mono">{{ param.name }}</td>
+                    <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">{{ param.type }}</td>
+                    <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">{{ param.required ? 'Yes' : 'No' }}</td>
+                    <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">{{ param.description }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
             <div class="mb-6">
-              <h4 class="text-lg font-semibold mb-2">Example Request</h4>
-              <pre class="bg-gray-200 dark:bg-gray-700 p-3 rounded overflow-x-auto">{{ endpoint.exampleRequest }}</pre>
+              <h4 class="text-lg dark:text-white font-semibold mb-2">Example Request</h4>
+              <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto">{{ endpoint.exampleRequest }}</pre>
             </div>
 
             <div>
@@ -66,7 +66,7 @@
                 @click="toggleResponse(index)" 
                 class="flex justify-between items-center cursor-pointer py-2 px-3 bg-gray-100 dark:bg-gray-800 rounded"
               >
-                <h4 class="text-lg font-semibold">Example Response</h4>
+                <h4 class="text-lg dark:text-white font-semibold">Example Response</h4>
                 <div class="transform transition-transform" :class="{ 'rotate-180': openResponses[index] }">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -77,7 +77,7 @@
                 v-show="openResponses[index]" 
                 class="mt-2 transition-all duration-300 ease-in-out overflow-hidden"
               >
-                <pre class="bg-gray-200 dark:bg-gray-700 p-3 rounded overflow-x-auto whitespace-pre-wrap">{{ endpoint.exampleResponse }}</pre>
+                <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto whitespace-pre-wrap">{{ endpoint.exampleResponse }}</pre>
               </div>
             </div>
           </div>
@@ -85,12 +85,12 @@
       </section>
       
       <section class="mb-10">
-        <h2 class="text-2xl font-bold mb-6">Entity Definitions</h2>
+        <h2 class="text-2xl text-gray-800 dark:text-slate-300 font-bold mb-6">Entity Definitions</h2>
         
         <div class="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
           <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800">
             <div class="flex-grow">
-              <h3 class="text-xl font-bold">ServerEntity</h3>
+              <h3 class="text-xl text-gray-500 dark:text-white font-bold">ServerEntity</h3>
               <p class="mt-1 text-gray-600 dark:text-gray-400">ServerEntity represents an individual Server and returns the following attributes.</p>
             </div>
             <div 
@@ -107,27 +107,27 @@
           
           <div v-show="openEntities.serverEntity" class="p-4 border-t border-gray-200 dark:border-gray-700">
             <div class="mb-6">
-              <h4 class="text-lg font-semibold mb-2">Attributes</h4>
+              <h4 class="text-lg dark:text-white font-semibold mb-2">Attributes</h4>
               <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                   <thead>
                     <tr class="bg-gray-100 dark:bg-gray-800">
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Name</th>
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Type</th>
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Nullable</th>
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Description</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Name</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Type</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Nullable</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Description</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(attr, attrIndex) in serverEntityAttributes" :key="attrIndex" class="border-b border-gray-200 dark:border-gray-700">
-                      <td class="p-2 border border-gray-200 dark:border-gray-700 font-mono">{{ attr.name }}</td>
-                      <td class="p-2 border border-gray-200 dark:border-gray-700">{{ attr.type }}</td>
-                      <td class="p-2 border border-gray-200 dark:border-gray-700">
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-mono">{{ attr.name }}</td>
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">{{ attr.type }}</td>
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">
                         <svg v-if="attr.nullable" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                       </td>
-                      <td class="p-2 border border-gray-200 dark:border-gray-700">{{ attr.description }}</td>
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">{{ attr.description }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -135,8 +135,8 @@
             </div>
 
             <div>
-              <h4 class="text-lg font-semibold mb-2">Example Response</h4>
-              <pre class="bg-gray-200 dark:bg-gray-700 p-3 rounded overflow-x-auto">{
+              <h4 class="text-lg dark:text-white font-semibold mb-2">Example Response</h4>
+              <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto">{
     "id": 18006,
     "domain": "pixelfed.social",
     "open_registration": true,
@@ -167,7 +167,7 @@
         <div class="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
           <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800">
             <div class="flex-grow">
-              <h3 class="text-xl font-bold">SoftwareEntity</h3>
+              <h3 class="text-xl text-gray-500 dark:text-white font-bold">SoftwareEntity</h3>
               <p class="mt-1 text-gray-600 dark:text-gray-400">SoftwareEntity represents an individual Software project and returns the following attributes.</p>
             </div>
             <div 
@@ -184,27 +184,27 @@
           
           <div v-show="openEntities.softwareEntity" class="p-4 border-t border-gray-200 dark:border-gray-700">
             <div class="mb-6">
-              <h4 class="text-lg font-semibold mb-2">Attributes</h4>
+              <h4 class="text-lg dark:text-white font-semibold mb-2">Attributes</h4>
               <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                   <thead>
                     <tr class="bg-gray-100 dark:bg-gray-800">
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Name</th>
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Type</th>
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Nullable</th>
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Description</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Name</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Type</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Nullable</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Description</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(attr, attrIndex) in softwareEntityAttributes" :key="attrIndex" class="border-b border-gray-200 dark:border-gray-700">
-                      <td class="p-2 border border-gray-200 dark:border-gray-700 font-mono">{{ attr.name }}</td>
-                      <td class="p-2 border border-gray-200 dark:border-gray-700">{{ attr.type }}</td>
-                      <td class="p-2 border border-gray-200 dark:border-gray-700">
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-mono">{{ attr.name }}</td>
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">{{ attr.type }}</td>
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">
                         <svg v-if="attr.nullable" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                       </td>
-                      <td class="p-2 border border-gray-200 dark:border-gray-700">{{ attr.description }}</td>
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">{{ attr.description }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -212,8 +212,8 @@
             </div>
 
             <div>
-              <h4 class="text-lg font-semibold mb-2">Example Response</h4>
-              <pre class="bg-gray-200 dark:bg-gray-700 p-3 rounded overflow-x-auto">{
+              <h4 class="text-lg dark:text-white font-semibold mb-2">Example Response</h4>
+              <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto">{
     "id": 1,
     "name": "Pixelfed",
     "url": "https://fedidb.org/software/pixelfed",
@@ -233,7 +233,7 @@
         <div class="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
           <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800">
             <div class="flex-grow">
-              <h3 class="text-xl font-bold">PopularAccountEntity</h3>
+              <h3 class="text-xl text-gray-500 dark:text-white font-bold">PopularAccountEntity</h3>
               <p class="mt-1 text-gray-600 dark:text-gray-400">PopularAccountEntity represents an individual account and returns the following attributes.</p>
             </div>
             <div 
@@ -250,27 +250,27 @@
           
           <div v-show="openEntities.popularAccountEntity" class="p-4 border-t border-gray-200 dark:border-gray-700">
             <div class="mb-6">
-              <h4 class="text-lg font-semibold mb-2">Attributes</h4>
+              <h4 class="text-lg dark:text-white font-semibold mb-2">Attributes</h4>
               <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                   <thead>
                     <tr class="bg-gray-100 dark:bg-gray-800">
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Name</th>
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Type</th>
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Nullable</th>
-                      <th class="p-2 border border-gray-200 dark:border-gray-700">Description</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Name</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Type</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Nullable</th>
+                      <th class="p-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">Description</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(attr, attrIndex) in popularAccountEntityAttributes" :key="attrIndex" class="border-b border-gray-200 dark:border-gray-700">
-                      <td class="p-2 border border-gray-200 dark:border-gray-700 font-mono">{{ attr.name }}</td>
-                      <td class="p-2 border border-gray-200 dark:border-gray-700">{{ attr.type }}</td>
-                      <td class="p-2 border border-gray-200 dark:border-gray-700">
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-mono">{{ attr.name }}</td>
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">{{ attr.type }}</td>
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">
                         <svg v-if="attr.nullable" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                       </td>
-                      <td class="p-2 border border-gray-200 dark:border-gray-700">{{ attr.description }}</td>
+                      <td class="p-2 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">{{ attr.description }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -278,8 +278,8 @@
             </div>
 
             <div>
-              <h4 class="text-lg font-semibold mb-2">Example Response</h4>
-              <pre class="bg-gray-200 dark:bg-gray-700 p-3 rounded overflow-x-auto">{
+              <h4 class="text-lg dark:text-white font-semibold mb-2">Example Response</h4>
+              <pre class="bg-gray-200 dark:bg-gray-700 text-slate-800 dark:text-slate-200 p-3 rounded overflow-x-auto">{
     "id": 1,
     "rank": 5,
     "username": "Mastodon",
