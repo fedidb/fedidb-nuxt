@@ -17,6 +17,9 @@
                     <NuxtLink to="/"
                         class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">
                         Home</NuxtLink>
+                    <NuxtLink to="/welcome"
+                        class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">
+                        Welcome</NuxtLink>
                     <NuxtLink to="/accounts"
                         class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">
                         Accounts</NuxtLink>
@@ -68,6 +71,9 @@
                     <NuxtLink to="/" @click="closeMenu"
                         class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">
                         Home</NuxtLink>
+                    <NuxtLink to="/welcome" @click="closeMenu"
+                        class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">
+                        Welcome</NuxtLink>
                     <NuxtLink to="/accounts" @click="closeMenu"
                         class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">
                         Accounts</NuxtLink>
