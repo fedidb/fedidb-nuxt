@@ -328,7 +328,7 @@
                     <div class="bg-gray-50 dark:bg-gray-700 rounded-lg relative md:ml-3">
                         <ReusableBarChart
                             :chart-data="asnStats.asns.map(m => m.total_count)"
-                            :categories="asnStats.asns.map(m => m.asn_org)"
+                            :categories="asnStats.asns.map(m => m.asn_org || 'Unknown')"
                             title="Service Providers"
                             y-axis-name="Count"
                             :height="400"
@@ -345,7 +345,7 @@
                             <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Top Service Providers</h4>
                             <div class="space-y-2">
                                 <div v-for="item in asnStats.asns" class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-700 dark:text-gray-300">{{ item.asn_org }}</span>
+                                    <span class="text-sm text-gray-700 dark:text-gray-300">{{ item.asn_org || 'Unknown' }}</span>
                                     <span class="flex gap-3 items-center">
                                         <span class="text-sm font-medium text-gray-900 dark:text-white">{{ item.total_count }}</span>
                                         <span class="text-xs font-medium text-gray-600 dark:text-white">{{ item.percentage }}%</span>
