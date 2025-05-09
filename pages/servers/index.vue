@@ -150,7 +150,7 @@
 
     const serverSearch = ref('');
     const softwareFilter = ref('');
-    const sortOption = ref('users-desc');
+    const sortOption = ref('mau-desc');
     const regionFilter = ref('all');
 
     const currentPage = ref(1);

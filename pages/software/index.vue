@@ -235,7 +235,7 @@
     const viewMode = ref('grid');
     const currentPage = ref(1);
     const itemsPerPage = ref(12);
-    const sortOption = ref('users');
+    const sortOption = ref('active');
     const sortDirection = ref('desc');
     const softwareSearch = ref('');
     const softwareTypeFilter = ref('all');
