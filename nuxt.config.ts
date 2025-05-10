@@ -16,6 +16,12 @@ export default defineNuxtConfig({
         ],
     },
 
+    mdc: {
+        components: {
+            prose: true
+        }
+    },
+
     colorMode: {
         classSuffix: '',
         preference: 'system',
@@ -25,5 +31,5 @@ export default defineNuxtConfig({
         storageKey: 'nuxt-color-mode'
     },
 
-    modules: ['nuxt-echarts', '@nuxt/icon', '@nuxtjs/color-mode'],
+    modules: ['nuxt-echarts', '@nuxt/icon', '@nuxtjs/color-mode', '@nuxtjs/mdc'],
 })
