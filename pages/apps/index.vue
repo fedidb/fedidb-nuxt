@@ -178,7 +178,6 @@ const categories = ref([
     { id: 'official', name: 'Official' },
     { id: 'client', name: 'Client' },
     { id: 'tools', name: 'Tools' },
-    { id: 'moderation', name: 'Moderation' },
     { id: 'analytics', name: 'Analytics' },
     { id: 'utility', name: 'Utility' },
 ]);
