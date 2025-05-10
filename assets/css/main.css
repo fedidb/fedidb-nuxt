@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 html {
@@ -30,4 +32,24 @@ html {
 
 .router-link-active {
   @apply text-blue-600 dark:text-blue-400;
+}
+
+.prose {
+  strong {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  code {
+    @apply px-1.5 py-0.5 rounded font-mono text-sm bg-gray-100 text-gray-800 border border-gray-200 whitespace-pre-wrap break-words;
+    @apply dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700;
+  }
+
+  .code-block {
+    @apply p-4 rounded-lg font-mono text-sm bg-gray-100 text-gray-800 border border-gray-200 whitespace-pre-wrap overflow-x-auto my-4;
+    @apply dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700;
+  }
+
+  a {
+    @apply text-blue-600 dark:text-blue-400;
+  }
 }
