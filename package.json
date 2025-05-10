@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxt/icon": "^1.12.0",
     "@nuxtjs/color-mode": "^3.5.2",
+    "@nuxtjs/mdc": "^0.17.0",
     "@tailwindcss/vite": "^4.0.15",
     "@tanstack/query-sync-storage-persister": "^5.74.6",
     "@tanstack/react-query-persist-client": "^5.74.6",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@iconify-json/feather": "^1.2.1"
+    "@iconify-json/feather": "^1.2.1",
+    "@tailwindcss/typography": "^0.5.16"
   }
 }
