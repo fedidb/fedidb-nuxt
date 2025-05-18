@@ -36,9 +36,9 @@
                     <div class="absolute top-1/3 left-[5%] h-1.5 -translate-y-1/2 rounded-full transition-all duration-500 z-0"
                         :class="[
                             currentStep > 1 ? 'bg-gradient-to-r from-emerald-400 to-emerald-600 dark:from-emerald-500 dark:to-emerald-700' : 'bg-slate-200 dark:bg-slate-700'
-                        ]" :style="{ width: `${((currentStep - 1) / 3) * 90}%` }"></div>
+                        ]" :style="{ width: `${((currentStep - 1) / 1) * 90}%` }"></div>
 
-                    <div v-for="step in 4" :key="step" class="relative z-10 flex flex-col items-center">
+                    <div v-for="step in 2" :key="step" class="relative z-10 flex flex-col items-center">
                         <div :class="[
                             'w-10 h-10 rounded-full flex items-center justify-center shadow-sm transition-all duration-300',
                             step < currentStep
@@ -59,7 +59,7 @@
                                     ? 'text-emerald-600 dark:text-emerald-400 font-medium'
                                     : 'text-gray-400 dark:text-gray-500'
                         ]">
-                            {{ ['Content', 'Platforms', 'Preferences', 'Servers'][step - 1] }}
+                            {{ ['Your Needs', 'Servers'][step - 1] }}
                         </span>
                     </div>
                 </div>
@@ -68,13 +68,10 @@
             <div v-if="currentStep === 1" class="px-8 py-6 animate-fade-in" v-motion :initial="{ opacity: 0, y: 15 }"
                 :enter="{ opacity: 1, y: 0 }">
                 <h2 class="text-3xl font-bold mb-4 text-slate-800 dark:text-white text-center">
-                    What content interests you?
+                    What are you looking for?
                 </h2>
-                <p class="text-slate-600 dark:text-slate-300 mb-1 text-center max-w-2xl mx-auto">
-                    The fediverse has different apps for different types of content.
-                </p>
                 <p class="text-slate-600 dark:text-slate-300 mb-8 text-center max-w-2xl mx-auto">
-                    Select all that match your interests.
+                    Select your desired features and we'll find the perfect platform for you.
                 </p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-8">
@@ -133,107 +130,6 @@
                         </div>
                     </button>
                 </div>
-
-                <div class="flex justify-center">
-                    <button @click="goToNextStep" :disabled="!selectedContentTypes.length" :class="[
-                        'flex items-center justify-center py-4 px-8 rounded-xl text-sm md:text-lg font-medium transition-all duration-200',
-                        !selectedContentTypes.length
-                            ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-sky-600 hover:to-indigo-600 text-white shadow-lg shadow-sky-500/20 dark:shadow-indigo-500/20 hover:shadow-xl hover:shadow-sky-500/30 dark:hover:shadow-indigo-500/30'
-                    ]">
-                        Continue
-                        <Icon name="feather:arrow-right" class="ml-2 w-5 h-5" />
-                    </button>
-                </div>
-            </div>
-
-            <div v-if="currentStep === 2" class="px-8 py-6 animate-fade-in" v-motion :initial="{ opacity: 0, y: 15 }"
-                :enter="{ opacity: 1, y: 0 }">
-                <h2 class="text-3xl font-bold mb-4 text-slate-800 dark:text-white text-center">
-                    Choose your platform
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 mb-1 text-center max-w-2xl mx-auto">
-                    Based on your content preferences, here are the best platforms for you.
-                </p>
-                <p class="text-slate-600 dark:text-slate-300 mb-8 text-center max-w-2xl mx-auto">
-                    Each offers different features and communities.
-                </p>
-
-                <div v-if="recommendedSoftware.length" class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-8">
-                    <button v-for="s in recommendedSoftware" :key="s.id" @click="selectSoftware(s)"
-                        class="bg-white dark:bg-slate-800/50 rounded-xl border-2 border-slate-100 dark:border-slate-700/50 p-6 flex flex-col items-start hover:border-sky-200 dark:hover:border-sky-700 hover:shadow-lg transition-all duration-200 group relative overflow-hidden">
-                        <div
-                            class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-sky-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                        </div>
-
-                        <div class="flex mb-4 w-full">
-                            <div class="flex-1">
-                                <div class="flex items-center mb-2">
-                                    <h3 class="text-xl md:text-2xl font-bold text-slate-800 dark:text-white">{{ s.name
-                                        }}</h3>
-                                </div>
-                                <div class="flex items-center gap-4 mb-2">
-                                    <div class="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                                        <span>{{ formatNumber(s.user_count) }} users</span>
-                                    </div>
-                                    <div v-if="s.status_count" class="text-slate-500 dark:text-slate-400">·</div>
-                                    <div v-if="s.status_count"
-                                        class="flex items-center text-sm text-slate-500 dark:text-slate-400">
-                                        <span>{{ formatNumber(s.status_count) }} statuses</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center group-hover:bg-sky-500 transition-colors duration-200">
-                                <Icon name="feather:arrow-right"
-                                    class="text-slate-400 dark:text-slate-500 group-hover:text-white transition-colors duration-200"
-                                    width="18" height="18" />
-                            </div>
-                        </div>
-
-                        <p class="text-slate-600 dark:text-slate-300 text-left mb-4 text-sm line-clamp-4 flex-grow-1">{{
-                            s.description }}</p>
-
-                        <div class="flex flex-wrap gap-2">
-                            <span v-for="(f, i) in s.features" :key="i"
-                                class="bg-slate-50 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 px-3 py-0.5 rounded-full text-[12px] border border-slate-200 dark:border-slate-600">
-                                {{ f }}
-                            </span>
-                        </div>
-                    </button>
-                </div>
-
-                <div v-else
-                    class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/30 rounded-xl p-6 mb-8 max-w-2xl mx-auto">
-                    <div class="flex items-center mb-2">
-                        <Icon name="feather:alert-circle" class="text-amber-500 dark:text-amber-400 mr-2" size="24" />
-                        <h3 class="text-lg font-medium text-amber-700 dark:text-amber-400">No matching platforms</h3>
-                    </div>
-                    <p class="text-amber-600 dark:text-amber-300">
-                        No software matches your selected content types. Please go back and select different content
-                        preferences.
-                    </p>
-                </div>
-
-                <div class="flex justify-center">
-                    <button @click="goToPreviousStep"
-                        class="flex items-center justify-center py-3 px-6 text-sm md:text-lg rounded-xl text-slate-700 dark:text-slate-300 border-2 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-200">
-                        <Icon name="feather:arrow-left" class="mr-2 w-5 h-5" />
-                        Back to content types
-                    </button>
-                </div>
-            </div>
-
-            <div v-if="currentStep === 3" class="px-8 py-6 animate-fade-in" v-motion :initial="{ opacity: 0, y: 15 }"
-                :enter="{ opacity: 1, y: 0 }">
-                <h2 class="text-3xl font-bold mb-4 text-slate-800 dark:text-white text-center">
-                    Customize your server preferences
-                </h2>
-                <p class="text-slate-600 dark:text-slate-300 mb-8 text-center max-w-2xl mx-auto">
-                    You've selected
-                    <span class="font-semibold text-sky-600 dark:text-sky-400">{{ selectedSoftware?.name }}</span>.
-                    Now let's find the perfect server for you.
-                </p>
 
                 <div class="mb-8 border border-slate-100 dark:border-slate-700/50 rounded-xl overflow-hidden">
                     <div class="p-6 border-b border-slate-100 dark:border-slate-700/50">
@@ -305,55 +201,69 @@
                     </div>
                 </div>
 
-                <div class="flex justify-center space-x-4">
-                    <button @click="goToPreviousStep"
-                        class="flex items-center justify-center py-4 px-6 rounded-xl text-sm md:text-lg text-slate-700 dark:text-slate-300 border-2 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200">
-                        <Icon name="feather:arrow-left" class="mr-2 w-5 h-5" />
-                        Back
-                    </button>
-                    <button @click="goToNextStep"
-                        class="flex items-center justify-center py-4 px-8 rounded-xl text-sm md:text-lg font-medium bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-sky-600 hover:to-indigo-600 text-white shadow-lg shadow-sky-500/20 dark:shadow-indigo-500/20 hover:shadow-xl hover:shadow-sky-500/30 dark:hover:shadow-indigo-500/30 transition-all duration-200">
-                        Find servers
+                <div class="flex justify-center">
+                    <button @click="findServers" :disabled="!selectedContentTypes.length" :class="[
+                        'flex items-center justify-center py-4 px-8 rounded-xl text-sm md:text-lg font-medium transition-all duration-200',
+                        !selectedContentTypes.length
+                            ? 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed'
+                            : 'bg-gradient-to-r from-sky-500 to-indigo-500 hover:from-sky-600 hover:to-indigo-600 text-white shadow-lg shadow-sky-500/20 dark:shadow-indigo-500/20 hover:shadow-xl hover:shadow-sky-500/30 dark:hover:shadow-indigo-500/30'
+                    ]">
+                        Find Servers
                         <Icon name="feather:search" class="ml-2 w-5 h-5" />
                     </button>
                 </div>
             </div>
 
-            <div v-if="currentStep === 4" class="px-8 py-6 animate-fade-in" v-motion :initial="{ opacity: 0, y: 15 }"
+            <div v-if="currentStep === 2" class="px-8 py-6 animate-fade-in" v-motion :initial="{ opacity: 0, y: 15 }"
                 :enter="{ opacity: 1, y: 0 }">
                 <div class="mb-8 text-center">
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
                         Recommended Servers
                     </h2>
-                    <p v-if="recommendations && recommendations.length"
-                        class="mt-3 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                        Based on your preferences, we've found {{ recommendations.length }}{{ hasNextPage ? '+' : '' }}
-                        {{ selectedSoftware?.name }}
-                        servers that might be perfect for you.
+                    <p v-if="selectedSoftware" class="mt-3 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        Based on your preferences, we've selected <span class="font-semibold text-sky-600 dark:text-sky-400">{{ selectedSoftware.name }}</span> 
+                        as the best platform for you. Here are some recommended servers.
                     </p>
                 </div>
 
+                <div v-if="selectedSoftware"
+                    class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/30 rounded-xl p-4 max-w-3xl mx-auto mb-8">
+                    <div class="flex items-start">
+                        <div class="bg-emerald-100 dark:bg-emerald-800/50 rounded-lg p-2 mr-3 mt-1 shrink-0">
+                            <Icon name="feather:info" class="text-emerald-600 dark:text-emerald-400" width="18" height="18" />
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-medium text-emerald-800 dark:text-emerald-300 mb-1">About {{ selectedSoftware.name }}</h3>
+                            <p class="text-sm text-emerald-700 dark:text-emerald-400 mb-2">
+                                {{ selectedSoftware.description }}
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span v-for="(f, i) in selectedSoftware.features" :key="i"
+                                    class="bg-emerald-100 dark:bg-emerald-800/40 text-emerald-700 dark:text-emerald-300 px-3 py-0.5 rounded-full text-[12px] border border-emerald-200 dark:border-emerald-700/50">
+                                    {{ f }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div v-if="recommendations && recommendations.length"
-                    class="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/30 rounded-xl p-4 max-w-3xl mx-auto mb-8 flex items-center">
-                    <div class="bg-emerald-100 dark:bg-emerald-800/50 rounded-lg p-2 mr-3">
-                        <Icon name="feather:filter" class="text-emerald-600 dark:text-emerald-400" width="18"
-                            height="18" />
+                    class="bg-sky-50 dark:bg-sky-900/20 border border-sky-100 dark:border-sky-800/30 rounded-xl p-4 max-w-3xl mx-auto mb-8 flex items-center">
+                    <div class="bg-sky-100 dark:bg-sky-800/50 rounded-lg p-2 mr-3">
+                        <Icon name="feather:filter" class="text-sky-600 dark:text-sky-400" width="18" height="18" />
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-sm font-medium text-emerald-800 dark:text-emerald-300 mb-1">Filters Applied</h3>
-                        <p class="text-sm text-emerald-700 dark:text-emerald-400">
-                            <span v-if="preferences.region">Region: <strong class="capitalize">{{ preferences.region
-                                    }}</strong></span>
-                            <span v-if="preferences.region && (preferences.small || preferences.mature)">, </span>
+                        <h3 class="text-sm font-medium text-sky-800 dark:text-sky-300 mb-1">Filters Applied</h3>
+                        <p class="text-sm text-sky-700 dark:text-sky-400">
+                            <span v-if="preferences.region && preferences.region !== 'all'">Region: <strong class="capitalize">{{ preferences.region }}</strong></span>
+                            <span v-if="preferences.region && preferences.region !== 'all' && (preferences.small || preferences.mature)">, </span>
                             <span v-if="preferences.small">Size: <strong>Smaller Communities</strong></span>
                             <span v-if="preferences.small && preferences.mature">, </span>
                             <span v-if="preferences.mature">Age: <strong>Established (3+ years old)</strong></span>
-                            <span v-if="!preferences.region && !preferences.small && !preferences.mature">No filters
-                                applied</span>
                         </p>
                     </div>
                     <button @click="goToPreviousStep"
-                        class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 text-sm font-medium rounded-lg px-3 py-1.5 transition-colors duration-200 bg-emerald-100 dark:bg-emerald-800/50 hover:bg-emerald-200 dark:hover:bg-emerald-700/50">
+                        class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 text-sm font-medium rounded-lg px-3 py-1.5 transition-colors duration-200 bg-sky-100 dark:bg-sky-800/50 hover:bg-sky-200 dark:hover:bg-sky-700/50">
                         Edit Filters
                     </button>
                 </div>
@@ -382,8 +292,7 @@
                         class="bg-white dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 text-center max-w-xl mx-auto shadow-sm hover:shadow-md transition-all duration-300">
                         <div
                             class="bg-blue-50 dark:bg-blue-900/30 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
-                            <Icon name="feather:search" class="text-blue-600 dark:text-blue-400" width="28"
-                                height="28" />
+                            <Icon name="feather:search" class="text-blue-600 dark:text-blue-400" width="28" height="28" />
                         </div>
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                             No servers match your criteria
@@ -405,8 +314,7 @@
                             <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
                                 <div class="flex-1">
                                     <div class="flex items-center mb-1">
-                                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">{{ srv.domain
-                                        }}</h3>
+                                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mr-3">{{ srv.domain }}</h3>
                                         <span
                                             v-if="['mastodon.social', 'mastodon.online', 'pixelfed.social', 'pixelfed.art'].includes(srv.domain)"
                                             class="bg-emerald-100 border border-emerald-200 dark:border-emerald-800 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs px-2 py-0.5 rounded-full">
@@ -443,12 +351,6 @@
                                     <Icon name="feather:clock" class="mr-1" width="12" height="12" />
                                     {{ formatDate(srv.first_seen_at) }}
                                 </div>
-                                <div v-if="srv.rules && srv.rules.length"
-                                    class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-3 py-1 rounded-full text-xs flex items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600"
-                                    @click="showRules(srv)">
-                                    <Icon name="feather:shield" class="mr-1" width="12" height="12" />
-                                    {{ srv.rules.length }} rules
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -471,11 +373,11 @@
                         <button @click="goToPreviousStep"
                             class="flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium mb-4 sm:mb-0">
                             <Icon name="feather:arrow-left" class="mr-2" width="16" height="16" />
-                            Back to Preferences
+                            Adjust Your Preferences
                         </button>
-                        <NuxtLink :href="`/software/${selectedSoftware?.slug}`" target="_blank"
+                        <NuxtLink href="/software" target="_blank"
                             class="flex items-center text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-medium">
-                            View All {{ selectedSoftware?.name }} Servers
+                            Explore All Fediverse Software
                             <Icon name="feather:external-link" class="ml-2" width="16" height="16" />
                         </NuxtLink>
                     </div>
@@ -484,7 +386,7 @@
         </div>
 
         <div class="md:hidden flex justify-center space-x-2 mt-6">
-            <div v-for="step in 4" :key="step" class="w-2 h-2 rounded-full"
+            <div v-for="step in 2" :key="step" class="w-2 h-2 rounded-full"
                 :class="step === currentStep ? 'bg-sky-500' : 'bg-slate-300 dark:bg-slate-700'"></div>
         </div>
 
@@ -504,7 +406,6 @@
             </div>
         </div>
     </main>
-
 </template>
 
 <script setup lang="ts">
@@ -524,7 +425,6 @@ const {
     error,
     refetch: fetchSoftwareData
 } = useFetchSoftware();
-
 
 const categoryMap = computed(() => {
     return {
@@ -630,29 +530,12 @@ const regions = [
 const currentStep = ref(1)
 const selectedContentTypes = ref<string[]>([])
 const selectedSoftware = ref<any>(null)
-const selectedSoftwareSlug = ref<any>(null)
 const preferences = reactive({
     region: '',
     small: false,
     mature: false
 })
 const animationClass = ref(fadeIn)
-
-function goToNextStep() {
-    animationClass.value = fadeOut
-    if (currentStep.value === 3) {
-        refetch()
-    }
-    setTimeout(() => {
-        currentStep.value++
-        animationClass.value = fadeIn
-
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
-    }, 300)
-}
 
 function goToPreviousStep() {
     animationClass.value = fadeOut
@@ -674,12 +557,6 @@ function toggleContentType(ct: string) {
         : [...selectedContentTypes.value, ct]
 }
 
-function selectSoftware(s: any) {
-    selectedSoftware.value = s
-    selectedSoftwareSlug.value = s?.slug
-    goToNextStep()
-}
-
 function updateRegion(r: string) {
     if (preferences.region == r) {
         preferences.region = null
@@ -687,8 +564,8 @@ function updateRegion(r: string) {
     preferences.region = r
 }
 
-const recommendedSoftware = computed(() => {
-    if (!selectedContentTypes.value.length || !softwareData.value) return []
+function findBestSoftware() {
+    if (!selectedContentTypes.value.length || !softwareData.value) return null
 
     const labelMap = contentTypeMap.value.reduce((acc, { value, label }) => {
         acc[value] = label
@@ -700,17 +577,54 @@ const recommendedSoftware = computed(() => {
         .filter(([tag, label]) => selectedContentTypes.value.includes(label))
         .map(([tag]) => tag)
 
-    return softwareData.value.filter(s => s.description && s.features.length && s.user_count && s.user_count > 500).filter(s =>
-        s.tags.some(tag => selectedTags.includes(tag))
-    )
-})
+    const matchingSoftware = softwareData.value
+        .filter(s => s.description && s.features.length && s.user_count && s.user_count > 500)
+        .filter(s => s.tags.some(tag => selectedTags.includes(tag)))
+
+    return matchingSoftware.sort((a, b) => {
+        const featureScoreA = a.features.length
+        const featureScoreB = b.features.length
+        
+        const userScoreA = Math.log10(a.user_count)
+        const userScoreB = Math.log10(b.user_count)
+        
+        const scoreA = featureScoreA * 2 + userScoreA
+        const scoreB = featureScoreB * 2 + userScoreB
+        
+        return scoreB - scoreA
+    })[0] || null
+}
+
+function findServers() {
+    selectedSoftware.value = findBestSoftware()
+    
+    if (selectedSoftware.value) {
+        selectedSoftwareSlug.value = selectedSoftware.value.slug
+        
+        animationClass.value = fadeOut
+        setTimeout(() => {
+            currentStep.value = 2
+            animationClass.value = fadeIn
+            refetch()
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
+        }, 300)
+    } else {
+        alert("No suitable software found for your preferences. Please select different content types.")
+    }
+}
+
+const selectedSoftwareSlug = ref<string | null>(null)
 
 const apiFilters = computed(() => {
     const f = {
         limit: 6,
         registration: 'open',
     }
-    if (preferences.region !== 'all') f.region = preferences.region
+    if (preferences.region && preferences.region !== 'all') f.region = preferences.region
     if (preferences.mature === true) f.mature = 1
     if (preferences.small === true) f.small = 1
     return f
@@ -741,6 +655,21 @@ function loadMoreServers() {
                 lastServer.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }, 500);
+    }
+}
+
+function formatDate(dateStr) {
+    const date = new Date(dateStr)
+    const now = new Date()
+    const diffMonths = (now.getFullYear() - date.getFullYear()) * 12 + (now.getMonth() - date.getMonth())
+    
+    if (diffMonths < 1) {
+        return 'New'
+    } else if (diffMonths < 12) {
+        return `${diffMonths} months`
+    } else {
+        const years = Math.floor(diffMonths / 12)
+        return `${years} ${years === 1 ? 'year' : 'years'}`
     }
 }
 </script>
