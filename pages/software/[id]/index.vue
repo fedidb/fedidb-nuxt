@@ -37,7 +37,7 @@
             <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md overflow-hidden transition-colors duration-200 mb-8">
                 <div class="hidden md:grid md:grid-cols-12 gap-4 px-6 py-3 bg-gray-100 dark:bg-gray-700 font-medium text-gray-500 dark:text-gray-400 text-sm">
                     <div class="col-span-4">Server</div>
-                    <div class="col-span-1">Version</div>
+                    <div class="col-span-2">Version</div>
                     <div class="col-span-1">Accounts</div>
                     <div class="col-span-2">Region</div>
                     <div v-if="showDetailedStats" class="col-span-4">Stats</div>
@@ -73,7 +73,7 @@
                                     </div>
                                     <div>
                                         <div class="text-xs text-gray-500 dark:text-gray-400">Version</div>
-                                        <div class="text-sm font-medium dark:text-gray-200 truncate" :class="isLatestVersion(server.software?.version) ? 'text-green-600 dark:text-green-400' : ''">
+                                        <div class="text-xs font-medium dark:text-gray-200 truncate" :class="isLatestVersion(server.software?.version) ? 'text-green-600 dark:text-green-400' : ''">
                                             v{{ server.software?.version }}
                                         </div>
                                     </div>
@@ -119,9 +119,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-span-1 font-medium truncate" :class="isLatestVersion(server.software.version) ? 'text-green-600 dark:text-green-400' : 'dark:text-gray-300'">v{{ server.software.version }}</div>
+                                <div
+                                    class="col-span-2 font-medium text-wrap"
+                                    :class="[isLatestVersion(server.software.version) ? 'text-green-600 dark:text-green-400' : 'dark:text-gray-300', server.software.version.length > 9 ? 'text-xs' : 'text-md']"
+                                    :title="server.software.version">v{{ server.software.version }}</div>
                                 <div class="col-span-1 dark:text-gray-300">{{ formatNumber(server.stats.user_count) }}</div>
-                                <div class="col-span-2 dark:text-gray-300">{{ server.location.city ? server.location.city + ', ' : '' }}{{ server.location.country }}</div>
+                                <div class="col-span-2 dark:text-gray-300 text-sm">{{ server.location.city ? server.location.city + ', ' : '' }}{{ server.location.country }}</div>
                                 <div v-if="showDetailedStats" class="col-span-4">
                                     <div class="flex justify-between text-sm">
                                         <div class="text-center">
@@ -138,7 +141,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div v-else class="col-span-4 dark:text-gray-300">
+                                <div v-else class="col-span-3 dark:text-gray-300">
                                     <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">{{ server.description || 'No description available'}}</p>
                                 </div>
                             </div>
