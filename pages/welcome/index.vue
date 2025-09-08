@@ -321,7 +321,7 @@
                                             Official Server
                                         </span>
                                     </div>
-                                    <p class="text-gray-600 dark:text-gray-400 text-sm">{{ srv.description }}</p>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">{{ parseDescription(srv.description) }}</p>
                                 </div>
                                 <a :href="`https://${srv.domain}`" target="_blank" rel="noopener noreferrer"
                                     class="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 px-5 rounded-lg text-sm font-medium transition-all inline-flex items-center justify-center">
@@ -671,6 +671,15 @@ function formatDate(dateStr) {
         const years = Math.floor(diffMonths / 12)
         return `${years} ${years === 1 ? 'year' : 'years'}`
     }
+}
+
+function parseDescription(str) {
+    if (!str) return '';
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(str, 'text/html');
+
+    return doc.body.textContent || doc.body.innerText || '';
 }
 </script>
 
