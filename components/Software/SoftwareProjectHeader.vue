@@ -21,7 +21,7 @@
                 <div class="flex flex-wrap gap-y-2 gap-x-6">
                     <div v-if="software.versions?.length" class="flex items-center">
                         <Icon name="feather:git-pull-request" class="mr-1.5 text-gray-400 dark:text-gray-500" />
-                        <span class="text-xs text-gray-700 dark:text-gray-400">Latest version: <span class="text-green-600 dark:text-green-400">{{ software.versions[0].version }}</span></span>
+                        <span class="text-xs text-gray-700 dark:text-gray-400">Latest version: <span class="text-green-600 dark:text-green-400">{{ software?.latest_version?.version || software.versions[0].version }}</span></span>
                     </div>
                     <div class="flex items-center">
                         <Icon name="feather:info" class="mr-1.5 text-gray-400 dark:text-gray-500" />

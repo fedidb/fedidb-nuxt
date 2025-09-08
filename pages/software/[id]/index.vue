@@ -389,6 +389,13 @@
     };
 
     const isLatestVersion = (version) => {
+        if(software.value?.latest_version?.version) {
+            const latestVer = software.value?.latest_version?.version;
+            if(latestVer.startsWith('v')) {
+                return version === software.value?.latest_version?.version.slice(1);
+            }
+            return version === software.value?.latest_version?.version;
+        }
         if(!software.value?.versions) {
             return false;
         }
