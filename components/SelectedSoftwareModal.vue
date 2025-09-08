@@ -273,22 +273,22 @@ const seriesConfig = [
         showArea: true,
         showSymbol: false,
     },
-    {
-        name: 'Total Servers',
-        field: 'instance_count',
-        type: 'line',
-        width: 3,
-        showArea: true,
-        showSymbol: false
-    },
-    {
-        name: 'New Servers',
-        field: 'new_instance_count',
-        type: 'line',
-        width: 2,
-        showArea: true,
-        showSymbol: false
-    },
+    // {
+    //     name: 'Total Servers',
+    //     field: 'instance_count',
+    //     type: 'line',
+    //     width: 3,
+    //     showArea: false,
+    //     showSymbol: false
+    // },
+    // {
+    //     name: 'New Servers',
+    //     field: 'new_instance_count',
+    //     type: 'line',
+    //     width: 2,
+    //     showArea: false,
+    //     showSymbol: false
+    // },
 ];
 
 const getSoftwareBgColor = (name) => {
