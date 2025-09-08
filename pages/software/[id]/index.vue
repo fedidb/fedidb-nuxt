@@ -396,10 +396,7 @@
             }
             return version === software.value?.latest_version?.version;
         }
-        if(!software.value?.versions) {
-            return false;
-        }
-        return version === software.value?.versions[0].version;
+        return false;
     };
 
     const isFilteringOrSearching = computed(() => {
