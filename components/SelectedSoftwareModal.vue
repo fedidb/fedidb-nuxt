@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="grid grid-cols-2 gap-4 mb-6">
-                                <div>
+                                <div v-if="selectedSoftware?.latest_version?.version">
                                     <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Latest Version
                                     </h4>
                                     <p class="dark:text-gray-200 font-medium">{{
@@ -66,11 +66,6 @@
                                     <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Accounts</h4>
                                     <p class="dark:text-gray-200 font-medium">{{
                                         selectedSoftware?.user_count?.toLocaleString() || 0 }}</p>
-                                </div>
-                                <div>
-                                    <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">First Released
-                                    </h4>
-                                    <p class="dark:text-gray-200 font-medium">{{ 'Unknown' }}</p>
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">License</h4>
