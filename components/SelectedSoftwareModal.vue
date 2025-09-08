@@ -265,14 +265,14 @@ const seriesConfig = [
         showArea: true,
         showSymbol: false,
     },
-    {
-        name: 'Monthly Active',
-        field: 'monthly_active',
-        type: 'line',
-        width: 4,
-        showArea: true,
-        showSymbol: false,
-    },
+    // {
+    //     name: 'Monthly Active',
+    //     field: 'monthly_active',
+    //     type: 'line',
+    //     width: 4,
+    //     showArea: true,
+    //     showSymbol: false,
+    // },
     // {
     //     name: 'Total Servers',
     //     field: 'instance_count',
