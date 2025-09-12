@@ -20,8 +20,8 @@ export default defineNuxtPlugin((nuxt) => {
         defaultOptions: {
             queries: {
                 staleTime: 900000,
-                gcTime: 1000 * 60 * 60 * 24,
-                cacheTime: 1000 * 60 * 60 * 24,
+                gcTime: 1000 * 60 * 30,
+                cacheTime: 1000 * 60 * 30,
                 retry: false,
             },
         },
@@ -41,7 +41,7 @@ export default defineNuxtPlugin((nuxt) => {
                 queryClient,
                 persister: localStoragePersister,
                 maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
-                buster: 'v1.6',
+                buster: 'v1.7',
                 dehydrateOptions: {
                     shouldDehydrateQuery: (query) => {
                         return (
