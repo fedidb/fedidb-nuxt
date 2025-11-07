@@ -27,7 +27,7 @@ export function useSoftwareSlugs() {
                 throw error;
             }
         },
-        staleTime: 1000 * 60 * 60 * 24 * 14,
+        staleTime: 1000 * 60 * 60,
     });
 }
 
@@ -52,7 +52,7 @@ export function useApps() {
                 throw error;
             }
         },
-        staleTime: 1000 * 60 * 60 * 4,
+        staleTime: 1000 * 60 * 60 * 12,
     });
 }
 
@@ -77,7 +77,7 @@ export function useHistoricalStats() {
                 throw error;
             }
         },
-        staleTime: 1000 * 60 * 60 * 4,
+        staleTime: 1000 * 60 * 15,
     });
 }
 
