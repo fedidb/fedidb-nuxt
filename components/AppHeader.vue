@@ -32,6 +32,9 @@
                     <NuxtLink to="/stats"
                         class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">
                         Stats</NuxtLink>
+                    <NuxtLink to="/year-in-review/2025"
+                        class="font-medium text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors">
+                        #OurFedi2025</NuxtLink>
                 </nav>
 
                 <div class="flex items-center space-x-4">
