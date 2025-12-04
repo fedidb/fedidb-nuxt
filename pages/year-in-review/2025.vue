@@ -351,7 +351,7 @@
       New Platforms
   </h3>
   <p class="text-xl text-white/90 dark:text-cyan-200 text-center mb-16 drop-shadow">
-      The fediverse seen several new projects launch this year!
+      The fediverse has seen several new projects launch this year!
   </p>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <NuxtLink
