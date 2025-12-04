@@ -91,7 +91,7 @@
 </div>
 </section>
 
-<section class="py-20">
+<section class="py-20" id="top-platforms">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-16 drop-shadow-lg">
       Top Platforms
@@ -138,7 +138,7 @@
 </div>
 </section>
 
-<section class="py-20">
+<section class="py-20" id="platform-growth">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
       Platform Growth
@@ -185,7 +185,7 @@
 </div>
 </section>
 
-<section class="py-20">
+<section class="py-20" id="global-reach">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
       Global Reach
@@ -227,7 +227,7 @@
 </div>
 </section>
 
-<section class="py-20">
+<section class="py-20" id="growth-throughout-2025">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-16 drop-shadow-lg">
       Growth Throughout 2025
@@ -260,7 +260,7 @@
 </div>
 </section>
 
-<section class="py-20">
+<section class="py-20" id="most-active-instances">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-16 drop-shadow-lg">
       Most Active Instances
@@ -311,7 +311,7 @@
 </div>
 </section>
 
-<section class="py-20">
+<section class="py-20" id="network-averages">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-16 drop-shadow-lg">
       Network Averages
@@ -345,7 +345,7 @@
 </div>
 </section>
 
-<section class="py-20">
+<section class="py-20" id="new-platforms">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
       New Platforms
@@ -384,38 +384,38 @@
 </section>
 
 <section class="py-20" id="notable-mentions">
-  <div class="max-w-6xl mx-auto">
-    <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
+  <div class="max-w-6xl mx-auto px-4">
+    <h3 class="text-4xl sm:text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
       Notable Mentions
     </h3>
-    <p class="text-xl text-white/90 dark:text-cyan-200 text-center mb-16 drop-shadow">
+    <p class="text-lg sm:text-xl text-white/90 dark:text-cyan-200 text-center mb-12 sm:mb-16 drop-shadow px-4">
       Projects making waves in the fediverse
     </p>
-    <div class="space-y-6">
+    <div class="space-y-4 sm:space-y-6">
       <NuxtLink
         v-for="project in notableMentions"
         :key="project.slug"
         :to="`/software/${project.slug}`"
         class="block group"
       >
-        <div class="bg-white/20 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/30 dark:hover:bg-white/15 transition-all shadow-xl border border-white/20 dark:border-white/10">
-          <div class="flex items-stretch justify-between gap-8 flex-wrap lg:flex-nowrap">
+        <div class="bg-white/20 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-6 sm:p-8 hover:bg-white/30 dark:hover:bg-white/15 transition-all shadow-xl border border-white/20 dark:border-white/10">
+          <div class="flex flex-col lg:flex-row lg:items-stretch justify-between gap-6 lg:gap-8">
             <div class="flex-1 min-w-0 flex items-center">
               <div>
-                <h4 class="text-3xl font-bold text-white mb-3 drop-shadow group-hover:text-cyan-100 transition-colors">
+                <h4 class="text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-3 drop-shadow group-hover:text-cyan-100 transition-colors">
                   {{ project.name }}
                 </h4>
-                <p class="text-lg text-white/90 dark:text-cyan-100 drop-shadow leading-relaxed">
+                <p class="text-base sm:text-lg text-white/90 dark:text-cyan-100 drop-shadow leading-relaxed">
                   {{ project.description }}
                 </p>
               </div>
             </div>
-            <div class="flex-shrink-0 lg:border-l lg:border-white/30 lg:pl-8 flex items-center">
-              <div class="lg:text-right">
-                <p class="text-sm uppercase tracking-wider text-white/70 dark:text-cyan-200/70 mb-2 font-semibold drop-shadow">
+            <div class="flex-shrink-0 lg:border-l lg:border-white/30 lg:pl-8 flex items-center pt-4 lg:pt-0 border-t lg:border-t-0 border-white/30">
+              <div class="w-full lg:text-right">
+                <p class="text-xs sm:text-sm uppercase tracking-wider text-white/70 dark:text-cyan-200/70 mb-1 sm:mb-2 font-semibold drop-shadow">
                   Highlight
                 </p>
-                <p class="text-xl font-semibold text-white drop-shadow italic">
+                <p class="text-lg sm:text-xl font-semibold text-white drop-shadow italic">
                   {{ project.statement }}
                 </p>
               </div>
