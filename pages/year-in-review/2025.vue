@@ -185,7 +185,7 @@
 </div>
 </section>
 
-<section class="py-20" id="global-reach">
+<section class="min-h-screen py-20" id="global-reach">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
       Global Reach
@@ -227,7 +227,7 @@
 </div>
 </section>
 
-<section class="py-20" id="growth-throughout-2025">
+<section class="min-h-screen py-20" id="growth-throughout-2025">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-16 drop-shadow-lg">
       Growth Throughout 2025
@@ -260,7 +260,7 @@
 </div>
 </section>
 
-<section class="py-20" id="most-active-instances">
+<section class="min-h-screen py-20" id="most-active-instances">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-16 drop-shadow-lg">
       Most Active Instances
@@ -311,7 +311,7 @@
 </div>
 </section>
 
-<section class="py-20" id="network-averages">
+<section class="min-h-screen py-20" id="network-averages">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-16 drop-shadow-lg">
       Network Averages
@@ -345,7 +345,7 @@
 </div>
 </section>
 
-<section class="py-20" id="new-platforms">
+<section class="min-h-screen py-20" id="new-platforms">
   <div class="max-w-6xl mx-auto">
     <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
       New Platforms
@@ -383,7 +383,54 @@
 </div>
 </section>
 
-<section class="py-20" id="notable-mentions">
+<section class="min-h-screen py-20" id="publishing-platforms">
+  <div class="max-w-6xl mx-auto px-4">
+    <h3 class="text-4xl sm:text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
+      Publishing Platforms
+    </h3>
+    <p class="text-lg sm:text-xl text-white/90 dark:text-cyan-200 text-center mb-12 sm:mb-16 drop-shadow px-4">
+      Long form publishing platforms that have seen explosive growth this year
+    </p>
+    <div class="space-y-6">
+      <NuxtLink
+        v-for="platform in publishingPlatforms"
+        :key="platform.slug"
+        :to="`/software/${platform.slug}`"
+        class="block"
+      >
+        <div class="bg-gradient-to-r from-white/25 to-white/15 dark:from-white/15 dark:to-white/10 backdrop-blur-lg rounded-3xl p-8 sm:p-10 hover:from-white/35 hover:to-white/25 dark:hover:from-white/20 dark:hover:to-white/15 transition-all shadow-2xl border border-white/30 dark:border-white/20 hover:scale-[1.02] hover:shadow-3xl">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-3 sm:mb-4">
+                <h4 class="text-3xl sm:text-4xl md:text-5xl font-black text-white drop-shadow-lg">
+                  {{ platform.name }}
+                </h4>
+              </div>
+              <p class="text-lg sm:text-xl text-white/95 dark:text-cyan-50 drop-shadow leading-relaxed mb-3">
+                {{ platform.description }}
+              </p>
+              <p class="text-base sm:text-lg text-white/80 dark:text-cyan-100 drop-shadow italic">
+                {{ platform.highlight }}
+              </p>
+            </div>
+            <div class="flex-shrink-0 text-center lg:text-right lg:min-w-[200px]">
+              <div class="inline-block lg:block bg-white/20 dark:bg-white/10 backdrop-blur rounded-2xl px-8 py-6 border border-white/30">
+                <p class="text-sm uppercase tracking-wider text-white/70 dark:text-cyan-200/70 mb-2 font-semibold drop-shadow">
+                  {{ platform.label }}
+                </p>
+                <p class="text-5xl sm:text-6xl font-black text-white drop-shadow-xl">
+                  {{ platform.instances }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </NuxtLink>
+    </div>
+  </div>
+</section>
+
+<section class="min-h-screen py-20" id="notable-mentions">
   <div class="max-w-6xl mx-auto px-4">
     <h3 class="text-4xl sm:text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
       Notable Mentions
@@ -514,6 +561,41 @@
       'Austria': '🇦🇹',
       'Portugal': '🇵🇹',
   }
+
+const publishingPlatforms = ref([
+  {
+    name: 'Flipboard',
+    slug: 'flipboard',
+    label: 'Users',
+    instances: '100M+',
+    description: 'Social magazine and content aggregation platform bringing curated news and stories to the fediverse. Flipboard users can now follow and be followed across the open social web.',
+    highlight: 'Bridging curation and federation'
+  },
+  {
+    name: 'Ghost',
+    slug: 'ghost',
+    label: 'Instances',
+    instances: '12.4k',
+    description: 'Professional publishing platform powering independent media and creators. Ghost\'s ActivityPub integration brings premium content publishing to the open social web.',
+    highlight: 'The most popular fediverse software'
+  },
+  {
+    name: 'WordPress',
+    slug: 'wordpress',
+    label: 'Instances',
+    instances: '10k+',
+    description: 'The world\'s most popular CMS joins the fediverse. With ActivityPub plugin support, millions of WordPress sites can now federate their content across the open social web.',
+    highlight: 'Explosive growth in federated blogs'
+  },
+  {
+    name: 'WriteFreely',
+    slug: 'writefreely',
+    label: 'Instances',
+    instances: '480+',
+    description: 'Minimalist, privacy-focused writing platform built for the fediverse from the ground up. Clean, distraction-free publishing that puts writers first.',
+    highlight: 'Built for ActivityPub from day one'
+  }
+])
 
   const notableMentions = ref([
       {
