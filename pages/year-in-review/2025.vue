@@ -383,6 +383,50 @@
 </div>
 </section>
 
+<section class="py-20" id="notable-mentions">
+  <div class="max-w-6xl mx-auto">
+    <h3 class="text-5xl md:text-7xl font-black text-white text-center mb-8 drop-shadow-lg">
+      Notable Mentions
+    </h3>
+    <p class="text-xl text-white/90 dark:text-cyan-200 text-center mb-16 drop-shadow">
+      Projects making waves in the fediverse
+    </p>
+    <div class="space-y-6">
+      <NuxtLink
+        v-for="project in notableMentions"
+        :key="project.slug"
+        :to="`/software/${project.slug}`"
+        class="block group"
+      >
+        <div class="bg-white/20 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/30 dark:hover:bg-white/15 transition-all shadow-xl border border-white/20 dark:border-white/10">
+          <div class="flex items-stretch justify-between gap-8 flex-wrap lg:flex-nowrap">
+            <div class="flex-1 min-w-0 flex items-center">
+              <div>
+                <h4 class="text-3xl font-bold text-white mb-3 drop-shadow group-hover:text-cyan-100 transition-colors">
+                  {{ project.name }}
+                </h4>
+                <p class="text-lg text-white/90 dark:text-cyan-100 drop-shadow leading-relaxed">
+                  {{ project.description }}
+                </p>
+              </div>
+            </div>
+            <div class="flex-shrink-0 lg:border-l lg:border-white/30 lg:pl-8 flex items-center">
+              <div class="lg:text-right">
+                <p class="text-sm uppercase tracking-wider text-white/70 dark:text-cyan-200/70 mb-2 font-semibold drop-shadow">
+                  Highlight
+                </p>
+                <p class="text-xl font-semibold text-white drop-shadow italic">
+                  {{ project.statement }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </NuxtLink>
+    </div>
+  </div>
+</section>
+
 <section class="min-h-screen flex flex-col justify-center items-center text-center">
   <div class="space-y-8 max-w-4xl">
     <h3 class="text-6xl md:text-8xl font-black text-white leading-tight drop-shadow-lg">
@@ -470,6 +514,57 @@
       'Austria': '🇦🇹',
       'Portugal': '🇵🇹',
   }
+
+  const notableMentions = ref([
+      {
+        name: 'Bonfire',
+        slug: 'bonfire',
+        description: 'A federated social network for individuals and communities to design, operate and control their own digital lives.',
+        statement: 'Modular federated communities'
+      },
+      {
+        name: 'Emissary',
+        slug: 'emissary',
+        description: 'The Social Web Toolkit: A Programmable server for custom Fediverse apps.',
+        statement: 'The Social Web Toolkit'
+      },
+      {
+        name: 'Ghost',
+        slug: 'ghost',
+        description: 'Ghost is a powerful app for professional publishers to create, share, and grow a business around their content.',
+        statement: 'Professional publishing'
+      },
+      {
+        name: 'GoToSocial',
+        slug: 'gotosocial',
+        description: 'GoToSocial is an ActivityPub social network server, written in Golang.',
+        statement: 'Privacy focused microblogging'
+      },
+      {
+        name: 'Mitra',
+        slug: 'mitra',
+        description: 'Federated micro-blogging platform.',
+        statement: 'Microblogging with micropayments'
+      },
+      {
+        name: 'Sharkey',
+        slug: 'sharkey',
+        description: 'Sharkey is an Misskey fork following upstream changes when possible, with added features.',
+        statement: 'Feature packed microblogging'
+      },
+      {
+        name: 'Vernissage',
+        slug: 'vernissage',
+        description: 'Vernissage is a free platform designed for photographers. It\'s ad-free and focused on community and creativity, not algorithms.',
+        statement: 'Photo sharing for photographers'
+      },
+      {
+        name: 'Wafrn',
+        slug: 'wafrn',
+        description: 'Wafrn is a federated social media inspired by tumblr.',
+        statement: 'A better Tumblr alternative'
+      },
+    ])
 
   const activePercentage = computed(() => {
       if (!stats.value.overview.total_users || !stats.value.overview.monthly_active) return 0
