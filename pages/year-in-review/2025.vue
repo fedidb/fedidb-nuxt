@@ -1,25 +1,25 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 dark:from-cyan-950 dark:via-blue-950 dark:to-indigo-950">
-    <div class="container mx-auto px-4 py-16">
-      <section class="min-h-screen flex flex-col justify-center items-center text-center mb-32">
-        <div class="space-y-8 animate-fade-in">
-          <h1 class="text-7xl md:text-9xl font-black text-white tracking-tight drop-shadow-lg">
-            #OurFedi2025
+<div class="min-h-screen bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 dark:from-cyan-950 dark:via-blue-950 dark:to-indigo-950">
+  <div class="container mx-auto px-6 py-16">
+    <section class="min-h-screen flex flex-col justify-center items-center text-center mb-32">
+      <div class="space-y-8 animate-fade-in max-w-4xl">
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-black text-white tracking-tight drop-shadow-lg break-words">
+          #OurFedi2025
         </h1>
-        <h2 class="text-3xl text-center md:text-5xl font-bold text-white drop-shadow-md">
-            Fediverse Year in Review
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-md break-words">
+          Fediverse Year in Review
         </h2>
-        <div class="text-xl text-center md:text-2xl text-white/90 dark:text-cyan-100 drop-shadow">
-            A year of growth, connection, and decentralization
+        <div class="text-lg sm:text-xl md:text-2xl text-white/90 dark:text-cyan-100 drop-shadow break-words px-4">
+          A year of growth, connection, and decentralization
         </div>
         <button
-        @click="scrollToStats"
-        class="mt-8 px-8 py-4 bg-white text-indigo-600 dark:bg-indigo-900 dark:text-white rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-xl"
+          @click="scrollToStats"
+          class="mt-8 px-8 py-4 bg-white text-indigo-600 dark:bg-indigo-900 dark:text-white rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-xl"
         >
-        See the Stats
-    </button>
-</div>
-</section>
+          See the Stats
+        </button>
+      </div>
+    </section>
 
 <div v-if="loading" class="flex justify-center items-center min-h-screen">
     <div class="text-white text-2xl drop-shadow-lg">Loading your year...</div>
