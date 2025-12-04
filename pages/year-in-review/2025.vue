@@ -468,6 +468,7 @@
       'Finland': '🇫🇮',
       'Spain': '🇪🇸',
       'Austria': '🇦🇹',
+      'Portugal': '🇵🇹',
   }
 
   const activePercentage = computed(() => {
