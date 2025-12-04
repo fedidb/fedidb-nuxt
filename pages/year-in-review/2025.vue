@@ -541,6 +541,12 @@
         statement: 'Privacy focused microblogging'
       },
       {
+        name: 'Manyfold',
+        slug: 'manyfold',
+        description: 'Organise and share your 3d print files.',
+        statement: 'Federated blueprints & 3d assets'
+      },
+      {
         name: 'Mitra',
         slug: 'mitra',
         description: 'Federated micro-blogging platform.',
