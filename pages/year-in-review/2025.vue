@@ -1,5 +1,6 @@
 <template>
-<div class="min-h-screen bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600 dark:from-cyan-950 dark:via-blue-950 dark:to-indigo-950" id="stats">
+  <div class="fixed inset-0 -z-10 bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600 dark:from-cyan-950 dark:via-blue-950 dark:to-indigo-950 will-change-transform"></div>
+<div class="relative min-h-screen overflow-x-hidden" id="stats">
   <div class="container mx-auto px-6 py-16">
     <section class="min-h-screen flex flex-col justify-center items-center text-center mb-32">
       <div class="space-y-8 animate-fade-in max-w-4xl">
@@ -235,7 +236,7 @@
       Growth Throughout 2025
   </h3>
   <div class="glass-card rounded-3xl p-8 shadow-xl">
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6">
         <div
         v-for="month in stats.monthly_growth"
         :key="month.month"
@@ -754,15 +755,9 @@ to {
   animation: fade-in 1s ease-out;
 }
 
-#stats {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  will-change: scroll-position;
-}
-
 section {
-  contain: layout style paint;
-  transform: translateZ(0);
+  content-visibility: auto;
+  contain-intrinsic-size: 100vh;
 }
 
 .bg-gradient-to-r {
@@ -771,8 +766,16 @@ section {
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: none;
   backdrop-filter: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (hover: none) {
+  .hover-scale:hover, .hover-scale-sm:hover {
+    transform: none;
+  }
 }
 
 .dark .glass-card {
@@ -803,9 +806,16 @@ section {
 }
 
 .shadow-text {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
   filter: none;
 }
+
+@media (min-width: 768px) {
+  .shadow-text {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
 
 .shadow-text-lg {
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
