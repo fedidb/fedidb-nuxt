@@ -27,7 +27,7 @@ export function useSoftwareSlugs() {
                 throw error;
             }
         },
-        staleTime: 1000 * 60 * 60,
+        staleTime: 1000 * 60 * 15,
     });
 }
 
@@ -77,7 +77,7 @@ export function useHistoricalStats() {
                 throw error;
             }
         },
-        staleTime: 1000 * 60 * 15,
+        staleTime: 1000 * 60 * 5,
     });
 }
 

@@ -40,8 +40,8 @@ export default defineNuxtPlugin((nuxt) => {
             persistQueryClient({
                 queryClient,
                 persister: localStoragePersister,
-                maxAge: 1000 * 60 * 60 * 6, // 6 hours
-                buster: 'v1.9',
+                maxAge: 1000 * 60 * 15,
+                buster: 'v1.10',
                 dehydrateOptions: {
                     shouldDehydrateQuery: (query) => {
                         return (
