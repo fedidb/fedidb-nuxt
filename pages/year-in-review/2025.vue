@@ -1,5 +1,5 @@
 <template>
-<div class="min-h-screen bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 dark:from-cyan-950 dark:via-blue-950 dark:to-indigo-950">
+<div class="min-h-screen bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 dark:from-cyan-950 dark:via-blue-950 dark:to-indigo-950" id="stats">
   <div class="container mx-auto px-6 py-16">
     <section class="min-h-screen flex flex-col justify-center items-center text-center mb-32">
       <div class="space-y-8 animate-fade-in max-w-4xl">
@@ -619,23 +619,38 @@
       return countryFlags[code] || '🌍'
   }
 
-  const scrollToStats = () => {
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth'
+const scrollToStats = () => {
+  const statsSection = document.getElementById('stats')
+  if (statsSection) {
+    statsSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     })
   }
+}
 
-  onMounted(async () => {
-      try {
-        const response = await fetch('https://api.fedidb.org/v1/year-in-review/2025')
-        const data = await response.json()
-        stats.value = data
-    } catch (error) {
-        console.error('Failed to load stats:', error)
-    } finally {
-        loading.value = false
+onMounted(async () => {
+  try {
+    const response = await fetch('https://api.fedidb.org/v1/year-in-review/2025')
+    const data = await response.json()
+    stats.value = data
+  } catch (error) {
+    console.error('Failed to load stats:', error)
+  } finally {
+    loading.value = false
+
+    if (window.location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(window.location.hash)
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          })
+        }
+      }, 100)
     }
+  }
 })
 </script>
 
