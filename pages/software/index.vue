@@ -365,10 +365,7 @@
         if (!softwarePlatforms.value) return;
 
         const software = softwarePlatforms.value.find(s => s.id === softwareId);
-        if (software) {
-            selectedSoftware.value = software;
-            updateQueryParams();
-        }
+        router.push(`/software/${software.slug}`)
     }
 
     function closeSoftwareModal() {

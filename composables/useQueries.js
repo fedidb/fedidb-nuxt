@@ -309,6 +309,28 @@ export function useSoftwareBySlug(slug) {
     });
 }
 
+export function useSoftwareBySlugExtended(slug) {
+    const id = computed(() => unref(slug));
+
+    return useQuery({
+        queryKey: computed(() => ["softwareBySlugExtended", id.value]),
+        queryFn: async () => {
+            if (!id.value) {
+                throw new Error("Software slug is required");
+            }
+            const res = await fetch(
+                `https://api.fedidb.org/v1.1/software/${id.value}`
+            );
+            if (!res.ok) {
+                throw new Error(`API request failed with status ${res.status}`);
+            }
+            return res.json();
+        },
+        enabled: computed(() => Boolean(id.value)),
+        staleTime: 1000 * 60 * 15,
+    });
+}
+
 /**
  * Hook to fetch software servers with advanced filtering and cursor pagination
  * @param {Object} data The data object from useInfiniteQuery
@@ -351,21 +373,26 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
             } = currentFilters.value;
 
             if (limit) params.push(`limit=${limit}`);
-            if (sort_by) params.push(`sort_by=${sort_by}`);
-            if (sort_direction) params.push(`sort_direction=${sort_direction}`);
+            
+            if (sort_by && sort_direction) {
+                const sortMap = {
+                    'user_count': 'users',
+                    'status_count': 'posts',
+                    'first_seen_at': 'created',
+                    'monthly_active': 'mau'
+                };
+                const field = sortMap[sort_by] || sort_by;
+                params.push(`sort=${field}-${sort_direction}`);
+            }
 
             if (search) params.push(`q=${encodeURIComponent(search)}`);
             if (region && region !== "all")
                 params.push(`region=${encodeURIComponent(region)}`);
             if (version) params.push(`version=${encodeURIComponent(version)}`);
             if (registration)
-                params.push(
-                    `registration=${
-                        registration === "open" ? "open" : "closed"
-                    }`
-                );
-            if (mature) params.push(`mature=${mature ? 1 : null}`);
-            if (small) params.push(`small=${small ? 1 : null}`);
+                params.push(`registration=${registration === "open" ? "open" : "closed"}`);
+            if (mature) params.push(`mature=1`);
+            if (small) params.push(`small=1`);
 
             if (params.length > 0) {
                 url += `?${params.join("&")}`;
@@ -379,22 +406,27 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
             const data = await res.json();
             return data;
         },
-        getPreviousPageParam: first => first.meta.prev_cursor,
+        
         getNextPageParam: (lastPage) => {
             if (lastPage.meta?.next_cursor) {
                 return lastPage.meta.next_cursor;
             }
+            
             if (lastPage.links?.next) {
                 const url = new URL(lastPage.links.next);
                 return url.searchParams.get("cursor");
             }
-            const limit = currentFilters.value.limit || 10;
-            if (lastPage.data && lastPage.data.length < limit) {
-                return undefined;
-            }
-
+            
             return undefined;
         },
+        
+        getPreviousPageParam: (firstPage) => {
+            if (firstPage.meta?.prev_cursor) {
+                return firstPage.meta.prev_cursor;
+            }
+            return undefined;
+        },
+        
         enabled: computed(() => Boolean(id.value)),
         staleTime: 1000 * 60 * 15,
         ...options,
