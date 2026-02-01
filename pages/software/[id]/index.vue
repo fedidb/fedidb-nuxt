@@ -60,7 +60,7 @@
                                 <span class="text-lg font-semibold text-gray-900 dark:text-white">
                                     {{ formatNumber(software.user_count || 0) }}
                                 </span>
-                                <span class="text-xs text-gray-500 dark:text-gray-400">total accounts</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">accounts</span>
                             </div>
                         </div>
                         
@@ -70,7 +70,7 @@
                                 <span class="text-lg font-semibold text-gray-900 dark:text-white">
                                     {{ formatNumber(software.monthly_actives || 0) }}
                                 </span>
-                                <span class="text-xs text-gray-500 dark:text-gray-400">active accounts</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">active</span>
                             </div>
                         </div>
                         
