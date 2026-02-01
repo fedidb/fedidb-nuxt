@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         
-                        <div v-if="software.latest_version?.version" class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
+                        <!-- <div v-if="software.latest_version?.version" class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
                             <Icon name="feather:tag" size="14" class="text-gray-500 dark:text-gray-400" />
                             <div class="flex items-baseline gap-1.5">
                                 <span class="text-base font-semibold text-gray-900 dark:text-white font-mono">
@@ -82,7 +82,7 @@
                                 </span>
                                 <span class="text-xs text-gray-500 dark:text-gray-400">latest</span>
                             </div>
-                        </div>
+                        </div> -->
                         
                         <div v-if="software.license" class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
                             <Icon name="feather:file-text" size="14" class="text-gray-500 dark:text-gray-400" />
