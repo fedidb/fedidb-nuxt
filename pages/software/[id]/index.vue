@@ -28,15 +28,15 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-2 flex-shrink-0">
+                   <div class="flex w-full md:w-auto flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
                         <a v-if="software.join_url" :href="software.join_url" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-b from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 border border-blue-700 dark:border-blue-600 text-white rounded-lg transition-all text-sm font-medium shadow-sm">
-                            <Icon name="feather:user-plus" size="14" />
-                            <span>Join {{  software.name }}</span>
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-b from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 dark:from-green-600 dark:to-green-700 dark:hover:from-green-700 dark:hover:to-green-800 border border-green-700 dark:border-green-600 text-white rounded-lg transition-all text-base font-semibold shadow-md hover:shadow-lg w-full sm:w-auto">
+                            <Icon name="feather:user-plus" size="18" />
+                            <span>Join {{ software.name }}</span>
                         </a>
                         <a v-if="software.website" :href="software.website" target="_blank" rel="noopener noreferrer"
-                            class="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-b from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-200 rounded-lg transition-all text-sm font-medium shadow-sm">
-                            <Icon name="feather:external-link" size="14" />
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-b from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-200 rounded-lg transition-all text-base font-semibold shadow-md hover:shadow-lg w-full sm:w-auto">
+                            <Icon name="feather:external-link" size="18" />
                             <span>Visit Project Website</span>
                         </a>
                     </div>
@@ -373,7 +373,7 @@
             </div>
         </main>
 
-        <div v-if="software.historical_stats?.length" class="bg-gray-100 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-700 py-8">
+        <!-- <div v-if="software.historical_stats?.length" class="bg-gray-100 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-700 py-8">
             <div class="container max-w-7xl mx-auto px-4">
                 <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                     <ReusableChart 
@@ -385,7 +385,7 @@
                     />
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
