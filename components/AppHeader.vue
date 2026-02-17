@@ -2,7 +2,6 @@
     <header
         class="sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-200">
         <div class="container mx-auto px-4">
-            <a href="https://mastodon.social/@dansup" rel="me" style="display: none !important;">Made by dansup</a>
             <div class="flex items-center justify-between py-4">
                 <NuxtLink href="/" @click="closeMenu">
                     <div class="flex items-center space-x-2">
