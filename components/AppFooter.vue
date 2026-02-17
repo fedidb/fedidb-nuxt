@@ -79,7 +79,7 @@
 
             <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
                 <p class="text-center text-gray-500 dark:text-gray-400 text-sm">© {{ new Date().getFullYear() }}
-                    FediDB.com. All data is provided for informational purposes only.</p>
+                    FediDB.com. All data is provided for informational purposes only. <a href="https://mastodon.social/@dansup" rel="me" style="display: none !important;">Made by dansup</a></p>
             </div>
         </div>
     </footer>
