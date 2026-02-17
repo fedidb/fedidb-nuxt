@@ -76,7 +76,6 @@
         >
           <option value="users-desc">Users (High → Low)</option>
           <option value="users-asc">Users (Low → High)</option>
-          <option value="uptime-desc">Uptime (Best First)</option>
           <option value="version-desc">Version (Newest First)</option>
           <option value="created-desc">Newest Servers</option>
           <option value="created-asc">Oldest Servers</option>
