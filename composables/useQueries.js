@@ -374,16 +374,8 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
 
             if (limit) params.push(`limit=${limit}`);
             
-            if (sort_by && sort_direction) {
-                const sortMap = {
-                    'user_count': 'users',
-                    'status_count': 'posts',
-                    'first_seen_at': 'created',
-                    'monthly_active': 'mau'
-                };
-                const field = sortMap[sort_by] || sort_by;
-                params.push(`sort=${field}-${sort_direction}`);
-            }
+            if (sort_by) params.push(`sort_by=${sort_by}`)
+            if (sort_direction) params.push(`sort_direction=${sort_direction}`)
 
             if (search) params.push(`q=${encodeURIComponent(search)}`);
             if (region && region !== "all")
