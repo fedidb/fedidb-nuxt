@@ -331,6 +331,28 @@ export function useSoftwareBySlugExtended(slug) {
     });
 }
 
+export function useSoftwareVersionsBySlug(slug) {
+    const id = computed(() => unref(slug));
+
+    return useQuery({
+        queryKey: computed(() => ["softwareByVersion", id.value]),
+        queryFn: async () => {
+            if (!id.value) {
+                throw new Error("Software slug is required");
+            }
+            const res = await fetch(
+                `https://api.fedidb.org/v1.1/software/${id.value}/versions`
+            );
+            if (!res.ok) {
+                throw new Error(`API request failed with status ${res.status}`);
+            }
+            return res.json();
+        },
+        enabled: computed(() => Boolean(id.value)),
+        staleTime: 1000 * 60 * 15,
+    });
+}
+
 /**
  * Hook to fetch software servers with advanced filtering and cursor pagination
  * @param {Object} data The data object from useInfiniteQuery
@@ -373,7 +395,7 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
             } = currentFilters.value;
 
             if (limit) params.push(`limit=${limit}`);
-            
+
             if (sort_by) params.push(`sort_by=${sort_by}`)
             if (sort_direction) params.push(`sort_direction=${sort_direction}`)
 
@@ -398,27 +420,27 @@ export function useSoftwareServers(slug, filters = {}, options = {}) {
             const data = await res.json();
             return data;
         },
-        
+
         getNextPageParam: (lastPage) => {
             if (lastPage.meta?.next_cursor) {
                 return lastPage.meta.next_cursor;
             }
-            
+
             if (lastPage.links?.next) {
                 const url = new URL(lastPage.links.next);
                 return url.searchParams.get("cursor");
             }
-            
+
             return undefined;
         },
-        
+
         getPreviousPageParam: (firstPage) => {
             if (firstPage.meta?.prev_cursor) {
                 return firstPage.meta.prev_cursor;
             }
             return undefined;
         },
-        
+
         enabled: computed(() => Boolean(id.value)),
         staleTime: 1000 * 60 * 15,
         ...options,
