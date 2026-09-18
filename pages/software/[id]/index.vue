@@ -1,5 +1,6 @@
 <template>
-    <div v-if="metaLoading" class="h-screen flex flex-col gap-4 items-center justify-center bg-gray-200 dark:bg-gray-950">
+    <div v-if="metaLoading"
+        class="h-screen flex flex-col gap-4 items-center justify-center bg-gray-200 dark:bg-gray-950">
         <Spinner />
         <span class="dark:text-gray-300">Loading…</span>
     </div>
@@ -28,7 +29,8 @@
                         </div>
                     </div>
 
-                   <div class="flex w-full md:w-auto flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
+                    <div
+                        class="flex w-full md:w-auto flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
                         <a v-if="software.join_url" :href="software.join_url" target="_blank" rel="noopener noreferrer"
                             class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-b from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 dark:from-green-600 dark:to-green-700 dark:hover:from-green-700 dark:hover:to-green-800 border border-green-700 dark:border-green-600 text-white rounded-lg transition-all text-base font-semibold shadow-md hover:shadow-lg w-full sm:w-auto">
                             <Icon name="feather:user-plus" size="18" />
@@ -44,7 +46,8 @@
 
                 <div class="flex flex-wrap lg:flex-nowrap lg:justify-between gap-3 mb-4">
                     <div class="flex flex-wrap lg:flex-nowrap lg:justify-between gap-3">
-                        <div class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
                             <Icon name="feather:server" size="14" class="text-gray-500 dark:text-gray-400" />
                             <div class="flex items-center gap-1.5">
                                 <span class="text-lg font-semibold text-gray-900 dark:text-white">
@@ -53,8 +56,9 @@
                                 <span class="text-xs text-gray-500 dark:text-gray-400">servers</span>
                             </div>
                         </div>
-                        
-                        <div class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
+
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
                             <Icon name="feather:users" size="14" class="text-gray-500 dark:text-gray-400" />
                             <div class="flex items-center gap-1.5">
                                 <span class="text-lg font-semibold text-gray-900 dark:text-white">
@@ -63,8 +67,9 @@
                                 <span class="text-xs text-gray-500 dark:text-gray-400">accounts</span>
                             </div>
                         </div>
-                        
-                        <div class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
+
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
                             <Icon name="feather:activity" size="14" class="text-gray-500 dark:text-gray-400" />
                             <div class="flex items-center gap-1.5">
                                 <span class="text-lg font-semibold text-gray-900 dark:text-white">
@@ -73,7 +78,7 @@
                                 <span class="text-xs text-gray-500 dark:text-gray-400">active</span>
                             </div>
                         </div>
-                        
+
                         <!-- <div v-if="software.latest_version?.version" class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
                             <Icon name="feather:tag" size="14" class="text-gray-500 dark:text-gray-400" />
                             <div class="flex items-baseline gap-1.5">
@@ -83,8 +88,9 @@
                                 <span class="text-xs text-gray-500 dark:text-gray-400">latest</span>
                             </div>
                         </div> -->
-                        
-                        <div v-if="software.license" class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
+
+                        <div v-if="software.license"
+                            class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-600">
                             <Icon name="feather:file-text" size="14" class="text-gray-500 dark:text-gray-400" />
                             <div class="flex items-baseline gap-1.5">
                                 <span class="text-sm font-semibold text-gray-900 dark:text-white">
@@ -96,12 +102,14 @@
                     </div>
 
                     <div v-if="hasResources" class="flex flex-wrap lg:flex-nowrap lg:justify-between gap-2">
-                        <a v-if="software.source_repo" :href="software.source_repo" target="_blank" rel="noopener noreferrer"
+                        <a v-if="software.source_repo" :href="software.source_repo" target="_blank"
+                            rel="noopener noreferrer"
                             class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-200 rounded-md transition-all text-xs font-medium">
                             <Icon name="feather:github" size="13" />
                             <span>Source Code</span>
                         </a>
-                        <a v-if="software.api_docs_url" :href="software.api_docs_url" target="_blank" rel="noopener noreferrer"
+                        <a v-if="software.api_docs_url" :href="software.api_docs_url" target="_blank"
+                            rel="noopener noreferrer"
                             class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-200 rounded-md transition-all text-xs font-medium">
                             <Icon name="feather:book-open" size="13" />
                             <span>API Docs</span>
@@ -111,7 +119,8 @@
                             <Icon name="feather:smartphone" size="13" />
                             <span>Mobile Apps</span>
                         </a>
-                        <a v-if="software.forum_url" :href="software.forum_url" target="_blank" rel="noopener noreferrer"
+                        <a v-if="software.forum_url" :href="software.forum_url" target="_blank"
+                            rel="noopener noreferrer"
                             class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-200 rounded-md transition-all text-xs font-medium">
                             <Icon name="feather:message-circle" size="13" />
                             <span>Community</span>
@@ -131,32 +140,22 @@
                         </div>
                     </div>
 
-                    <SoftwareProjectFilters
-                        v-if="software?.instance_count"
-                        :instance-count="software.instance_count"
-                        :search-input-value="searchInputValue"
-                        @update:search-input-value="handleSearchInput"
-                        :is-searching="isSearching"
-                        :region-filter="regionFilter"
-                        @update:region-filter="regionFilter = $event"
-                        :sort-option="sortOption"
-                        @update:sort-option="sortOption = $event"
-                        :show-detailed-stats="showDetailedStats"
-                        @update:show-detailed-stats="showDetailedStats = $event"
-                        :version-filter="versionFilter"
-                        @update:version-filter="toggleVersionFilter"
-                        :uptime-filter="uptimeFilter"
-                        @update:uptime-filter="toggleUptimeFilter"
-                        :registration-filter="registrationFilter"
-                        @update:registration-filter="toggleRegistrationFilter"
-                        :mature-filter="matureFilter"
-                        @update:mature-filter="toggleMatureFilter"
-                        :small-filter="smallFilter"
-                        @update:small-filter="toggleSmallFilter"
-                    />
+                    <SoftwareProjectFilters v-if="software?.instance_count" :instance-count="software.instance_count"
+                        :search-input-value="searchInputValue" @update:search-input-value="handleSearchInput"
+                        :is-searching="isSearching" :region-filter="regionFilter"
+                        @update:region-filter="regionFilter = $event" :sort-option="sortOption"
+                        @update:sort-option="sortOption = $event" :show-detailed-stats="showDetailedStats"
+                        @update:show-detailed-stats="showDetailedStats = $event" :version-filter="versionFilter"
+                        @update:version-filter="toggleVersionFilter" :uptime-filter="uptimeFilter"
+                        @update:uptime-filter="toggleUptimeFilter" :registration-filter="registrationFilter"
+                        @update:registration-filter="toggleRegistrationFilter" :mature-filter="matureFilter"
+                        @update:mature-filter="toggleMatureFilter" :small-filter="smallFilter"
+                        @update:small-filter="toggleSmallFilter" />
 
-                    <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md overflow-hidden transition-colors duration-200 mb-8">
-                        <div class="hidden md:grid md:grid-cols-12 gap-4 px-6 py-3 bg-gray-100 dark:bg-gray-700 font-medium text-gray-500 dark:text-gray-400 text-sm">
+                    <div
+                        class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl shadow-md overflow-hidden transition-colors duration-200 mb-8">
+                        <div
+                            class="hidden md:grid md:grid-cols-12 gap-4 px-6 py-3 bg-gray-100 dark:bg-gray-700 font-medium text-gray-500 dark:text-gray-400 text-sm">
                             <div class="col-span-4">Server</div>
                             <div class="col-span-2">Version</div>
                             <div class="col-span-1">Accounts</div>
@@ -166,59 +165,80 @@
                         </div>
 
                         <div class="divide-y divide-gray-100 dark:divide-gray-700">
-                            <div v-for="server in pagedServers" :key="server.id" class="p-4 md:px-6 md:py-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <div v-for="server in pagedServers" :key="server.id"
+                                class="p-4 md:px-6 md:py-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                                 <NuxtLink :to="`/servers/${server.domain}`">
                                     <div class="md:hidden space-y-3">
                                         <div class="flex justify-between items-start">
                                             <div class="flex items-start">
-                                                <div class="h-8 w-8 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-2 flex items-center justify-center overflow-hidden">
-                                                    <img v-if="server.logo" :src="server.logo" alt="" class="h-full w-full object-cover">
-                                                    <span v-else class="text-lg font-bold text-blue-600 dark:text-blue-400">{{ server.domain.charAt(0).toUpperCase() }}</span>
+                                                <div
+                                                    class="h-8 w-8 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-2 flex items-center justify-center overflow-hidden">
+                                                    <img v-if="server.logo" :src="server.logo" alt=""
+                                                        class="h-full w-full object-cover">
+                                                    <span v-else
+                                                        class="text-lg font-bold text-blue-600 dark:text-blue-400">{{
+                                                            server.domain.charAt(0).toUpperCase() }}</span>
                                                 </div>
                                                 <div>
                                                     <h3 class="font-semibold dark:text-white">{{ server.name }}</h3>
-                                                    <a :href="`https://${server.domain}`" target="_blank" rel="noopener noreferrer" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">{{ server.domain }}</a>
+                                                    <a :href="`https://${server.domain}`" target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="text-sm text-blue-600 dark:text-blue-400 hover:underline">{{
+                                                            server.domain }}</a>
                                                 </div>
                                             </div>
-                                            <div v-if="server.registrationOpen" class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-0.5 rounded text-xs font-medium">
+                                            <div v-if="server.registrationOpen"
+                                                class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-0.5 rounded text-xs font-medium">
                                                 Open
                                             </div>
                                         </div>
 
-                                        <p v-if="!showDetailedStats" class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{{ server.description }}</p>
+                                        <p v-if="!showDetailedStats"
+                                            class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{{
+                                                server.description }}</p>
 
                                         <div class="grid grid-cols-2 gap-y-2">
                                             <div>
                                                 <div class="text-xs text-gray-500 dark:text-gray-400">MAU</div>
-                                                <div class="text-sm font-medium dark:text-gray-200">{{ formatNumber(server.stats.monthly_active_users) }}</div>
+                                                <div class="text-sm font-medium dark:text-gray-200">{{
+                                                    formatNumber(server.stats.monthly_active_users) }}</div>
                                             </div>
                                             <div>
                                                 <div class="text-xs text-gray-500 dark:text-gray-400">Version</div>
-                                                <div class="text-xs font-medium dark:text-gray-200 truncate" :class="isLatestVersion(server.software?.version) ? 'text-green-600 dark:text-green-400' : ''">
+                                                <div class="text-xs font-medium dark:text-gray-200 truncate"
+                                                    :class="isLatestVersion(server.software?.version) ? 'text-green-600 dark:text-green-400' : ''">
                                                     v{{ server.software?.version }}
                                                 </div>
                                             </div>
                                             <div>
                                                 <div class="text-xs text-gray-500 dark:text-gray-400">Accounts</div>
-                                                <div class="text-sm font-medium dark:text-gray-200">{{ formatNumber(server.stats.user_count) }}</div>
+                                                <div class="text-sm font-medium dark:text-gray-200">{{
+                                                    formatNumber(server.stats.user_count) }}</div>
                                             </div>
                                             <div>
                                                 <div class="text-xs text-gray-500 dark:text-gray-400">Location</div>
-                                                <div class="text-sm font-medium dark:text-gray-200 truncate">{{ server.location.country }}</div>
+                                                <div class="text-sm font-medium dark:text-gray-200 truncate">{{
+                                                    server.location.country }}</div>
                                             </div>
                                         </div>
 
                                         <div class="flex justify-between items-center pt-2">
                                             <div class="flex space-x-2">
-                                                <a :href="`https://${server.domain}/about`" target="_blank" rel="noopener noreferrer" class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200">
+                                                <a :href="`https://${server.domain}/about`" target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200">
                                                     Visit
                                                 </a>
-                                                <button class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200">
+                                                <button
+                                                    class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200">
                                                     Details
                                                 </button>
                                             </div>
                                             <div class="text-xs text-gray-500 dark:text-gray-400">
-                                                Last checked: {{ formatDate(server.last_seen_at, { relative:true, shortFormat: true }) }}
+                                                Last checked: {{ formatDate(server.last_seen_at, {
+                                                    relative: true,
+                                                    shortFormat: true
+                                                }) }}
                                             </div>
                                         </div>
                                     </div>
@@ -226,62 +246,79 @@
                                     <div class="hidden md:grid md:grid-cols-12 md:gap-4 md:items-center">
                                         <div class="col-span-4">
                                             <div class="flex items-center">
-                                                <div class="h-10 w-10 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-3 flex items-center justify-center overflow-hidden">
-                                                    <img v-if="server.logo" :src="server.logo" alt="" class="h-full w-full object-cover">
-                                                    <span v-else class="text-xl font-bold text-blue-600 dark:text-blue-400">{{ server.domain.charAt(0).toUpperCase() }}</span>
+                                                <div
+                                                    class="h-10 w-10 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900 rounded-lg mr-3 flex items-center justify-center overflow-hidden">
+                                                    <img v-if="server.logo" :src="server.logo" alt=""
+                                                        class="h-full w-full object-cover">
+                                                    <span v-else
+                                                        class="text-xl font-bold text-blue-600 dark:text-blue-400">{{
+                                                            server.domain.charAt(0).toUpperCase() }}</span>
                                                 </div>
                                                 <div>
                                                     <div class="flex items-center">
                                                         <h3 class="font-medium dark:text-white">{{ server.domain }}</h3>
-                                                        <div v-if="server.registrationOpen" class="ml-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-1.5 py-0.5 rounded text-xs">
+                                                        <div v-if="server.registrationOpen"
+                                                            class="ml-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-1.5 py-0.5 rounded text-xs">
                                                             Open
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div
-                                            class="col-span-2 font-medium text-wrap"
+                                        <div class="col-span-2 font-medium text-wrap"
                                             :class="[isLatestVersion(server.software.version) ? 'text-green-600 dark:text-green-400' : 'dark:text-gray-300', server.software.version.length > 9 ? 'text-xs' : 'text-md']"
                                             :title="server.software.version">v{{ server.software.version }}</div>
-                                        <div class="col-span-1 dark:text-gray-300">{{ formatNumber(server.stats.user_count) }}</div>
-                                        <div class="col-span-2 dark:text-gray-300 text-sm">{{ server.location.city ? server.location.city + ', ' : '' }}{{ server.location.country }}</div>
+                                        <div class="col-span-1 dark:text-gray-300">{{
+                                            formatNumber(server.stats.user_count) }}</div>
+                                        <div class="col-span-2 dark:text-gray-300 text-sm">{{ server.location.city ?
+                                            server.location.city + ', ' : '' }}{{ server.location.country }}</div>
                                         <div v-if="showDetailedStats" class="col-span-4">
                                             <div class="flex justify-between text-sm">
                                                 <div class="text-center">
-                                                    <div class="text-gray-500 dark:text-gray-400">Monthly Active Users</div>
-                                                    <div class="font-medium dark:text-gray-300">{{ formatNumber(server.stats.monthly_active_users) }}</div>
+                                                    <div class="text-gray-500 dark:text-gray-400">Monthly Active Users
+                                                    </div>
+                                                    <div class="font-medium dark:text-gray-300">{{
+                                                        formatNumber(server.stats.monthly_active_users) }}</div>
                                                 </div>
                                                 <div class="text-center">
                                                     <div class="text-gray-500 dark:text-gray-400">Status Count</div>
-                                                    <div class="font-medium dark:text-gray-300">{{ formatNumber(server.stats.status_count) }}</div>
+                                                    <div class="font-medium dark:text-gray-300">{{
+                                                        formatNumber(server.stats.status_count) }}</div>
                                                 </div>
                                                 <div class="text-center">
                                                     <div class="text-gray-500 dark:text-gray-400">Active Rate</div>
-                                                    <div class="font-medium dark:text-gray-300">{{ parseFloat(server.stats.monthly_active_users / server.stats.user_count * 100).toFixed(2) }}%</div>
+                                                    <div class="font-medium dark:text-gray-300">{{
+                                                        parseFloat(server.stats.monthly_active_users /
+                                                            server.stats.user_count * 100).toFixed(2) }}%</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div v-else class="col-span-3 dark:text-gray-300">
-                                            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">{{ server.description || 'No description available'}}</p>
+                                            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">{{
+                                                server.description || 'No description available' }}</p>
                                         </div>
                                     </div>
                                 </NuxtLink>
                             </div>
-                            <div v-if="!pagedServers.length && isFilteringOrSearching" class="flex flex-col gap-3 justify-center items-center p-4 md:px-6 md:py-20">
+                            <div v-if="!pagedServers.length && isFilteringOrSearching"
+                                class="flex flex-col gap-3 justify-center items-center p-4 md:px-6 md:py-20">
                                 <Spinner />
                                 <p class="dark:text-gray-300">Loading...</p>
                             </div>
                         </div>
 
-                        <div v-if="!pagedServers.length && !isFilteringOrSearching && !isLoading" class="p-8 text-center">
+                        <div v-if="!pagedServers.length && !isFilteringOrSearching && !isLoading"
+                            class="p-8 text-center">
                             <div class="text-gray-500 dark:text-gray-400 mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                 </svg>
                                 <p class="text-lg font-medium dark:text-gray-300">No servers found</p>
                             </div>
-                            <p class="text-gray-600 dark:text-gray-400">Try adjusting your filters or search criteria</p>
+                            <p class="text-gray-600 dark:text-gray-400">Try adjusting your filters or search criteria
+                            </p>
                         </div>
                     </div>
 
@@ -290,19 +327,26 @@
                             <span v-if="isLoading && servers.length === 0">Loading servers...</span>
                             <span v-else>
                                 Showing
-                                <span class="font-medium">{{ currentPageIndex * pageSize + 1 }}–{{ Math.min((currentPageIndex + 1) * pageSize, servers.length) }}</span>
+                                <span class="font-medium">{{ currentPageIndex * pageSize + 1 }}–{{
+                                    Math.min((currentPageIndex + 1) * pageSize, servers.length) }}</span>
                                 of <span class="font-medium">{{ software.instance_count }}</span>
                                 servers
                             </span>
                         </div>
                         <div class="flex space-x-2">
-                            <button @click="prevPage" :disabled="currentPageIndex < 1" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">Previous</button>
+                            <button @click="prevPage" :disabled="currentPageIndex < 1"
+                                class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">Previous</button>
 
-                            <button @click="nextPage" :disabled="isNextButtonDisabled" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center transition-colors">
+                            <button @click="nextPage" :disabled="isNextButtonDisabled"
+                                class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center transition-colors">
                                 <span>{{ isFetchingNextPage ? 'Loading...' : 'Next' }}</span>
-                                <svg v-if="isFetchingNextPage" class="animate-spin ml-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                <svg v-if="isFetchingNextPage" class="animate-spin ml-2 h-4 w-4 text-white"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
                                 </svg>
                             </button>
                         </div>
@@ -310,46 +354,24 @@
                 </div>
 
                 <aside v-if="hasRichData" class="lg:w-1/4 space-y-6">
-                    <div v-if="software.features?.length" class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                                <Icon name="feather:check-circle" size="20" class="text-blue-600 dark:text-blue-400" />
-                                <span>Key Features</span>
-                            </h3>
-                            <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600 dark:text-gray-300">
-                                <li v-for="(feature, index) in software.features" :key="index">
-                                    {{ feature }}
-                                </li>
-                            </ul>
-                    </div>
-                    <div v-if="software.versions?.length" class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+                    <div v-if="software.features?.length"
+                        class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                            <Icon name="feather:package" size="20" class="text-purple-600 dark:text-purple-400" />
-                            <span>Version Distribution</span>
+                            <Icon name="feather:check-circle" size="20" class="text-blue-600 dark:text-blue-400" />
+                            <span>Key Features</span>
                         </h3>
-                        <div class="space-y-3">
-                            <div v-for="(version, index) in software.versions.slice(0, 10)" :key="index"
-                                class="pb-3 border-b border-gray-200 dark:border-gray-700 last:border-0">
-                                <div class="flex justify-between items-center gap-3 mb-1">
-                                    <div class="text-sm font-medium dark:text-white">v{{ version.version }}</div>
-                                    <div class="text-xs text-gray-500 dark:text-gray-400">
-                                        {{ Math.round(version.count / software.instance_count * 100) }}%
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
-                                        <div class="bg-purple-600 dark:bg-purple-500 h-1.5 rounded-full transition-all"
-                                            :style="{ width: `${Math.round(version.count / software.instance_count * 100)}%` }">
-                                        </div>
-                                    </div>
-                                    <div class="text-xs text-gray-600 dark:text-gray-400 w-16 text-right">
-                                        {{ version.count?.toLocaleString() }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                            <li v-for="(feature, index) in software.features" :key="index">
+                                {{ feature }}
+                            </li>
+                        </ul>
                     </div>
 
-                    <div v-if="software.popular_asns?.length" class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+                    <SoftwareVersionsCard v-if="software.versions?.length" :software="software"
+                        :show-link="hasExtendedVersions" />
+
+                    <div v-if="software.popular_asns?.length"
+                        class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                             <Icon name="feather:server" size="20" class="text-green-600 dark:text-green-400" />
                             <span>Top Hosting Providers</span>
@@ -358,7 +380,8 @@
                             <div v-for="(asn, index) in software.popular_asns.slice(0, 10)" :key="index"
                                 class="flex items-center justify-between gap-3 pb-3 border-b border-gray-200 dark:border-gray-700 last:border-0">
                                 <div class="flex items-center gap-2 min-w-0 flex-1">
-                                    <div class="h-8 w-8 rounded-lg bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900 dark:to-green-800 flex items-center justify-center text-xs font-bold text-green-700 dark:text-green-300 flex-shrink-0">
+                                    <div
+                                        class="h-8 w-8 rounded-lg bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900 dark:to-green-800 flex items-center justify-center text-xs font-bold text-green-700 dark:text-green-300 flex-shrink-0">
                                         {{ asn.asn_org.charAt(0).toUpperCase() }}
                                     </div>
                                     <span class="text-sm truncate dark:text-gray-200">{{ asn.asn_org }}</span>
@@ -376,12 +399,12 @@
         <!-- <div v-if="software.historical_stats?.length" class="bg-gray-100 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-700 py-8">
             <div class="container max-w-7xl mx-auto px-4">
                 <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                    <ReusableChart 
-                        title="Activity Over Time" 
+                    <ReusableChart
+                        title="Activity Over Time"
                         :chart-data="software.historical_stats"
-                        x-axis-field="period" 
-                        :x-axis-formatter="formatGraphDate" 
-                        :series="seriesConfig" 
+                        x-axis-field="period"
+                        :x-axis-formatter="formatGraphDate"
+                        :series="seriesConfig"
                     />
                 </div>
             </div>
@@ -393,8 +416,8 @@
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
-  useSoftwareBySlugExtended,
-  useSoftwareServers,
+    useSoftwareBySlugExtended,
+    useSoftwareServers,
 } from '~/composables/useQueries'
 
 const route = useRoute()
@@ -410,6 +433,8 @@ const {
 } = useSoftwareBySlugExtended(slug);
 const software = computed(() => rawMeta.value ?? {});
 
+const hasExtendedVersions = computed(() => ['pixelfed', 'mastodon', 'writefreely', 'loops', 'peertube', 'lemmy', 'misskey', 'nodebb', 'wordpress'].includes(software.value.slug))
+
 const searchQuery = ref('');
 const regionFilter = ref(route.query.region ?? 'all')
 const sortOption = ref(route.query.sort ?? 'users-desc')
@@ -417,10 +442,10 @@ const versionFilter = ref(route.query.version ?? '')
 const uptimeFilter = ref(route.query.uptime ?? '')
 const registrationFilter = ref(route.query.registration ?? '')
 const matureFilter = ref(
-  route.query.mature === '1' || route.query.mature === 'true'
+    route.query.mature === '1' || route.query.mature === 'true'
 )
 const smallFilter = ref(
-  route.query.small === '1' || route.query.small === 'true'
+    route.query.small === '1' || route.query.small === 'true'
 )
 const showDetailedStats = ref(route.query.stats === '1')
 const page = ref(parseInt(route.query.page) || 1)
@@ -446,18 +471,18 @@ function handleSearchInput(event) {
 
 const getSortParams = () => {
     switch (sortOption.value) {
-    case 'users-desc':
-        return { sort_by: 'user_count', sort_direction: 'desc' }
-    case 'users-asc':
-        return { sort_by: 'user_count', sort_direction: 'asc' }
-    case 'version-desc':
-        return { sort_by: 'version', sort_direction: 'desc' }
-    case 'created-desc':
-        return { sort_by: 'first_seen_at', sort_direction: 'desc' }
-    case 'created-asc':
-        return { sort_by: 'first_seen_at', sort_direction: 'asc' }
-    default:
-        return { sort_by: 'user_count', sort_direction: 'desc' }
+        case 'users-desc':
+            return { sort_by: 'user_count', sort_direction: 'desc' }
+        case 'users-asc':
+            return { sort_by: 'user_count', sort_direction: 'asc' }
+        case 'version-desc':
+            return { sort_by: 'version', sort_direction: 'desc' }
+        case 'created-desc':
+            return { sort_by: 'first_seen_at', sort_direction: 'desc' }
+        case 'created-asc':
+            return { sort_by: 'first_seen_at', sort_direction: 'asc' }
+        default:
+            return { sort_by: 'user_count', sort_direction: 'desc' }
     }
 };
 
@@ -490,36 +515,36 @@ const {
 } = useSoftwareServers(slug, apiFilters);
 
 watch(
-  [
-    debouncedSearchQuery,
-    regionFilter,
-    sortOption,
-    versionFilter,
-    uptimeFilter,
-    registrationFilter,
-    matureFilter,
-    smallFilter,
-    showDetailedStats,
-  ],
-  () => {
-    const q = {}
-    if (debouncedSearchQuery.value) q.search = debouncedSearchQuery.value
-    if (regionFilter.value !== 'all') q.region = regionFilter.value
-    if (sortOption.value !== 'users-desc') q.sort = sortOption.value
-    if (versionFilter.value) q.version = versionFilter.value
-    if (uptimeFilter.value) q.uptime = uptimeFilter.value
-    if (registrationFilter.value) q.registration = registrationFilter.value
-    if (matureFilter.value) q.mature = '1'
-    if (smallFilter.value) q.small = '1'
-    if (showDetailedStats.value) q.stats = '1'
-    currentPageIndex.value = 0
+    [
+        debouncedSearchQuery,
+        regionFilter,
+        sortOption,
+        versionFilter,
+        uptimeFilter,
+        registrationFilter,
+        matureFilter,
+        smallFilter,
+        showDetailedStats,
+    ],
+    () => {
+        const q = {}
+        if (debouncedSearchQuery.value) q.search = debouncedSearchQuery.value
+        if (regionFilter.value !== 'all') q.region = regionFilter.value
+        if (sortOption.value !== 'users-desc') q.sort = sortOption.value
+        if (versionFilter.value) q.version = versionFilter.value
+        if (uptimeFilter.value) q.uptime = uptimeFilter.value
+        if (registrationFilter.value) q.registration = registrationFilter.value
+        if (matureFilter.value) q.mature = '1'
+        if (smallFilter.value) q.small = '1'
+        if (showDetailedStats.value) q.stats = '1'
+        currentPageIndex.value = 0
 
-    router.replace({ query: q })
-  }
+        router.replace({ query: q })
+    }
 )
 
 watch(apiFilters, () => {
-  refetch()
+    refetch()
 })
 
 const servers = computed(() =>
@@ -594,9 +619,9 @@ const toggleSmallFilter = (value) => {
 };
 
 const isLatestVersion = (version) => {
-    if(software.value?.latest_version?.version) {
+    if (software.value?.latest_version?.version) {
         const latestVer = software.value?.latest_version?.version;
-        if(latestVer.startsWith('v')) {
+        if (latestVer.startsWith('v')) {
             return version === software.value?.latest_version?.version.slice(1);
         }
         return version === software.value?.latest_version?.version;
@@ -609,17 +634,17 @@ const isFilteringOrSearching = computed(() => {
 });
 
 const hasResources = computed(() => {
-    return software.value?.website || 
-           software.value?.source_repo || 
-           software.value?.api_docs_url || 
-           software.value?.apps_url || 
-           software.value?.forum_url || 
-           software.value?.join_url;
+    return software.value?.website ||
+        software.value?.source_repo ||
+        software.value?.api_docs_url ||
+        software.value?.apps_url ||
+        software.value?.forum_url ||
+        software.value?.join_url;
 });
 
 const hasRichData = computed(() => {
-    return software.value?.versions?.length || 
-           software.value?.popular_asns?.length;
+    return software.value?.versions?.length ||
+        software.value?.popular_asns?.length;
 });
 
 const formatGraphDate = (dateString) => {
