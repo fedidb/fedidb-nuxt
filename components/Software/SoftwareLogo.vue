@@ -1,6 +1,6 @@
 <template>
     <div class="flex shrink-0 items-center justify-center overflow-hidden"
-        :class="[sizeClasses.box, showLogo ? 'bg-slate-950 ring-1 ring-black/5 dark:ring-white/10' : monogramClass]">
+        :class="[sizeClasses.box, showLogo ? 'bg-slate-100 ring-1 ring-black/5 dark:ring-white/10' : monogramClass]">
         <img v-if="showLogo" :src="software.logo_url" alt="" loading="lazy" decoding="async" class="object-contain"
             :class="sizeClasses.image" @error="hasFailed = true">
         <span v-else class="font-bold text-white" :class="sizeClasses.text">{{ initial }}</span>
@@ -28,7 +28,7 @@ const showLogo = computed(() => Boolean(props.software.logo_url) && !hasFailed.v
 const initial = computed(() => (props.software.name || '?').trim().charAt(0).toUpperCase());
 const monogramClass = computed(() => (
     props.muted
-        ? 'bg-gray-300 dark:bg-gray-600'
+        ? 'bg-gray-100 dark:bg-gray-600'
         : generateBgColor(props.software.name)
 ));
 
