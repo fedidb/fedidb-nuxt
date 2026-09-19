@@ -218,9 +218,9 @@
                                 </div>
                                 <div class="flex shrink-0 items-baseline gap-2 tabular-nums">
                                     <span class="font-medium text-gray-900 dark:text-white">{{ num(version.count)
-                                    }}</span>
+                                        }}</span>
                                     <span :class="['w-12 text-right text-sm', ui.muted]">{{ pct(version.share)
-                                    }}%</span>
+                                        }}%</span>
                                 </div>
                             </div>
 
@@ -234,7 +234,7 @@
                                 <div class="flex flex-wrap gap-x-4 gap-y-1">
                                     <span>{{ behindLabel(version) }}</span>
                                     <span v-if="version.release">Released {{ formatDate(version.release.published_at)
-                                    }}</span>
+                                        }}</span>
                                 </div>
                                 <button v-if="version.release" type="button" @click="openRelease(version.release)"
                                     :class="['cursor-pointer rounded font-medium', ui.link, ui.focus]">
@@ -282,10 +282,10 @@
                         <li v-for="group in familyGroups" :key="group.label">
                             <div class="flex items-baseline justify-between gap-3">
                                 <span class="font-medium tabular-nums text-gray-900 dark:text-white">{{ group.label
-                                }}.x</span>
+                                    }}.x</span>
                                 <span class="flex items-baseline gap-2 tabular-nums">
                                     <span class="font-medium text-gray-900 dark:text-white">{{ num(group.count)
-                                    }}</span>
+                                        }}</span>
                                     <span :class="['text-sm', ui.muted]">{{ pct(group.share) }}%</span>
                                 </span>
                             </div>
@@ -389,7 +389,7 @@
                                     class="h-6 w-6 rounded-full ring-1 ring-gray-200 dark:ring-white/10" />
                                 <span :class="ui.muted">Released by</span>
                                 <span class="font-medium text-gray-700 dark:text-gray-200">{{ release.author.login
-                                }}</span>
+                                    }}</span>
                             </div>
 
                             <MDC :value="displayBody(release.body)" tag="article"
@@ -435,9 +435,10 @@
 
 <script setup>
 import { ref, computed, watch, nextTick } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 const slug = route.params.id
 
 const { data, isLoading } = useSoftwareVersionsBySlug(slug)
@@ -446,6 +447,8 @@ const FAMILY_MODE_MIN_SERIES = 3
 const VERSION_LIMIT = 10
 const RELEASE_PAGE = 15
 const BUCKET_ORDER = ['latest', 'recent', 'behind', 'outdated', 'unknown']
+const TAB_IDS = ['distribution', 'releases']
+const DEFAULT_TAB = 'distribution'
 
 const ui = {
     card: 'rounded-xl border border-gray-200 bg-white dark:border-gray-700/60 dark:bg-gray-800',
@@ -494,13 +497,6 @@ const FRESHNESS = {
     },
 }
 
-const activeTab = ref('distribution')
-const showAllVersions = ref(false)
-const releaseSearch = ref('')
-const releaseFamily = ref('')
-const releaseLimit = ref(RELEASE_PAGE)
-const expanded = ref(new Set())
-
 const numberFormat = new Intl.NumberFormat('en-US')
 const dateFormat = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
 const relativeFormat = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
@@ -510,6 +506,41 @@ const pct = (n) => (Number.isFinite(n) ? n : 0).toFixed(1)
 const cleanVersion = (v = '') => String(v).trim().replace(/^v/i, '')
 const coreVersion = (v = '') => cleanVersion(v).split('+')[0].split('-')[0]
 const familyOf = (v = '') => coreVersion(v).split('.').slice(0, 2).join('.')
+
+/* ---------------------------------------------------------------------------
+ * URL state: ?tab=releases and ?release=<tag>
+ * ------------------------------------------------------------------------- */
+
+const queryValue = (value) => (Array.isArray(value) ? value[0] : value) || ''
+
+function tabFromQuery(query) {
+    const tab = queryValue(query.tab)
+    if (TAB_IDS.includes(tab)) return tab
+    // A release deep link implies the releases tab, so ?release= works on its own.
+    return queryValue(query.release) ? 'releases' : DEFAULT_TAB
+}
+
+function updateQuery(patch) {
+    const query = { ...route.query }
+    for (const [key, value] of Object.entries(patch)) {
+        if (value === null || value === undefined || value === '') delete query[key]
+        else query[key] = value
+    }
+    return router.replace({ query })
+}
+
+const activeTab = computed({
+    get: () => tabFromQuery(route.query),
+    set: (tab) => updateQuery({ tab: tab === DEFAULT_TAB ? null : tab }),
+})
+
+const queryRelease = computed(() => cleanVersion(queryValue(route.query.release)))
+
+const showAllVersions = ref(false)
+const releaseSearch = ref('')
+const releaseFamily = ref('')
+const releaseLimit = ref(RELEASE_PAGE)
+const expanded = ref(new Set())
 
 function parseSemver(tag = '') {
     const [core, ...pre] = cleanVersion(tag).split('+')[0].split('-')
@@ -761,16 +792,20 @@ const releaseKey = (release) => cleanVersion(release.tag)
 const runningOn = (release) => distributionByVersion.value.get(cleanVersion(release.version)) ?? null
 const isLatest = (release) => latestVersion.value !== null && releaseKey(release) === latestVersion.value
 
+function findRelease(key) {
+    const wanted = cleanVersion(key)
+    if (!wanted) return null
+    return (
+        sortedReleases.value.find(
+            (r) => releaseKey(r) === wanted || cleanVersion(r.version) === wanted
+        ) ?? null
+    )
+}
+
 function behindLabel(item) {
     if (item.freshness === 'latest') return 'Latest release'
     if (item.rank === null) return 'Not in the release history'
     return `${item.rank} ${item.rank === 1 ? 'release' : 'releases'} behind`
-}
-
-function toggleRelease(release) {
-    const key = releaseKey(release)
-    if (expanded.value.has(key)) expanded.value.delete(key)
-    else expanded.value.add(key)
 }
 
 function clearReleaseFilters() {
@@ -778,18 +813,60 @@ function clearReleaseFilters() {
     releaseFamily.value = ''
 }
 
-async function openRelease(release) {
+// The article may not be in the DOM on the first frame: the tab switch is a
+// router navigation now, and the list has to grow past releaseLimit first.
+function waitForElement(id, frames = 12) {
+    return new Promise((resolve) => {
+        let tries = 0
+        const check = () => {
+            const el = document.getElementById(id)
+            if (el || tries++ >= frames) return resolve(el ?? null)
+            requestAnimationFrame(check)
+        }
+        check()
+    })
+}
+
+/**
+ * Expand a release, page the list far enough to include it, and scroll to it.
+ * Does not touch the URL, so it is safe to call from the deep link watcher.
+ */
+async function revealRelease(release, { scroll = true, smooth = true } = {}) {
     const key = releaseKey(release)
-    clearReleaseFilters()
-    const index = sortedReleases.value.findIndex((r) => releaseKey(r) === key)
-    releaseLimit.value = Math.max(releaseLimit.value, index + 1)
+    const index = filteredReleases.value.findIndex((r) => releaseKey(r) === key)
+    if (index >= 0) releaseLimit.value = Math.max(releaseLimit.value, index + 1)
     expanded.value.add(key)
-    activeTab.value = 'releases'
+    if (!scroll || typeof window === 'undefined') return
     await nextTick()
+    const el = await waitForElement(`release-${key}`)
+    if (!el) return
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    document
-        .getElementById(`release-${key}`)
-        ?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
+    // One more frame so the router's own scroll handling lands first and
+    // doesn't cancel a smooth scroll that started before it.
+    requestAnimationFrame(() => {
+        el.scrollIntoView({
+            behavior: reduceMotion || !smooth ? 'auto' : 'smooth',
+            block: 'start',
+        })
+    })
+}
+
+function toggleRelease(release) {
+    const key = releaseKey(release)
+    if (expanded.value.has(key)) {
+        expanded.value.delete(key)
+        if (queryRelease.value === key) updateQuery({ release: null })
+    } else {
+        expanded.value.add(key)
+        updateQuery({ release: key })
+    }
+}
+
+async function openRelease(release) {
+    clearReleaseFilters()
+    // Awaiting the navigation means the releases panel is mounted before we scroll.
+    await updateQuery({ tab: 'releases', release: releaseKey(release) })
+    await revealRelease(release)
 }
 
 function isTruncated(body = '') {
@@ -832,6 +909,24 @@ watch(
     latestVersion,
     (version) => {
         if (version) expanded.value.add(version)
+    },
+    { immediate: true }
+)
+
+// Resolve ?release=<tag> once the release history has loaded. Expanding does not
+// write to the query, and an already-expanded release is skipped, so a manual
+// toggle cannot bounce back through here.
+let deepLinked = false
+watch(
+    [queryRelease, sortedReleases],
+    async ([key, list]) => {
+        if (!key || !list.length) return
+        if (expanded.value.has(key)) return
+        const target = findRelease(key)
+        if (!target) return
+        const first = !deepLinked
+        deepLinked = true
+        await revealRelease(target, { smooth: !first })
     },
     { immediate: true }
 )
